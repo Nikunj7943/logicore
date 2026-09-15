@@ -1,0 +1,15 @@
+{
+ "app_name": "logicore",
+ "creation": "2026-03-10 10:28:45.184763",
+ "custom": 0,
+ "docstatus": 0,
+ "doctype": "Module Def",
+ "idx": 0,
+ "modified": "2026-03-13 12:40:40.112759",
+ "modified_by": "Administrator",
+ "module_name": "LogiCore",
+ "name": "LogiCore",
+ "owner": "Administrator",
+ "icon": "/assets/logicore/images/logicore_icon.png",
+ "color": "blue"
+}

@@ -1,0 +1,127 @@
+{
+ "actions": [],
+ "creation": "2026-05-12 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "tyre_id",
+  "tyre_type",
+  "brand",
+  "size",
+  "tyre_item",
+  "purchase_cost",
+  "warranty_months",
+  "warranty_kms",
+  "warranty_expiry",
+  "position",
+  "fitment_date",
+  "expected_km"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "tyre_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tyre ID / Sr.No.",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "tyre_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "\nNew\nRetreaded\nRecap"
+  },
+  {
+   "columns": 3,
+   "fieldname": "brand",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Brand"
+  },
+  {
+   "columns": 2,
+   "fieldname": "size",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tyre Size",
+   "placeholder": "e.g. 10.00R20"
+  },
+  {
+   "columns": 2,
+   "fieldname": "tyre_item",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Tyre Item",
+   "mandatory_depends_on": "eval:parent.entry_type=='In Stock Use'",
+   "options": "Item"
+  },
+  {
+   "columns": 3,
+   "fieldname": "purchase_cost",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Purchase Cost (₹)"
+  },
+  {
+   "columns": 2,
+   "fieldname": "warranty_months",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "War. Months"
+  },
+  {
+   "columns": 2,
+   "fieldname": "warranty_kms",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "War. KMs"
+  },
+  {
+   "columns": 2,
+   "fieldname": "warranty_expiry",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "War. Expiry",
+   "read_only": 1
+  },
+  {
+   "columns": 3,
+   "fieldname": "position",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Tyre Position",
+   "options": "\nFront Left\nFront Right\nMiddle Left Inner\nMiddle Left Outer\nMiddle Right Inner\nMiddle Right Outer\nRear Left Outer\nRear Left Inner\nRear Right Outer\nRear Right Inner\nRear Left (Single)\nRear Right (Single)\nSpare 1\nSpare 2"
+  },
+  {
+   "columns": 3,
+   "fieldname": "fitment_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Fitment Date"
+  },
+  {
+   "columns": 2,
+   "fieldname": "expected_km",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Expected Life (km)",
+   "placeholder": "e.g. 80000"
+  }
+ ],
+ "editable_grid": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-05-12 19:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Tyre Expense Detail",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC"
+}

@@ -1,0 +1,1172 @@
+const TRIP_TYPE_META = {
+	"Primary":             { code: "P", label: "Primary",   icon: "🚛" },
+	"RCPL Primary":        { code: "R", label: "RCPL",      icon: "🔄" },
+	"Secondary Dedicated": { code: "D", label: "Dedicated", icon: "📦" },
+	"Secondary Market":    { code: "M", label: "Market",    icon: "🏪" },
+	"Other":               { code: "O", label: "Other",     icon: "🔧" },
+};
+
+const COMBOS = {
+	"Primary": [
+		{ name: "Ocean Command",   page_bg: "#EEF2FF", card_bg: "#FFFFFF", section_border: "#C7D7FF", field_bg: "#F0F4FF", field_border: "#A5B4FC", primary: "#3B4FE4", accent: "#06B6D4", label_color: "#3730A3", heading_color: "#1E1B4B", radius: "10px" },
+		{ name: "Steel Authority", page_bg: "#F0F4F8", card_bg: "#FFFFFF", section_border: "#CBD5E1", field_bg: "#F8FAFC", field_border: "#94A3B8", primary: "#1E3A5F", accent: "#0EA5E9", label_color: "#334155", heading_color: "#0F172A", radius: "8px"  },
+		{ name: "Midnight Fleet",  page_bg: "#0F172A", card_bg: "#1E293B", section_border: "#334155", field_bg: "#1A2540", field_border: "#475569", primary: "#6366F1", accent: "#22D3EE", label_color: "#94A3B8", heading_color: "#E2E8F0", radius: "10px" },
+		{ name: "Arctic Blue",     page_bg: "#F0F9FF", card_bg: "#FFFFFF", section_border: "#BAE6FD", field_bg: "#F0F9FF", field_border: "#7DD3FC", primary: "#0369A1", accent: "#0EA5E9", label_color: "#075985", heading_color: "#0C4A6E", radius: "12px" },
+	],
+	"RCPL Primary": [
+		{ name: "Forest Route",    page_bg: "#F0FDF4", card_bg: "#FFFFFF", section_border: "#BBF7D0", field_bg: "#F0FDF4", field_border: "#86EFAC", primary: "#15803D", accent: "#65A30D", label_color: "#166534", heading_color: "#14532D", radius: "10px" },
+		{ name: "Jade Logistics",  page_bg: "#ECFDF5", card_bg: "#FFFFFF", section_border: "#A7F3D0", field_bg: "#F0FDF8", field_border: "#6EE7B7", primary: "#047857", accent: "#0D9488", label_color: "#065F46", heading_color: "#022C22", radius: "8px"  },
+		{ name: "Sage Enterprise", page_bg: "#F7FEE7", card_bg: "#FFFFFF", section_border: "#D9F99D", field_bg: "#F7FEE7", field_border: "#BEF264", primary: "#4D7C0F", accent: "#16A34A", label_color: "#3F6212", heading_color: "#1A2E05", radius: "12px" },
+		{ name: "Emerald Night",   page_bg: "#052E16", card_bg: "#14532D", section_border: "#166534", field_bg: "#0D3321", field_border: "#15803D", primary: "#22C55E", accent: "#86EFAC", label_color: "#86EFAC", heading_color: "#DCFCE7", radius: "10px" },
+	],
+	"Secondary Dedicated": [
+		{ name: "Amber Cargo",     page_bg: "#FFF7ED", card_bg: "#FFFFFF", section_border: "#FED7AA", field_bg: "#FFFBF5", field_border: "#FDBA74", primary: "#EA580C", accent: "#D97706", label_color: "#9A3412", heading_color: "#7C2D12", radius: "12px" },
+		{ name: "Sunset Dispatch", page_bg: "#FEF9EE", card_bg: "#FFFFFF", section_border: "#FDE68A", field_bg: "#FFFDF0", field_border: "#FCD34D", primary: "#B45309", accent: "#F59E0B", label_color: "#92400E", heading_color: "#451A03", radius: "10px" },
+		{ name: "Copper Line",     page_bg: "#FFF8F1", card_bg: "#FFFFFF", section_border: "#FBBF24", field_bg: "#FFFBF5", field_border: "#F59E0B", primary: "#C2410C", accent: "#EA580C", label_color: "#9A3412", heading_color: "#431407", radius: "8px"  },
+		{ name: "Dark Amber",      page_bg: "#1C0A00", card_bg: "#2C1A00", section_border: "#78350F", field_bg: "#1C0F00", field_border: "#92400E", primary: "#F59E0B", accent: "#FCD34D", label_color: "#FCD34D", heading_color: "#FEF3C7", radius: "10px" },
+	],
+	"Secondary Market": [
+		{ name: "Rose Commerce",   page_bg: "#FFF1F2", card_bg: "#FFFFFF", section_border: "#FECDD3", field_bg: "#FFF5F7", field_border: "#FDA4AF", primary: "#BE185D", accent: "#EA580C", label_color: "#9D174D", heading_color: "#4C0519", radius: "14px" },
+		{ name: "Violet Market",   page_bg: "#F5F3FF", card_bg: "#FFFFFF", section_border: "#DDD6FE", field_bg: "#FAF5FF", field_border: "#C4B5FD", primary: "#7C3AED", accent: "#DB2777", label_color: "#5B21B6", heading_color: "#3B0764", radius: "12px" },
+		{ name: "Plum Trade",      page_bg: "#FDF4FF", card_bg: "#FFFFFF", section_border: "#E9D5FF", field_bg: "#FDF4FF", field_border: "#D8B4FE", primary: "#9333EA", accent: "#C026D3", label_color: "#7E22CE", heading_color: "#3B0764", radius: "10px" },
+		{ name: "Magenta Night",   page_bg: "#1A0A2E", card_bg: "#2D1B47", section_border: "#4C1D95", field_bg: "#1E0D35", field_border: "#5B21B6", primary: "#C084FC", accent: "#E879F9", label_color: "#D8B4FE", heading_color: "#F3E8FF", radius: "10px" },
+	],
+	"Other": [
+		{ name: "Slate Neutral",   page_bg: "#F1F5F9", card_bg: "#FFFFFF", section_border: "#CBD5E1", field_bg: "#F8FAFC", field_border: "#94A3B8", primary: "#475569", accent: "#0284C7", label_color: "#334155", heading_color: "#0F172A", radius: "8px"  },
+		{ name: "Warm Neutral",    page_bg: "#FFFBEB", card_bg: "#FFFFFF", section_border: "#FDE68A", field_bg: "#FFFDF5", field_border: "#FCD34D", primary: "#B45309", accent: "#059669", label_color: "#92400E", heading_color: "#451A03", radius: "10px" },
+		{ name: "Teal Operations", page_bg: "#F0FDFA", card_bg: "#FFFFFF", section_border: "#99F6E4", field_bg: "#F0FDFA", field_border: "#5EEAD4", primary: "#0D9488", accent: "#0369A1", label_color: "#0F766E", heading_color: "#042F2E", radius: "10px" },
+		{ name: "Carbon Pro",      page_bg: "#18181B", card_bg: "#27272A", section_border: "#3F3F46", field_bg: "#1C1C1F", field_border: "#52525B", primary: "#A1A1AA", accent: "#71717A", label_color: "#A1A1AA", heading_color: "#F4F4F5", radius: "6px"  },
+	],
+};
+
+const TMS_STORAGE_KEY        = "tms_trip_type_themes";
+const DEFAULT_FALLBACK_COMBO = COMBOS["Primary"][0];
+
+const STATUS_COLORS = {
+	"Open":   "#10B981",
+	"Close":  "#6366F1",
+	"Cancel": "#EF4444",
+	"Draft":  "#94A3B8",
+};
+
+const TRIP_STATUS_STAGES = [
+	{ key: "Trip Created",          label: "Created",          icon: "📋" },
+	{ key: "Trip In-Transit",       label: "In Transit",       icon: "🚛" },
+	{ key: "Trip Awaiting Billing", label: "Awaiting Billing", icon: "📄" },
+	{ key: "Trip Billed",           label: "Billed",           icon: "🧾" },
+	{ key: "Trip Payment Received", label: "Pmt. Received",    icon: "💳" },
+	{ key: "Trip Closed",           label: "Closed",           icon: "✅" },
+];
+
+const SECTION_ICONS = {
+	"branch":         "🏢",
+	"route":          "🗺️",
+	"origin":         "📍",
+	"destination":    "🏁",
+	"billing":        "💳",
+	"vehicle":        "🚛",
+	"driver":         "👤",
+	"lr":             "📄",
+	"loading":        "📦",
+	"unloading":      "📤",
+	"detention":      "⏱️",
+	"additional":     "💰",
+	"kilometer":      "🛣️",
+	"vendor freight": "🏭",
+	"pod":            "📸",
+	"approval":       "✅",
+	"payment":        "💵",
+	"trip amount":    "📊",
+	"remarks":        "📝",
+};
+
+// ══════════════════════════════════════════════════════════════════
+//  INJECT STYLES  ← no external CSS file; all styles live here
+// ══════════════════════════════════════════════════════════════════
+
+function inject_tms_styles() {
+	if (document.getElementById("tms-trip-styles")) return;
+	const el = document.createElement("style");
+	el.id = "tms-trip-styles";
+	el.textContent = `
+:root {
+  --tms-primary:          #3B4FE4;
+  --tms-accent:           #06B6D4;
+  --tms-primary-light:    rgba(59,79,228,.10);
+  --tms-primary-border:   rgba(59,79,228,.28);
+  --tms-label-color:      #3730A3;
+  --tms-heading-color:    #1E1B4B;
+  --tms-radius:           10px;
+}
+
+/* ── Banner ─────────────────────────── */
+.tms-trip-banner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:14px 20px;border-radius:var(--tms-radius) var(--tms-radius) 0 0;position:relative;z-index:2;}
+.tms-bid{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.tms-bid-icon{font-size:22px;line-height:1;}
+.tms-bid-sono{font-size:16px;font-weight:800;color:#fff;letter-spacing:.01em;}
+.tms-bid-route{font-size:12px;font-weight:600;color:rgba(255,255,255,.80);background:rgba(255,255,255,.15);border-radius:20px;padding:3px 10px;}
+.tms-bprogress{display:flex;align-items:center;gap:10px;}
+.tms-dots{display:flex;gap:5px;}
+.tms-dot{width:10px;height:10px;border-radius:50%;transition:background .25s,box-shadow .25s;}
+.tms-dot-done{background:rgba(255,255,255,.95);box-shadow:0 0 6px rgba(255,255,255,.7);}
+.tms-dot-current{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.35),0 0 10px rgba(255,255,255,.5);}
+.tms-dot-pending{background:rgba(255,255,255,.25);}
+.tms-bstage{font-size:11px;font-weight:700;color:rgba(255,255,255,.90);letter-spacing:.05em;text-transform:uppercase;}
+.tms-bstatus{display:flex;align-items:center;gap:6px;border:1.5px solid transparent;border-radius:20px;padding:5px 13px;font-size:12px;font-weight:700;letter-spacing:.05em;}
+.tms-status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+
+/* ── Tab badges ─────────────────────── */
+.tms-stage-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--tms-primary);box-shadow:0 0 6px var(--tms-primary);margin-left:5px;vertical-align:middle;animation:tms-pulse 1.6s ease-in-out infinite;}
+.tms-tab-check{display:inline-block;margin-left:5px;font-size:11px;color:#10B981;font-weight:800;vertical-align:middle;}
+@keyframes tms-pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.55;transform:scale(.8);}}
+@keyframes tms-spin{to{transform:rotate(360deg);}}
+.tms-sec-icon{font-size:14px;margin-right:4px;}
+
+/* ══════════════════════════════════════
+   FIX 1: READONLY FIELD LABEL + VALUE
+   Frappe omits <label> for empty readonly
+   fields. We inject it and force visibility.
+   ══════════════════════════════════════ */
+.tms-computed-field{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;}
+.tms-computed-field label.control-label{display:block!important;visibility:visible!important;opacity:1!important;color:var(--tms-label-color)!important;font-size:10px!important;font-weight:700!important;letter-spacing:.07em!important;text-transform:uppercase!important;margin-bottom:4px!important;}
+.tms-computed-field .like-disabled-input{display:block!important;visibility:visible!important;opacity:1!important;background:var(--tms-primary-light)!important;border:1.5px solid var(--tms-primary-border)!important;border-radius:calc(var(--tms-radius) - 2px)!important;color:var(--tms-heading-color)!important;font-size:13px!important;font-weight:600!important;padding:7px 10px 7px 32px!important;min-height:36px!important;line-height:1.4!important;cursor:default!important;pointer-events:none!important;box-shadow:inset 0 1px 3px rgba(0,0,0,.04)!important;}
+.tms-computed-field input[disabled],.tms-computed-field input[readonly],.tms-computed-field .form-control[disabled]{display:block!important;visibility:visible!important;opacity:1!important;background:var(--tms-primary-light)!important;border:1.5px solid var(--tms-primary-border)!important;border-radius:calc(var(--tms-radius) - 2px)!important;color:var(--tms-heading-color)!important;font-weight:600!important;padding-left:32px!important;min-height:36px!important;pointer-events:none!important;}
+.tms-auto-badge{position:absolute!important;left:8px!important;bottom:9px!important;font-size:9px!important;font-weight:700!important;color:var(--tms-primary)!important;opacity:.50!important;pointer-events:none!important;letter-spacing:.04em!important;z-index:3!important;line-height:1!important;}
+.tms-stage-locked .like-disabled-input,.tms-stage-locked input[disabled],.tms-stage-locked input[readonly]{background:rgba(251,146,60,.08)!important;border-color:rgba(251,146,60,.30)!important;color:#92400E!important;}
+
+/* ══════════════════════════════════════
+   FIX 2: DROPDOWN — no layout shift
+   Force awesomplete list to fixed stacking
+   context so it floats above the form.
+   JS then pins it to exact input coords.
+   ══════════════════════════════════════ */
+.awesomplete>ul{position:fixed!important;z-index:99999!important;max-height:300px!important;overflow-y:auto!important;overflow-x:hidden!important;border-radius:10px!important;border:1.5px solid var(--tms-primary-border)!important;background:#fff!important;box-shadow:0 8px 32px rgba(0,0,0,.14),0 2px 8px rgba(0,0,0,.07)!important;padding:4px 0!important;scrollbar-width:thin!important;scrollbar-color:var(--tms-primary-border) transparent!important;}
+.awesomplete>ul::-webkit-scrollbar{width:5px;}
+.awesomplete>ul::-webkit-scrollbar-thumb{background:var(--tms-primary-border);border-radius:4px;}
+.awesomplete>ul>li{padding:8px 14px!important;font-size:13px!important;font-weight:500!important;color:var(--tms-heading-color)!important;cursor:pointer!important;transition:background .12s!important;line-height:1.45!important;white-space:normal!important;}
+.awesomplete>ul>li:hover,.awesomplete>ul>li[aria-selected="true"]{background:var(--tms-primary-light)!important;color:var(--tms-primary)!important;}
+.awesomplete>ul>li mark{background:transparent!important;color:var(--tms-primary)!important;font-weight:800!important;}
+.frappe-control[data-fieldtype="Link"],.frappe-control[data-fieldtype="Dynamic Link"]{overflow:visible!important;}
+.form-column,.form-section,.section-body{overflow:visible!important;}
+
+/* ── Email template dialog ──────────── */
+.etpl-card{border:1.5px solid #E2E8F0;border-radius:12px;overflow:hidden;}
+.etpl-head{background:linear-gradient(135deg,var(--tms-primary),#1E1B4B);padding:14px 18px;display:flex;justify-content:space-between;align-items:flex-start;}
+.etpl-chip{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.7);margin-bottom:4px;}
+.etpl-name{font-size:15px;font-weight:800;color:#fff;}
+.etpl-open{font-size:11px;font-weight:700;color:rgba(255,255,255,.85);text-decoration:none;background:rgba(255,255,255,.15);border-radius:6px;padding:4px 10px;}
+.etpl-open:hover{background:rgba(255,255,255,.25);}
+.etpl-copy{font-size:11px;font-weight:700;color:var(--tms-primary);background:var(--tms-primary-light);border:1.5px solid var(--tms-primary-border);border-radius:6px;padding:4px 10px;cursor:pointer;}
+.etpl-copy-inv{color:#fff;background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3);}
+.etpl-subject-row{display:flex;align-items:center;gap:10px;padding:10px 18px;background:#F8FAFC;border-bottom:1.5px solid #E2E8F0;}
+.etpl-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94A3B8;white-space:nowrap;}
+.etpl-subject-val{flex:1;font-size:13px;font-weight:600;color:#1E293B;}
+.etpl-body-header{display:flex;justify-content:space-between;align-items:center;padding:8px 18px 4px;}
+.etpl-body{padding:10px 18px 14px;font-size:13px;color:#374151;line-height:1.6;max-height:260px;overflow-y:auto;}
+.etpl-footer{font-size:10px;color:#9CA3AF;text-align:right;padding:6px 18px;border-top:1px solid #F1F5F9;font-style:italic;}
+.etpl-empty{text-align:center;padding:36px 20px;color:#6B7280;}
+
+`;
+	document.head.appendChild(el);
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  FORM EVENTS
+// ══════════════════════════════════════════════════════════════════
+
+frappe.ui.form.on("Trip", {
+
+	refresh(frm) {
+		inject_tms_styles();
+
+		frm.$wrapper.off("click.tms_tabs");
+		frm._tms_tab_listener_bound = false;
+
+		const combo = get_combo_for_trip(frm.doc.trip_type);
+		apply_combo(combo);
+		setup_so_no_field(frm);
+		setup_field_read_only_rules(frm);
+		apply_trip_type_visibility(frm);
+		apply_status_locks(frm);
+		setup_address_search(frm);
+		setup_master_link_filters(frm);
+		add_custom_buttons(frm);
+		_attach_dropdown_fix(frm);   // ← FIX 2
+
+		setTimeout(() => {
+			render_banner(frm, combo);
+			render_section_icons(frm);
+			run_all_calcs_on_load(frm);
+			_force_readonly_fields_visible(frm);
+			highlight_active_tab(frm);
+		}, 120);
+	},
+
+	after_save(frm) {
+		_force_readonly_fields_visible(frm);
+	},
+
+	onload(frm) {
+		inject_tms_styles();
+		if (!frm.is_new()) return;
+
+		if (!frm.doc.tcntrip_date)
+			frm.set_value("tcntrip_date", frappe.datetime.get_today());
+
+		frappe.call({
+			method: "frappe.client.get_list",
+			args: { doctype: "Business Format", filters: [["isactive","=",1]], fields: ["name","billing_start_date","billing_end_date"], order_by: "creation asc", limit_page_length: 1 },
+			callback(r) {
+				if (r.message && r.message.length) {
+					frm.set_value("business_format", r.message[0].name);
+					_apply_billing_dates_for_current_month(frm, r.message[0]);
+				}
+			},
+		});
+
+		frappe.call({
+			method: "frappe.client.get_list",
+			args: { doctype: "Trip Type", filters: [["isactive","=",1]], fields: ["name"], order_by: "creation asc", limit_page_length: 1 },
+			callback(r) { if (r.message && r.message.length) frm.set_value("trip_type", r.message[0].name); },
+		});
+
+		frappe.call({
+			method: "logicore.logicore.doctype.trip.trip.get_user_branch",
+			callback(r) {
+				const res = r.message;
+				if (!res) return;
+				if (res.branch) {
+					frm.set_value("branch", res.branch);
+					if (res.source === "single_branch")
+						frappe.show_alert({ message: "🏢 Branch auto-set (only one branch exists).", indicator: "blue" }, 4);
+				} else if (res.debug) {
+					frappe.msgprint({ title: "⚠️ Branch Not Auto-Set", message: res.debug.replace(/\\n/g, "<br>"), indicator: "orange" });
+				}
+			},
+		});
+
+		frappe.call({
+			method: "frappe.client.get_list",
+			args: { doctype: "Business Subformat", filters: [["isactive","=",1]], fields: ["name"], order_by: "creation asc", limit_page_length: 1 },
+			callback(r) { if (r.message && r.message.length) frm.set_value("business_sub_format", r.message[0].name); },
+		});
+	},
+
+	origin_address_1(frm)      { on_address_selected(frm, "origin_address_1");      },
+	origin_address_2(frm)      { on_address_selected(frm, "origin_address_2");      },
+	destination_address_1(frm) { on_address_selected(frm, "destination_address_1"); },
+	destination_address_2(frm) { on_address_selected(frm, "destination_address_2"); },
+
+	trip_type(frm) {
+		preview_so_no_live(frm);
+		const combo = get_combo_for_trip(frm.doc.trip_type);
+		apply_combo(combo);
+		setTimeout(() => render_banner(frm, combo), 50);
+		setup_field_read_only_rules(frm);
+		apply_trip_type_visibility(frm);
+	},
+
+	tcntrip_date(frm) { preview_so_no_live(frm); },
+
+	business_format(frm) {
+		if (!frm.doc.business_format) { frm.set_value("billing_start_date",""); frm.set_value("billing_end_date",""); return; }
+		frappe.call({
+			method: "frappe.client.get",
+			args: { doctype: "Business Format", name: frm.doc.business_format },
+			callback(r) { if (r.message) _apply_billing_dates_for_current_month(frm, r.message); },
+		});
+	},
+
+	// FIX: driver mobile — only fetch cell_number (mobile_no is not permitted in query)
+	driver(frm) {
+		if (!frm.doc.driver) { frm.set_value("driver_mobile", ""); return; }
+		frappe.db.get_value("Driver", frm.doc.driver, "cell_number", (r) => {
+			if (r && r.cell_number) {
+				frm.set_value("driver_mobile", r.cell_number);
+			} else {
+				frm.set_value("driver_mobile", "");
+			}
+		});
+	},
+
+	origin_city(frm) {
+		update_route_chip(frm);
+		if (frm.doc.origin_city) {
+			frappe.call({
+				method: "logicore.logicore.doctype.trip.trip.get_city_state",
+				args: { city: frm.doc.origin_city },
+				callback(r) { if (r.message) frm.set_value("origin_state", r.message); _force_readonly_fields_visible(frm); },
+			});
+		} else { _force_readonly_fields_visible(frm); }
+		fetch_route_distance(frm);
+	},
+
+	destination_city_1(frm) {
+		update_route_chip(frm);
+		if (frm.doc.destination_city_1) {
+			frappe.call({
+				method: "logicore.logicore.doctype.trip.trip.get_city_state",
+				args: { city: frm.doc.destination_city_1 },
+				callback(r) { if (r.message) frm.set_value("destination_state", r.message); _force_readonly_fields_visible(frm); },
+			});
+		} else { _force_readonly_fields_visible(frm); }
+		fetch_route_distance(frm);
+	},
+
+	reach_date_time(frm)                { validate_chronology(frm); calc_loading_detention(frm); refresh_calcs(frm); },
+	dispatch_date_time(frm)             { validate_chronology(frm); calc_loading_detention(frm); calc_journey_time(frm); refresh_calcs(frm); },
+	loading_detention_rate_per_day(frm) { calc_loading_detention_amount(frm); calc_total_detention(frm); calc_total_additional_charges(frm); refresh_calcs(frm); },
+	loading_charge(frm)                 { calc_loading_unloading_total(frm); calc_total_additional_charges(frm); refresh_calcs(frm); },
+
+	vendor(frm)      { apply_status_locks(frm); highlight_active_tab(frm); },
+	vehicle_no(frm)  { apply_status_locks(frm); highlight_active_tab(frm); },
+
+	arrival_date_time(frm)                { validate_chronology(frm); calc_unloading_detention(frm); calc_journey_time(frm); apply_status_locks(frm); highlight_active_tab(frm); refresh_calcs(frm); },
+	release_date_time(frm)                { validate_chronology(frm); calc_unloading_detention(frm); refresh_calcs(frm); },
+	unloading_detention_rate_per_day(frm) { calc_unloading_detention_amount(frm); calc_total_detention(frm); calc_total_additional_charges(frm); refresh_calcs(frm); },
+	unloading_charge(frm)                 { calc_loading_unloading_total(frm); calc_total_additional_charges(frm); refresh_calcs(frm); },
+	weighment_charges(frm)                { calc_total_additional_charges(frm); refresh_calcs(frm); },
+	extra_expenses(frm)                   { calc_total_additional_charges(frm); refresh_calcs(frm); },
+
+	distance_loadingunloading_site(frm) { calc_ideal_journey_time(frm); refresh_calcs(frm); },
+
+	start_km(frm)    { validate_km(frm); calc_dedicated_km(frm); refresh_calcs(frm); },
+	end_km(frm)      { validate_km(frm); calc_dedicated_km(frm); refresh_calcs(frm); },
+	standard_km(frm) { calc_km_variation(frm); refresh_calcs(frm); },
+
+	vendor_freight(frm)            { calc_vendor_freight(frm); refresh_calcs(frm); },
+	vendor_freight_extra(frm)      { calc_vendor_freight(frm); refresh_calcs(frm); },
+	vendor_tds_to_be_deducted(frm) { calc_vendor_payment_total(frm); refresh_calcs(frm); },
+	customer_freight(frm)          { calc_trip_total_amount(frm); refresh_calcs(frm); },
+
+	approved_origin_detention(frm)      { calc_approved_detention(frm); refresh_calcs(frm); },
+	approved_destination_detention(frm) { calc_approved_detention(frm); refresh_calcs(frm); },
+	approved_loading_charge(frm)        { calc_approved_loading_unloading(frm); refresh_calcs(frm); },
+	approved_unloading_charge(frm)      { calc_approved_loading_unloading(frm); refresh_calcs(frm); },
+	approved_weighment_charge(frm)      { calc_total_approved_addl(frm); refresh_calcs(frm); },
+	approved_extra_expenses(frm)        { calc_total_approved_addl(frm); refresh_calcs(frm); },
+	brokerage_amount(frm)               { calc_total_approved_addl(frm); refresh_calcs(frm); },
+	lr_money(frm)                       { calc_total_approved_addl(frm); refresh_calcs(frm); },
+	tds_deducted_by_customer(frm)       { calc_total_approved_addl(frm); refresh_calcs(frm); },
+
+	date_pod_uploaded_on_erp(frm) {
+		frm.set_value("pod_status", frm.doc.date_pod_uploaded_on_erp ? "Uploaded" : "Left");
+		update_trip_status_display(frm);
+		apply_status_locks(frm);
+	},
+
+	utr_no(frm)            { update_trip_status_display(frm); apply_status_locks(frm); highlight_active_tab(frm); },
+	payment_advice_no(frm) { update_trip_status_display(frm); apply_status_locks(frm); highlight_active_tab(frm); },
+	bill_nodate(frm)       { update_trip_status_display(frm); apply_status_locks(frm); highlight_active_tab(frm); },
+
+	trip_status(frm) {
+		const s = frm.doc.trip_status || "Draft";
+		const c = STATUS_COLORS[s] || "#94A3B8";
+		$(".tms-bstatus").css({ background: hex_alpha(c,.18), color: c, "border-color": hex_alpha(c,.45) });
+		$(".tms-status-dot").css({ background: c, "box-shadow": `0 0 6px ${c}` });
+		$(".tms-banner-status-text").text(s);
+	},
+});
+
+// ══════════════════════════════════════════════════════════════════
+//  BILLING DATE HELPER
+// ══════════════════════════════════════════════════════════════════
+
+function _apply_billing_dates_for_current_month(frm, bf_record) {
+	const raw_start = bf_record.billing_start_date;
+	const raw_end   = bf_record.billing_end_date;
+	if (!raw_start || !raw_end) return;
+	const start_day = parseInt(raw_start.split("-")[2], 10);
+	const end_day   = parseInt(raw_end.split("-")[2],   10);
+	const ref       = new Date((frm.doc.tcntrip_date || frappe.datetime.get_today()) + "T00:00:00");
+	const yr        = ref.getFullYear();
+	const mon       = ref.getMonth();
+	const last_day  = new Date(yr, mon + 1, 0).getDate();
+	let bs, be;
+	if (end_day >= start_day) {
+		bs = new Date(yr, mon, start_day);
+		be = new Date(yr, mon, Math.min(end_day, last_day));
+	} else {
+		bs = new Date(yr, mon - 1, start_day);
+		be = new Date(yr, mon, end_day);
+	}
+	const fmt = d => d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+	frm.set_value("billing_start_date", fmt(bs));
+	frm.set_value("billing_end_date",   fmt(be));
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  LIVE SO NO PREVIEW
+// ══════════════════════════════════════════════════════════════════
+
+function preview_so_no_live(frm) {
+	if (!frm.is_new() || !frm.doc.trip_type) return;
+	frappe.call({
+		method: "logicore.logicore.doctype.trip.trip.preview_so_no",
+		args: { trip_type: frm.doc.trip_type, tcntrip_date: frm.doc.tcntrip_date || frappe.datetime.get_today() },
+		callback(r) {
+			if (r.message) { frm.set_value("so_no", r.message + ""); frm.refresh_field("so_no"); $(".tms-banner-sono").text(r.message); }
+		},
+	});
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  TRIP TYPE FIELD VISIBILITY
+// ══════════════════════════════════════════════════════════════════
+
+const TRIP_TYPE_FIELDS = {
+	business_format:                  ["Primary", "Secondary Dedicated", "Secondary Market"],
+	business_sub_format:              ["RCPL Primary"],
+	indent_date:                      ["Primary"],
+	indent_no:                        ["Primary"],
+	billing_start_date:               ["Primary", "Secondary Dedicated", "Secondary Market"],
+	billing_end_date:                 ["Primary", "Secondary Dedicated", "Secondary Market"],
+	lr_no:                            ["Primary", "Secondary Market", "Other"],
+	lr_date:                          ["Primary", "Secondary Market", "Other"],
+	packages:                         ["Primary", "Secondary Market", "Other"],
+	eway_bill_no:                     ["Other"],
+	customer_invoice_no:              ["Other"],
+	seal_no:                          ["Other"],
+	reach_date_time:                  ["Primary", "Other"],
+	dispatch_date_time:               ["Primary", "Other"],
+	loading_detention_days:           ["Primary", "Secondary Market", "Other"],
+	loading_detention_rate_per_day:   ["Primary", "Secondary Market", "Other"],
+	loading_site_detention_amount:    ["Primary", "Secondary Market", "Other"],
+	loading_charge:                   ["Primary", "Secondary Market", "Other"],
+	unloading_detention_days:         ["Primary", "Secondary Market", "Other"],
+	unloading_detention_rate_per_day: ["Primary", "Secondary Market", "Other"],
+	unloading_site_detention_amount:  ["Primary", "Secondary Market", "Other"],
+	total_detention_days:             ["Primary", "Secondary Market", "Other"],
+	total_detention_amount:           ["Primary", "Secondary Market", "Other"],
+	unloading_charge:                 ["Primary", "Secondary Market", "Other"],
+	total_loading_unloading_charge:   ["Primary", "Secondary Market", "Other"],
+	weighment_charges:                ["Primary", "Secondary Market", "Other"],
+	extra_expenses:                   ["Primary", "Secondary Market", "Other"],
+	total_additional_charges:         ["Primary", "Secondary Market", "Other"],
+	employee_lr_money:                ["Primary", "Secondary Market", "Other"],
+	start_km:                         ["Secondary Dedicated"],
+	end_km:                           ["Secondary Dedicated"],
+	total_km:                         ["Secondary Dedicated"],
+	standard_km:                      ["Secondary Dedicated"],
+	variation:                        ["Secondary Dedicated"],
+	vendor_freight:                   ["Primary", "Secondary Market"],
+	vendor_freight_extra:             ["Primary", "Secondary Market"],
+	total_vendor_freight:             ["Primary", "Secondary Market"],
+	vendor_tds_to_be_deducted:        ["Primary", "Secondary Market"],
+	brokerage_amount:                 ["Other"],
+	lr_money:                         ["Other"],
+	tds_deducted_by_customer:         ["Other"],
+};
+
+function apply_trip_type_visibility(frm) {
+	Object.keys(TRIP_TYPE_FIELDS).forEach(field => frm.toggle_display(field, true));
+	frm.refresh_fields(Object.keys(TRIP_TYPE_FIELDS));
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  STATUS-BASED FIELD LOCKING
+// ══════════════════════════════════════════════════════════════════
+
+const STAGE_LOCK_MAP = {
+	at_loading_site: [
+		"tcntrip_date", "trip_type", "business_format", "business_sub_format",
+		"branch", "trip_coordinator", "indent_date", "indent_no", "tcntrip_no",
+		"vehicle_type", "origin_city", "origin_city_2",
+		"destination_city_1", "destination_city_2",
+		"origin_address_1", "origin_address_2",
+		"destination_address_1", "destination_address_2",
+		"customer", "customer_freight",
+	],
+	at_unloading_site: [
+		"vendor", "vehicle_no", "driver", "driver_mobile",
+		"lr_no", "lr_date", "packages",
+		"eway_bill_no", "customer_invoice_no", "seal_no",
+		"reach_date_time", "dispatch_date_time",
+		"loading_detention_rate_per_day", "loading_charge",
+		"truck_return_without_loading",
+	],
+	pod_uploaded: [
+		"arrival_date_time", "release_date_time",
+		"unloading_detention_rate_per_day", "unloading_charge",
+		"weighment_charges", "extra_expenses",
+		"start_km", "end_km", "standard_km",
+		"vendor_freight", "vendor_freight_extra", "vendor_tds_to_be_deducted",
+		"employee_lr_money",
+		"packages_found_short", "packages_found_excess", "packages_found_damage",
+	],
+	bill_raised: [
+		"date_pod_uploaded_on_erp", "uploaded_pod_originalduplicate",
+		"date_pod_sent_to_customer", "courier_name",
+		"awb_no_for_dispatch", "indemnity_bond_serial_no", "indemnity_bond_date",
+		"date_approval_additional_charge",
+		"approved_origin_detention", "approved_destination_detention",
+		"approved_loading_charge", "approved_unloading_charge",
+		"approved_weighment_charge", "approved_extra_expenses",
+		"brokerage_amount", "lr_money", "tds_deducted_by_customer",
+	],
+	payment_received: [
+		"trip_total_amount_billed", "bill_nodate", "date_bill_credited",
+		"payment_advice_no", "payment_advice_date", "utr_no",
+	],
+};
+
+function get_current_stage(frm) {
+	if (frm.doc.utr_no)                    return "payment_received";
+	if (frm.doc.payment_advice_no)          return "bill_raised";
+	if (frm.doc.bill_nodate)                return "bill_raised";
+	if (frm.doc.date_pod_uploaded_on_erp)   return "pod_uploaded";
+	if (frm.doc.arrival_date_time)          return "at_unloading_site";
+	if (frm.doc.vendor || frm.doc.vehicle_no) return "at_loading_site";
+	return "trip_created";
+}
+
+function apply_status_locks(frm) {
+	const all_lockable = Object.values(STAGE_LOCK_MAP).flat();
+
+	all_lockable.forEach(f => {
+		if (!SYSTEM_READONLY_FIELDS.includes(f)) {
+			frm.set_df_property(f, "read_only", 0);
+			const fd = frm.fields_dict[f];
+			if (fd && fd.$wrapper) fd.$wrapper.removeClass("tms-stage-locked");
+		}
+	});
+
+	const stage = get_current_stage(frm);
+	const stage_order = ["trip_created","at_loading_site","at_unloading_site","pod_uploaded","bill_raised","payment_received"];
+	const stage_idx   = stage_order.indexOf(stage);
+
+	["at_loading_site","at_unloading_site","pod_uploaded","bill_raised","payment_received"].forEach((key, i) => {
+		if (stage_idx > i) {
+			STAGE_LOCK_MAP[key].forEach(f => {
+				frm.set_df_property(f, "read_only", 1);
+				const fd = frm.fields_dict[f];
+				if (fd && fd.$wrapper) fd.$wrapper.addClass("tms-stage-locked");
+			});
+		}
+	});
+
+	const locked = stage_idx > 0;
+	frm.set_intro(locked
+		? `<span style="color:var(--tms-primary);font-weight:600;">🔒 Stage: ${stage.replace(/_/g," ").replace(/\b\w/g,c=>c.toUpperCase())} — earlier fields are locked.</span>`
+		: "", locked ? "blue" : false
+	);
+
+	frm.refresh_fields(all_lockable);
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  READONLY RULES
+// ══════════════════════════════════════════════════════════════════
+
+const CURRENCY_READONLY_FIELDS = new Set([
+	"loading_site_detention_amount",
+	"unloading_site_detention_amount",
+	"total_detention_amount",
+	"total_loading_unloading_charge",
+	"total_additional_charges",
+	"total_vendor_freight",
+	"amount_to_be_paid_to_vendor",
+	"approved_detention_charge",
+	"approved_loadingunloading_charge",
+	"total_approved_addl_amount",
+	"difference_claimedapproved",
+	"total_trip_amount",
+]);
+
+const SYSTEM_READONLY_FIELDS = [
+	"origin_state", "destination_state",
+	"loading_detention_days", "loading_site_detention_amount",
+	"unloading_detention_days", "unloading_site_detention_amount",
+	"total_detention_days", "total_detention_amount",
+	"total_loading_unloading_charge", "total_additional_charges",
+	"total_km", "variation",
+	"total_vendor_freight", "amount_to_be_paid_to_vendor",
+	"journey_time", "journey_time_400_kmsday",
+	"approved_detention_charge", "approved_loadingunloading_charge",
+	"total_approved_addl_amount", "difference_claimedapproved",
+	"total_trip_amount", "pod_status",
+	"billing_start_date", "billing_end_date",
+	"so_no",
+];
+
+function setup_field_read_only_rules(frm) {
+	frm.set_df_property("so_no", "read_only", 1);
+	frm.set_df_property("so_no", "bold",      1);
+	frm.set_df_property("so_no", "hidden",    0);
+	frm.set_df_property("customer_freight", "read_only", 0);
+	frm.set_df_property("customer_freight", "hidden",    0);
+	SYSTEM_READONLY_FIELDS.forEach(f => { frm.set_df_property(f, "read_only", 1); frm.set_df_property(f, "hidden", 0); });
+	frm.refresh_fields(SYSTEM_READONLY_FIELDS.concat(["customer_freight"]));
+	_force_readonly_fields_visible(frm);
+}
+
+function _force_readonly_fields_visible(frm) {
+	_do_force(frm);
+	setTimeout(() => _do_force(frm), 150);
+	setTimeout(() => _do_force(frm), 450);
+	setTimeout(() => _do_force(frm), 800);
+	setTimeout(() => _do_force(frm), 1400);
+	_bind_tab_switch_listener(frm);
+}
+
+function refresh_calcs(frm) {
+	setTimeout(() => _do_force(frm), 60);
+}
+
+function run_all_calcs_on_load(frm) {
+	// Run full calculation chain so on-load display always matches field values,
+	// regardless of what Python saved to DB.
+	calc_loading_detention(frm);
+	calc_unloading_detention(frm);
+	calc_loading_unloading_total(frm);
+	calc_journey_time(frm);
+	calc_ideal_journey_time(frm);
+	calc_dedicated_km(frm);
+	calc_vendor_freight(frm);
+	calc_approved_detention(frm);
+	calc_approved_loading_unloading(frm);
+	calc_total_approved_addl(frm);
+	refresh_calcs(frm);
+}
+
+function _bind_tab_switch_listener(frm) {
+	if (frm._tms_tab_listener_bound) return;
+	frm._tms_tab_listener_bound = true;
+	frm.$wrapper.on("click.tms_tabs", ".form-tabs .nav-link", function () {
+		setTimeout(() => _do_force(frm), 80);
+		setTimeout(() => _do_force(frm), 300);
+		setTimeout(() => _do_force(frm), 600);
+	});
+}
+
+function _fmt_inr(val) {
+	const num = parseFloat(val);
+	if (isNaN(num)) return "₹ —";
+	const abs = Math.abs(num).toLocaleString("en-IN", { maximumFractionDigits: 2 });
+	return (num < 0 ? "− ₹\u00A0" : "₹\u00A0") + abs;
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  _do_force  ← FIX 1 CORE: inject label + show value correctly
+// ══════════════════════════════════════════════════════════════════
+
+function _do_force(frm) {
+	SYSTEM_READONLY_FIELDS.forEach(f => {
+		const fd = frm.fields_dict[f];
+		if (!fd || !fd.$wrapper) return;
+
+		const val        = frm.doc[f];
+		const empty      = (val === null || val === undefined || val === "");
+		const isCurrency = CURRENCY_READONLY_FIELDS.has(f);
+
+		// 1. Mark wrapper + force visible
+		fd.$wrapper
+			.addClass("tms-computed-field")
+			.removeClass("hidden-control")
+			.css({ display: "block", visibility: "visible", opacity: "1" });
+
+		// 2. ⚙ Auto badge (once, not on SO No)
+		if (!fd.$wrapper.find(".tms-auto-badge").length && f !== "so_no") {
+			fd.$wrapper.append('<span class="tms-auto-badge">⚙ Auto</span>');
+		}
+
+		// 3. ── LABEL FIX ────────────────────────────────────────────
+		const label_text = (fd.df && fd.df.label)
+			? fd.df.label
+			: f.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+
+		let $label = fd.$wrapper.find("label.control-label");
+		if (!$label.length) {
+			const $lbl = $(`<label class="control-label"></label>`).text(label_text);
+			const $val = fd.$wrapper.find(".like-disabled-input, input, select, textarea").first();
+			if ($val.length) $val.before($lbl);
+			else              fd.$wrapper.prepend($lbl);
+			$label = $lbl;
+		}
+		$label.css({ display: "block", visibility: "visible", opacity: "1" });
+		if (!$label.text().trim()) $label.text(label_text);
+
+		// 4. Force parent column visible
+		fd.$wrapper.closest(".form-column").css({ display: "", visibility: "visible" });
+
+		// 5. .like-disabled-input value display
+		const $disp = fd.$wrapper.find(".like-disabled-input");
+		if ($disp.length) {
+			$disp.css({ display: "block", "min-height": "36px", opacity: "1", visibility: "visible" });
+			if (empty) {
+				$disp.text(isCurrency ? "₹ —" : "—");
+			} else if (isCurrency) {
+				$disp.text(_fmt_inr(val));
+			} else {
+				// Data / Int / Date fields — always write the actual value
+				$disp.text(String(val));
+			}
+			if ((parseInt($disp.css("padding-left")) || 0) < 28)
+				$disp.css("padding-left", "32px");
+		}
+
+		// 6. Fallback for disabled <input>
+		const $inp = fd.$wrapper.find(
+			"input[disabled], input[readonly], .form-control[disabled], select[disabled]"
+		);
+		if (!$disp.length && $inp.length) {
+			if (empty) $inp.attr("placeholder", isCurrency ? "₹ —" : "—");
+			$inp.css({ display: "block", "min-height": "36px", opacity: "1",
+				visibility: "visible", "pointer-events": "none" });
+		}
+	});
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  _attach_dropdown_fix  ← FIX 2: no layout shift on dropdown open
+// ══════════════════════════════════════════════════════════════════
+
+function _reposition_awesomplete($input) {
+	let $ul = $input.next("ul[role='listbox']");
+	if (!$ul.length) $ul = $input.next("ul");
+	if (!$ul.length)
+		$ul = $input.closest(".frappe-control, .control-input-wrapper, .control-input").find("ul[role='listbox'], ul.awesomplete").first();
+	if (!$ul.length || !$ul.is(":visible")) return;
+
+	const rect       = $input[0].getBoundingClientRect();
+	const ulH        = Math.min(300, $ul[0].scrollHeight || 220);
+	const spaceBelow = window.innerHeight - rect.bottom - 6;
+	const openUp     = spaceBelow < ulH && rect.top > ulH;
+
+	$ul.css({
+		position:  "fixed",
+		zIndex:    99999,
+		top:       (openUp ? rect.top - ulH - 4 : rect.bottom + 2) + "px",
+		left:      rect.left + "px",
+		width:     rect.width + "px",
+		maxWidth:  rect.width + "px",
+		maxHeight: "300px",
+		overflowY: "auto",
+		bottom:    "auto",
+		right:     "auto",
+	});
+}
+
+function _attach_dropdown_fix(frm) {
+	frm.$wrapper.off("input.tms_dd focus.tms_dd awesomplete-open.tms_dd");
+
+	const SEL = ".frappe-control[data-fieldtype='Link'] input, .frappe-control[data-fieldtype='Dynamic Link'] input";
+
+	frm.$wrapper.on("awesomplete-open.tms_dd", SEL, function () {
+		_reposition_awesomplete($(this));
+		setTimeout(() => _reposition_awesomplete($(this)), 60);
+	});
+
+	frm.$wrapper.on("input.tms_dd", SEL, function () {
+		const $i = $(this);
+		_reposition_awesomplete($i);
+		setTimeout(() => _reposition_awesomplete($i), 80);
+	});
+
+	frm.$wrapper.on("focus.tms_dd", SEL, function () {
+		const $i = $(this);
+		setTimeout(() => _reposition_awesomplete($i), 60);
+	});
+
+	$(window).off("scroll.tms_dd resize.tms_dd")
+		.on("scroll.tms_dd resize.tms_dd", () => {
+			const $f = frm.$wrapper.find(SEL + ":focus");
+			if ($f.length) _reposition_awesomplete($f.first());
+		});
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  VALIDATION
+// ══════════════════════════════════════════════════════════════════
+
+function validate_chronology(frm) {
+	const errors = [];
+	if (frm.doc.reach_date_time    && frm.doc.dispatch_date_time && new Date(frm.doc.dispatch_date_time) < new Date(frm.doc.reach_date_time))
+		errors.push("⚠️ Dispatch cannot be before Reach time at Loading Site.");
+	if (frm.doc.dispatch_date_time && frm.doc.arrival_date_time  && new Date(frm.doc.arrival_date_time)  < new Date(frm.doc.dispatch_date_time))
+		errors.push("⚠️ Arrival cannot be before Dispatch time.");
+	if (frm.doc.arrival_date_time  && frm.doc.release_date_time  && new Date(frm.doc.release_date_time)  < new Date(frm.doc.arrival_date_time))
+		errors.push("⚠️ Release cannot be before Arrival time at Unloading Site.");
+	if (errors.length) frappe.show_alert({ message: errors.join("<br>"), indicator: "orange" }, 5);
+}
+
+function validate_km(frm) {
+	if (frappe.utils.flt(frm.doc.start_km) && frappe.utils.flt(frm.doc.end_km) && frappe.utils.flt(frm.doc.end_km) < frappe.utils.flt(frm.doc.start_km))
+		frappe.show_alert({ message: "⚠️ End KM cannot be less than Start KM. Please check odometer readings.", indicator: "orange" }, 5);
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  STAGE DISPLAY
+// ══════════════════════════════════════════════════════════════════
+
+function update_trip_status_display(frm) {
+	const idx = _get_stage_idx(frm);
+	const cur = TRIP_STATUS_STAGES[idx];
+	$(".tms-dot").each(function (i) {
+		$(this).removeClass("tms-dot-done tms-dot-current tms-dot-pending")
+			.addClass(i < idx ? "tms-dot-done" : i === idx ? "tms-dot-current" : "tms-dot-pending");
+	});
+	$(".tms-bstage").text(cur.icon + " " + cur.label);
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  CALCULATIONS
+// ══════════════════════════════════════════════════════════════════
+
+// Direct assignment bypasses frm.set_value's read_only check and
+// same-value skip, ensuring chained calc functions always read the
+// freshly computed value from frm.doc.
+function set_calc(frm, f, v) { frm.doc[f] = v; frm.refresh_field(f); }
+
+function calc_ideal_journey_time(frm) { const d = frappe.utils.flt(frm.doc.distance_loadingunloading_site); if (d) set_calc(frm, "journey_time_400_kmsday", hours_to_readable((d/400)*24)); }
+function calc_journey_time(frm)       { const h = hours_between(frm.doc.dispatch_date_time, frm.doc.arrival_date_time); if (h>0) set_calc(frm, "journey_time", hours_to_readable(h)); }
+function calc_loading_detention(frm) {
+	if (frm.doc.reach_date_time && frm.doc.dispatch_date_time)
+		set_calc(frm, "loading_detention_days", detention_days_calc(hours_between(frm.doc.reach_date_time, frm.doc.dispatch_date_time), 24));
+	calc_loading_detention_amount(frm);
+}
+function calc_loading_detention_amount(frm) {
+	set_calc(frm, "loading_site_detention_amount", frappe.utils.cint(frm.doc.loading_detention_days) * frappe.utils.flt(frm.doc.loading_detention_rate_per_day));
+	calc_total_detention(frm);
+}
+function calc_unloading_detention(frm) {
+	if (frm.doc.arrival_date_time && frm.doc.release_date_time)
+		set_calc(frm, "unloading_detention_days", detention_days_calc(hours_between(frm.doc.arrival_date_time, frm.doc.release_date_time), 24));
+	calc_unloading_detention_amount(frm);
+}
+function calc_unloading_detention_amount(frm) {
+	set_calc(frm, "unloading_site_detention_amount", frappe.utils.cint(frm.doc.unloading_detention_days) * frappe.utils.flt(frm.doc.unloading_detention_rate_per_day));
+	calc_total_detention(frm);
+}
+function calc_total_detention(frm) {
+	set_calc(frm, "total_detention_days",   frappe.utils.cint(frm.doc.loading_detention_days)   + frappe.utils.cint(frm.doc.unloading_detention_days));
+	set_calc(frm, "total_detention_amount", frappe.utils.flt(frm.doc.loading_site_detention_amount) + frappe.utils.flt(frm.doc.unloading_site_detention_amount));
+	calc_total_additional_charges(frm);
+}
+function calc_loading_unloading_total(frm) {
+	set_calc(frm, "total_loading_unloading_charge", frappe.utils.flt(frm.doc.loading_charge) + frappe.utils.flt(frm.doc.unloading_charge));
+	calc_total_additional_charges(frm);
+}
+function calc_total_additional_charges(frm) {
+	const t = frappe.utils.flt(frm.doc.total_detention_amount) + frappe.utils.flt(frm.doc.total_loading_unloading_charge) + frappe.utils.flt(frm.doc.weighment_charges) + frappe.utils.flt(frm.doc.extra_expenses);
+	set_calc(frm, "total_additional_charges", t);
+	set_calc(frm, "difference_claimedapproved", t - frappe.utils.flt(frm.doc.total_approved_addl_amount));
+}
+function calc_dedicated_km(frm) {
+	const s = frappe.utils.flt(frm.doc.start_km), e = frappe.utils.flt(frm.doc.end_km);
+	if (s && e && e >= s) { set_calc(frm, "total_km", e - s); calc_km_variation(frm); }
+}
+function calc_km_variation(frm) { const std = frappe.utils.flt(frm.doc.standard_km); if (std) set_calc(frm, "variation", frappe.utils.flt(frm.doc.total_km) - std); }
+function calc_vendor_freight(frm) { set_calc(frm, "total_vendor_freight", frappe.utils.flt(frm.doc.vendor_freight) + frappe.utils.flt(frm.doc.vendor_freight_extra)); calc_vendor_payment_total(frm); }
+function calc_vendor_payment_total(frm) { set_calc(frm, "amount_to_be_paid_to_vendor", frappe.utils.flt(frm.doc.total_vendor_freight) - frappe.utils.flt(frm.doc.vendor_tds_to_be_deducted)); }
+function calc_approved_detention(frm) { set_calc(frm, "approved_detention_charge", frappe.utils.flt(frm.doc.approved_origin_detention) + frappe.utils.flt(frm.doc.approved_destination_detention)); calc_total_approved_addl(frm); }
+function calc_approved_loading_unloading(frm) { set_calc(frm, "approved_loadingunloading_charge", frappe.utils.flt(frm.doc.approved_loading_charge) + frappe.utils.flt(frm.doc.approved_unloading_charge)); calc_total_approved_addl(frm); }
+function calc_total_approved_addl(frm) {
+	const t = frappe.utils.flt(frm.doc.approved_detention_charge) + frappe.utils.flt(frm.doc.approved_loadingunloading_charge)
+		+ frappe.utils.flt(frm.doc.approved_weighment_charge) + frappe.utils.flt(frm.doc.approved_extra_expenses)
+		+ frappe.utils.flt(frm.doc.brokerage_amount) + frappe.utils.flt(frm.doc.lr_money) - frappe.utils.flt(frm.doc.tds_deducted_by_customer);
+	set_calc(frm, "total_approved_addl_amount", t);
+	set_calc(frm, "difference_claimedapproved", frappe.utils.flt(frm.doc.total_additional_charges) - t);
+	calc_trip_total_amount(frm);
+}
+function calc_trip_total_amount(frm) { set_calc(frm, "total_trip_amount", frappe.utils.flt(frm.doc.customer_freight) + frappe.utils.flt(frm.doc.total_approved_addl_amount)); }
+function fetch_route_distance(frm) {
+	if (!frm.doc.origin_city || !frm.doc.destination_city_1) return;
+	frappe.call({
+		method: "logicore.logicore.doctype.trip.trip.get_route_distance",
+		args: { origin_city: frm.doc.origin_city, destination_city: frm.doc.destination_city_1 },
+		callback(r) { if (r.message) { frm.set_value("distance_loadingunloading_site", r.message); calc_ideal_journey_time(frm); } },
+	});
+}
+
+function hours_between(dt1, dt2) { if (!dt1||!dt2) return 0; try { return Math.abs((new Date(dt2.replace(" ","T")) - new Date(dt1.replace(" ","T"))) / 3600000); } catch(_){return 0;} }
+function detention_days_calc(h, f=24) { if (h<=f) return 0; const e=h-f; return Math.floor(e/24)+(e%24>0?1:0); }
+function hours_to_readable(hours) { if (!hours) return "0h"; const tm=Math.round(hours*60); const d=Math.floor(tm/1440); const h=Math.floor((tm%1440)/60); const m=tm%60; return [d&&d+"d",h&&h+"h",m&&m+"m"].filter(Boolean).join(" ")||"0h"; }
+
+// ══════════════════════════════════════════════════════════════════
+//  THEME
+// ══════════════════════════════════════════════════════════════════
+
+function get_combo_for_trip(trip_type) {
+	let b = trip_type || "Other";
+	if (!COMBOS[b]) b = "Other";
+	try { const r = localStorage.getItem(TMS_STORAGE_KEY); if (r) { const s = JSON.parse(r); return COMBOS[b][s[b]??0]||COMBOS[b][0]; } } catch(_){}
+	return COMBOS[b][0];
+}
+function apply_combo(combo) {
+	if (!combo) combo = DEFAULT_FALLBACK_COMBO;
+	const r = document.documentElement;
+	r.style.setProperty("--tms-primary",          combo.primary);
+	r.style.setProperty("--tms-accent",           combo.accent);
+	r.style.setProperty("--tms-page-bg",          combo.page_bg);
+	r.style.setProperty("--tms-card-bg",          combo.card_bg);
+	r.style.setProperty("--tms-section-border",   combo.section_border);
+	r.style.setProperty("--tms-field-bg",         combo.field_bg);
+	r.style.setProperty("--tms-field-border",     combo.field_border);
+	r.style.setProperty("--tms-label-color",      combo.label_color);
+	r.style.setProperty("--tms-heading-color",    combo.heading_color);
+	r.style.setProperty("--tms-radius",           combo.radius);
+	r.style.setProperty("--tms-primary-light",    hex_alpha(combo.primary, 0.10));
+	r.style.setProperty("--tms-primary-border",   hex_alpha(combo.primary, 0.28));
+	r.style.setProperty("--tms-field-focus-glow", hex_alpha(combo.primary, 0.12));
+}
+
+function setup_master_link_filters(frm) {
+	frm.set_query("trip_type",           () => ({ filters: { isactive: 1 } }));
+	frm.set_query("business_format",     () => ({ filters: { isactive: 1 } }));
+	frm.set_query("business_sub_format", () => ({ filters: { isactive: 1 } }));
+	if (frm.fields_dict["vehicle_type"]) frm.set_query("vehicle_type", () => ({ filters: { isactive: 1 } }));
+}
+
+function setup_so_no_field(frm) {
+	frm.set_df_property("so_no", "hidden",    0);
+	frm.set_df_property("so_no", "read_only", 1);
+	frm.set_df_property("so_no", "label",     "SO No / Trip ID");
+	frm.set_df_property("so_no", "bold",      1);
+	frm.refresh_field("so_no");
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  BANNER
+// ══════════════════════════════════════════════════════════════════
+
+function find_form_container(frm) {
+	for (const sel of [".form-page",".page-form",".form-layout",".frappe-card"]) {
+		let $el = frm.$wrapper.find(sel).first();
+		if (!$el.length) $el = $(sel).first();
+		if ($el.length) return $el;
+	}
+	return frm.$wrapper;
+}
+
+function _get_stage_idx(frm) {
+	if (frm.doc.utr_no)                  return 5;
+	if (frm.doc.payment_advice_no)        return 4;
+	if (frm.doc.bill_nodate)              return 3;
+	if (frm.doc.date_pod_uploaded_on_erp) return 2;
+	if (frm.doc.dispatch_date_time)       return 1;
+	return 0;
+}
+
+function render_banner(frm, combo) {
+	$(".tms-trip-banner").remove();
+	if (!combo) combo = DEFAULT_FALLBACK_COMBO;
+	const soNo     = frm.doc.so_no       || "New Trip";
+	const status   = frm.doc.trip_status || "Draft";
+	const meta     = TRIP_TYPE_META[frm.doc.trip_type] || { icon: "🚛" };
+	const sColor   = STATUS_COLORS[status] || "#94A3B8";
+	const route    = [frm.doc.origin_city, frm.doc.destination_city_1].filter(Boolean).join(" → ");
+	const stageIdx = _get_stage_idx(frm);
+	const curStage = TRIP_STATUS_STAGES[stageIdx];
+	const dotsHtml = TRIP_STATUS_STAGES.map((_, i) => {
+		const cls = i < stageIdx ? "tms-dot-done" : i === stageIdx ? "tms-dot-current" : "tms-dot-pending";
+		return `<span class="tms-dot ${cls}"></span>`;
+	}).join("");
+	const routeHtml = route ? `<span class="tms-bid-route">📍 ${frappe.utils.escape_html(route)}</span>` : "";
+	find_form_container(frm).prepend($(`
+		<div class="tms-trip-banner" style="background:linear-gradient(135deg,${combo.primary} 0%,${darken(combo.primary,28)} 100%);">
+			<div class="tms-bid">
+				<span class="tms-bid-icon">${meta.icon}</span>
+				<span class="tms-bid-sono">${frappe.utils.escape_html(soNo.replace(" (preview)",""))}</span>
+				${routeHtml}
+			</div>
+			<div class="tms-bprogress">
+				<div class="tms-dots">${dotsHtml}</div>
+				<span class="tms-bstage">${curStage.icon} ${curStage.label}</span>
+			</div>
+			<div class="tms-bstatus" style="background:${hex_alpha(sColor,.18)};color:${sColor};border-color:${hex_alpha(sColor,.45)};">
+				<span class="tms-status-dot" style="background:${sColor};box-shadow:0 0 6px ${sColor};"></span>
+				<span class="tms-banner-status-text">${frappe.utils.escape_html(status)}</span>
+			</div>
+		</div>
+	`));
+}
+
+function update_route_chip(frm) {
+	const route = [frm.doc.origin_city, frm.doc.destination_city_1].filter(Boolean).join(" → ");
+	const $chip = $(".tms-bid-route");
+	if (route) {
+		if ($chip.length) { $chip.text("📍 " + route).show(); }
+		else { $(".tms-bid").append(`<span class="tms-bid-route">📍 ${frappe.utils.escape_html(route)}</span>`); }
+	} else { $chip.hide(); }
+}
+
+function render_section_icons(frm) {
+	frm.$wrapper.find(".section-head, .form-section-heading").each(function() {
+		const $el = $(this);
+		if ($el.find(".tms-sec-icon").length) return;
+		const txt = $el.text().trim().toLowerCase();
+		for (const [key,icon] of Object.entries(SECTION_ICONS)) {
+			if (txt.includes(key)) { $el.prepend(`<span class="tms-sec-icon">${icon}</span>`); break; }
+		}
+	});
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  TAB HIGHLIGHT
+// ══════════════════════════════════════════════════════════════════
+
+const STAGE_TAB_MAP = {
+	"trip_created":      "tab_trip_info",
+	"at_loading_site":   "tab_loading_unloading",
+	"at_unloading_site": "tab_loading_unloading",
+	"pod_uploaded":      "tab_pod_approval",
+	"bill_raised":       "tab_billing_payment",
+	"payment_received":  "tab_billing_payment",
+};
+
+const TAB_ORDER = [
+	"tab_trip_info",
+	"tab_loading_unloading",
+	"tab_km_vendor",
+	"tab_pod_approval",
+	"tab_billing_payment",
+];
+
+const STAGE_TAB_COMPLETE_IDX = {
+	"trip_created":      0,
+	"at_loading_site":   1,
+	"at_unloading_site": 1,
+	"pod_uploaded":      2,
+	"bill_raised":       3,
+	"payment_received":  4,
+};
+
+function highlight_active_tab(frm) {
+	const stage          = get_current_stage(frm);
+	const active_tab     = STAGE_TAB_MAP[stage] || "tab_trip_info";
+	const complete_up_to = STAGE_TAB_COMPLETE_IDX[stage] ?? 0;
+	frm.$wrapper.find(".tms-stage-dot, .tms-tab-check").remove();
+	frm.$wrapper.find(".form-tabs .nav-item").each(function () {
+		const $link   = $(this).find(".nav-link");
+		const fn      = $link.attr("data-fieldname") || "";
+		const tab_idx = TAB_ORDER.indexOf(fn);
+		if (fn === active_tab) {
+			$link.append('<span class="tms-stage-dot" title="Action needed here"></span>');
+		} else if (tab_idx >= 0 && tab_idx < complete_up_to) {
+			$link.append('<span class="tms-tab-check" title="Complete">✓</span>');
+		}
+	});
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  BUTTONS
+// ══════════════════════════════════════════════════════════════════
+
+function add_custom_buttons(frm) {
+	// Removed: Theme Settings button (🎨)
+	// Removed: Trip Summary button (📊)
+	frm.add_custom_button(__("📧 Email Template"), () => show_email_template_dialog(frm));
+	if (!frm.is_new()) {
+		frm.add_custom_button(__("🖨️ Print Trip Sheet"), () => frappe.utils.print("Trip", frm.doc.name));
+	}
+}
+
+// ══════════════════════════════════════════════════════════════════
+//  EMAIL TEMPLATE
+// ══════════════════════════════════════════════════════════════════
+
+function show_email_template_dialog(frm) {
+	frappe.call({
+		method: "frappe.client.get_list",
+		args: { doctype: "Email Template", fields: ["name","subject","response"], limit_page_length: 100 },
+		callback(r) { build_email_dialog(frm, r.message||[]); },
+	});
+}
+function build_email_dialog(frm, templates) {
+	const opts = templates.map(t => t.name);
+	const dialog = new frappe.ui.Dialog({
+		title: "📧 Email Template", size: "large",
+		fields: [
+			{ fieldname: "template_name", fieldtype: "Select", label: "Select Email Template", options: ["", ...opts].join("\n") },
+			{ fieldname: "action_buttons", fieldtype: "HTML", options: `<div style="display:flex;gap:10px;margin:6px 0 2px;flex-wrap:wrap;"><button class="btn btn-xs btn-default" id="etpl-btn-new" style="border:1.5px solid var(--tms-primary);color:var(--tms-primary);border-radius:6px;font-weight:600;">➕ Add New Template</button><button class="btn btn-xs btn-default" id="etpl-btn-manage" style="border-radius:6px;font-weight:600;">⚙️ Manage Templates</button></div>` },
+			{ fieldname: "preview_sec", fieldtype: "Section Break", label: "Preview" },
+			{ fieldname: "preview_html", fieldtype: "HTML", options: etpl_empty() },
+		],
+		primary_action_label: "✅ Apply Template",
+		primary_action(vals) {
+			if (!vals.template_name) { frappe.msgprint({ title: "Required", message: "Please select a template.", indicator: "orange" }); return; }
+			frm.doc.__email_template = vals.template_name;
+			frappe.show_alert({ message: `Template <b>${vals.template_name}</b> applied.`, indicator: "green" }, 4);
+			dialog.hide();
+		},
+		secondary_action_label: "Cancel",
+	});
+	dialog.show();
+	dialog.$wrapper.find("#etpl-btn-new").on("click", () => { dialog.hide(); frappe.new_doc("Email Template"); });
+	dialog.$wrapper.find("#etpl-btn-manage").on("click", () => { frappe.set_route("List","Email Template"); });
+	dialog.fields_dict.template_name.$input.on("change", function () {
+		const sel = $(this).val();
+		if (!sel) { etpl_set(dialog, etpl_empty()); return; }
+		etpl_set(dialog, etpl_loading()); etpl_fetch(frm, dialog, sel);
+	});
+	if (frm.doc.__email_template) { dialog.set_value("template_name", frm.doc.__email_template); etpl_fetch(frm, dialog, frm.doc.__email_template); }
+}
+function etpl_fetch(frm, dialog, name) {
+	if (frm.is_new()) {
+		frappe.call({ method: "frappe.client.get", args: { doctype: "Email Template", name }, callback(r) {
+			if (!r.message) { etpl_set(dialog, etpl_error("Template not found.")); return; }
+			etpl_set(dialog, etpl_card(name, r.message.subject||"(No subject)", r.message.response||"(Empty body)"));
+		}});
+		return;
+	}
+	frappe.call({
+		method: "logicore.logicore.doctype.trip.trip.render_email_template_for_trip",
+		args: { template_name: name, trip_name: frm.doc.name },
+		callback(r) {
+			if (!r.message) { etpl_set(dialog, etpl_error("Could not render template.")); return; }
+			etpl_set(dialog, etpl_card(name, r.message.subject||"(No subject)", r.message.message||"(Empty body)"));
+		},
+		error() { etpl_set(dialog, etpl_error("Error rendering template.")); },
+	});
+}
+function etpl_set(dialog, html) {
+	const $w = dialog.fields_dict.preview_html.$wrapper;
+	$w.html(html);
+	$w.find("[data-copy]").on("click", function () {
+		const t = $(this).data("copy"); let text = "";
+		if (t==="subject") text = $w.find(".etpl-subject-val").text();
+		else if (t==="body") text = $w.find(".etpl-body").text();
+		else if (t==="all") text = `Subject: ${$w.find(".etpl-subject-val").text()}\n\n${$w.find(".etpl-body").text()}`;
+		if (text) copy_to_clipboard(text, $(this));
+	});
+}
+function etpl_card(name,subject,body){return `<div class="etpl-card"><div class="etpl-head"><div><span class="etpl-chip">📧 Email Template</span><div class="etpl-name">${frappe.utils.escape_html(name)}</div></div><div style="display:flex;gap:8px;align-items:center"><button class="etpl-copy etpl-copy-inv" data-copy="all">📋 Copy All</button><a class="etpl-open" href="/app/email-template/${encodeURIComponent(name)}" target="_blank">Open ↗</a></div></div><div class="etpl-subject-row"><span class="etpl-label">Subject</span><span class="etpl-subject-val">${frappe.utils.escape_html(subject)}</span><button class="etpl-copy" data-copy="subject">📋</button></div><div class="etpl-body-header"><span class="etpl-label">Message</span><button class="etpl-copy" data-copy="body">📋 Copy Body</button></div><div class="etpl-body">${body}</div><div class="etpl-footer">Previewed with current Trip data</div></div>`;}
+function etpl_empty(){return `<div class="etpl-empty"><div style="font-size:36px">📭</div><div style="font-weight:700;font-size:14px;color:#374151;margin-top:8px">No template selected</div><div style="font-size:12px;color:#9CA3AF;margin-top:4px">Pick a template from the dropdown above</div></div>`;}
+function etpl_loading(){return `<div class="etpl-empty"><div style="font-size:28px;animation:tms-spin 1s linear infinite;display:inline-block">⏳</div><div style="font-weight:600;font-size:13px;color:#6B7280;margin-top:8px">Loading…</div></div>`;}
+function etpl_error(msg){return `<div class="etpl-empty"><div style="font-size:30px">⚠️</div><div style="font-weight:600;font-size:13px;color:#EF4444;margin-top:8px">${frappe.utils.escape_html(msg)}</div></div>`;}
+
+function copy_to_clipboard(text,$btn){
+	if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(text).then(()=>flash_copy($btn)).catch(()=>exec_copy(text,$btn));
+	else exec_copy(text,$btn);
+}
+function exec_copy(text,$btn){const el=document.createElement("textarea");el.value=text;el.style.cssText="position:fixed;opacity:0;";document.body.appendChild(el);el.select();try{document.execCommand("copy");flash_copy($btn);}catch{frappe.show_alert({message:"Copy failed.",indicator:"red"},3);}document.body.removeChild(el);}
+function flash_copy($btn){const orig=$btn.html();$btn.html("✅ Copied!").css("opacity","0.8");frappe.show_alert({message:"Copied!",indicator:"green"},2);setTimeout(()=>$btn.html(orig).css("opacity",""),2000);}
+
+function hex_to_rgb(hex){const h=hex.trim().replace("#","");return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];}
+function hex_alpha(hex,a){try{const[r,g,b]=hex_to_rgb(hex);return `rgba(${r},${g},${b},${a})`;}catch{return hex;}}
+function darken(hex,amt){try{const[r,g,b]=hex_to_rgb(hex);const d=v=>Math.max(0,v-amt).toString(16).padStart(2,"0");return `#${d(r)}${d(g)}${d(b)}`;}catch{return hex;}}
+
+// ══════════════════════════════════════════════════════════════════
+//  ADDRESS SEARCH
+// ══════════════════════════════════════════════════════════════════
+
+function setup_address_search(frm) {
+	["origin_address_1","origin_address_2","destination_address_1","destination_address_2"].forEach(fn => {
+		if (!frm.fields_dict[fn]) return;
+		frm.set_query(fn, () => ({ query: "logicore.logicore.doctype.trip.trip.search_address", filters: {} }));
+		if (frm.doc[fn]) _show_address_label(frm, fn, frm.doc[fn]);
+	});
+}
+function on_address_selected(frm, fn) {
+	const addr = frm.doc[fn];
+	if (!addr) { frm.set_df_property(fn,"description",""); frm.refresh_field(fn); return; }
+	_show_address_label(frm, fn, addr);
+}
+function _show_address_label(frm, fn, addr_name) {
+	frappe.call({
+		method: "logicore.logicore.doctype.trip.trip.get_address_display_label",
+		args: { address_name: addr_name },
+		callback(r) { if (r.message) { frm.set_df_property(fn,"description",r.message); frm.refresh_field(fn); } },
+	});
+}

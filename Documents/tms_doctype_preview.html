@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LogiCore — DocType Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f5f7;
+    --surface: #ffffff;
+    --border: #e2e5ea;
+    --border-strong: #c8cdd6;
+    --text-primary: #1c2333;
+    --text-secondary: #6b7385;
+    --text-muted: #9aa0b0;
+    --accent-primary: #2b6cb0;
+    --accent-light: #ebf4ff;
+    --section-header: #f8f9fb;
+    --required: #e53e3e;
+    --read-only-bg: #f7f8fa;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    --radius: 6px;
+
+    /* Trip type colors */
+    --color-primary: #2563eb;
+    --color-rcpl: #7c3aed;
+    --color-secondary: #059669;
+    --color-dedicated: #d97706;
+    --color-other: #64748b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* ── APP CHROME ── */
+  .app-bar {
+    background: #1a202c;
+    color: #e2e8f0;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 16px;
+    font-size: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .app-bar .logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    color: #fff;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+  .app-bar .breadcrumb { color: #718096; display: flex; align-items: center; gap: 6px; }
+  .app-bar .breadcrumb span { color: #a0aec0; }
+  .app-bar .breadcrumb .current { color: #e2e8f0; font-weight: 500; }
+  .app-bar-right { margin-left: auto; display: flex; gap: 10px; align-items: center; }
+
+  /* ── TABS ── */
+  .tabs {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex;
+    gap: 2px;
+  }
+  .tab {
+    padding: 10px 18px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .tab.active {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary);
+  }
+  .tab:hover:not(.active) { color: var(--text-primary); background: var(--bg); }
+
+  /* ── PAGE LAYOUT ── */
+  .page-wrapper { max-width: 1200px; margin: 0 auto; padding: 20px 24px 60px; }
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* ── FORM PAGE HEAD ── */
+  .form-page-head {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .form-title-bar {
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .form-title-bar.themed { border-top: 4px solid var(--theme-color, #2563eb); }
+  .doc-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .type-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.3px;
+  }
+  .status-pill {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+  }
+  .status-created  { background: #dbeafe; color: #1d4ed8; }
+  .status-transit  { background: #fed7aa; color: #c2410c; }
+  .status-billing  { background: #fef9c3; color: #a16207; }
+  .status-billed   { background: #dcfce7; color: #15803d; }
+  .status-paid     { background: #ede9fe; color: #6d28d9; }
+  .status-closed   { background: #f1f5f9; color: #475569; }
+
+  .form-actions {
+    padding: 10px 20px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .btn {
+    padding: 6px 14px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid transparent;
+    font-family: 'IBM Plex Sans', sans-serif;
+    transition: all 0.15s;
+  }
+  .btn-primary { background: var(--accent-primary); color: #fff; border-color: var(--accent-primary); }
+  .btn-primary:hover { background: #1e56a0; }
+  .btn-default { background: var(--surface); color: var(--text-primary); border-color: var(--border-strong); }
+  .btn-default:hover { background: var(--bg); }
+  .btn-success { background: #16a34a; color: #fff; }
+  .btn-danger  { background: #dc2626; color: #fff; font-size: 11px; padding: 5px 10px; }
+
+  /* ── FORM BODY ── */
+  .form-body { display: flex; flex-direction: column; gap: 12px; }
+
+  /* ── SECTION ── */
+  .form-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .section-head {
+    background: var(--section-header);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 16px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .section-head .toggle { margin-left: auto; color: var(--text-muted); font-size: 10px; }
+  .section-head.accent { background: var(--accent-light); color: var(--accent-primary); }
+  .section-body { padding: 16px; }
+  .section-body.collapsed { display: none; }
+
+  /* ── FORM ROW / COLS ── */
+  .form-row { display: grid; gap: 0 20px; }
+  .form-row.cols-2 { grid-template-columns: 1fr 1fr; }
+  .form-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .form-row.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+  /* ── FIELD ── */
+  .field-wrap {
+    padding: 6px 0;
+    border-bottom: 1px solid transparent;
+  }
+  .field-wrap:hover { border-bottom-color: var(--border); }
+  .field-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .field-label .req { color: var(--required); font-size: 10px; }
+  .field-label .auto-tag {
+    font-size: 9px;
+    font-family: 'IBM Plex Mono', monospace;
+    background: #f0fdf4;
+    color: #15803d;
+    padding: 1px 5px;
+    border-radius: 3px;
+    border: 1px solid #bbf7d0;
+  }
+  .field-label .ro-tag {
+    font-size: 9px;
+    font-family: 'IBM Plex Mono', monospace;
+    background: #f8fafc;
+    color: #94a3b8;
+    padding: 1px 5px;
+    border-radius: 3px;
+    border: 1px solid #e2e8f0;
+  }
+
+  .field-input {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 5px 9px;
+    font-size: 12.5px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: var(--text-primary);
+    background: var(--surface);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .field-input:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 2px rgba(43,108,176,0.12); }
+  .field-input.read-only { background: var(--read-only-bg); color: var(--text-secondary); cursor: default; }
+  .field-input.has-value { font-weight: 500; }
+  .field-input.currency::before { content: '₹'; }
+
+  select.field-input { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7385' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 8px center; padding-right: 28px; }
+
+  .link-input { position: relative; }
+  .link-input input { padding-right: 28px; }
+  .link-icon { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 11px; }
+
+  /* ── CHILD TABLE ── */
+  .child-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .child-table th {
+    background: var(--section-header);
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .child-table td {
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    color: var(--text-primary);
+  }
+  .child-table tr:nth-child(even) td { background: #fafbfc; }
+  .child-table tr:hover td { background: var(--accent-light); }
+  .add-row-btn {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--accent-primary);
+    cursor: pointer;
+    padding: 4px 8px;
+    border: 1px dashed var(--border-strong);
+    border-radius: 4px;
+    display: inline-block;
+    transition: all 0.15s;
+  }
+  .add-row-btn:hover { background: var(--accent-light); border-style: solid; }
+
+  /* ── COLOR SWATCH ── */
+  .color-field { display: flex; align-items: center; gap: 8px; }
+  .color-swatch {
+    width: 28px; height: 28px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .color-hex {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--text-primary);
+  }
+
+  /* ── CALCULATION HIGHLIGHT ── */
+  .calc-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #065f46;
+    background: #f0fdf4;
+    border-color: #a7f3d0;
+  }
+
+  /* ── TRIP TYPE SELECTOR (for demo) ── */
+  .demo-controls {
+    background: #1a202c;
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .demo-label { color: #a0aec0; font-size: 12px; font-weight: 500; white-space: nowrap; }
+  .trip-type-btn {
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .trip-type-btn.active { border-color: #fff; transform: scale(1.05); }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    background: var(--accent-light);
+    border: 1px solid #bee3f8;
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #2b6cb0;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  /* ── MANDATORY STAR ── */
+  .req-star { color: var(--required); }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 12px 16px;
+    overflow-x: auto;
+  }
+  .timeline-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 90px;
+    position: relative;
+  }
+  .timeline-step::after {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+    z-index: 0;
+  }
+  .timeline-step:last-child::after { display: none; }
+  .timeline-dot {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: var(--surface);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+  }
+  .timeline-dot.done { background: var(--accent-primary); border-color: var(--accent-primary); color: #fff; }
+  .timeline-dot.current { background: #fff; border-color: var(--accent-primary); color: var(--accent-primary); }
+  .timeline-label { font-size: 10px; color: var(--text-muted); margin-top: 5px; text-align: center; font-weight: 500; }
+  .timeline-label.done { color: var(--accent-primary); }
+  .timeline-label.current { color: var(--text-primary); font-weight: 600; }
+
+  /* ── TMS SETTINGS PREVIEW ── */
+  .settings-theme-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 14px;
+    background: var(--bg);
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    margin-top: 10px;
+  }
+  .theme-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .theme-chip:hover { transform: translateY(-2px); }
+  .theme-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.5); }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .form-row.cols-2, .form-row.cols-3, .form-row.cols-4 { grid-template-columns: 1fr; }
+    .tabs { overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- APP BAR -->
+<div class="app-bar">
+  <div class="logo">⬡ LogiCore</div>
+  <div class="breadcrumb">
+    <span>Transport</span> › <span>Trips</span> › <span class="current" id="breadcrumb-name">New Trip</span>
+  </div>
+  <div class="app-bar-right" style="color:#718096;font-size:11px;font-family:'IBM Plex Mono',monospace;">
+    logicore.localhost
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" onclick="switchView('trip')">Trip DocType</div>
+  <div class="tab" onclick="switchView('settings')">TMS Settings DocType</div>
+  <div class="tab" onclick="switchView('city')">TMS City DocType</div>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- VIEW: TRIP                                      -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="view active" id="view-trip">
+
+    <!-- DEMO CONTROLS -->
+    <div class="demo-controls">
+      <span class="demo-label">🎨 Trip Type Preview:</span>
+      <button class="trip-type-btn active" style="background:#2563eb;color:#fff;" onclick="setTripType('Primary Trip','#2563eb')">Primary Trip</button>
+      <button class="trip-type-btn" style="background:#7c3aed;color:#fff;" onclick="setTripType('RCPL Primary','#7c3aed')">RCPL Primary</button>
+      <button class="trip-type-btn" style="background:#059669;color:#fff;" onclick="setTripType('Secondary Market','#059669')">Secondary Market</button>
+      <button class="trip-type-btn" style="background:#d97706;color:#fff;" onclick="setTripType('Secondary Dedicated','#d97706')">Secondary Dedicated</button>
+      <button class="trip-type-btn" style="background:#64748b;color:#fff;" onclick="setTripType('Other','#64748b')">Other</button>
+    </div>
+
+    <!-- FORM HEAD -->
+    <div class="form-page-head">
+      <div class="form-title-bar themed" id="title-bar" style="--theme-color:#2563eb; border-top-color:#2563eb; background:linear-gradient(to right, #eff6ff, #fff)">
+        <div class="doc-title" id="doc-id">SLPLP-2526-00001</div>
+        <span class="type-badge" id="type-badge" style="background:#dbeafe;color:#1d4ed8;">Primary Trip</span>
+        <span class="status-pill status-created" id="status-pill">Trip Created</span>
+      </div>
+      <!-- STATUS TIMELINE -->
+      <div class="timeline">
+        <div class="timeline-step"><div class="timeline-dot done" id="ts-1">✓</div><div class="timeline-label done" id="tl-1">Trip Created</div></div>
+        <div class="timeline-step"><div class="timeline-dot current" id="ts-2">2</div><div class="timeline-label current" id="tl-2">In Transit</div></div>
+        <div class="timeline-step"><div class="timeline-dot" id="ts-3">3</div><div class="timeline-label" id="tl-3">Awaiting Billing</div></div>
+        <div class="timeline-step"><div class="timeline-dot" id="ts-4">4</div><div class="timeline-label" id="tl-4">Billed</div></div>
+        <div class="timeline-step"><div class="timeline-dot" id="ts-5">5</div><div class="timeline-label" id="tl-5">Pmt Received</div></div>
+        <div class="timeline-step"><div class="timeline-dot" id="ts-6">6</div><div class="timeline-label" id="tl-6">Closed</div></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary">Save</button>
+        <button class="btn btn-default">Discard</button>
+        <button class="btn btn-default">Print</button>
+        <button class="btn btn-success" style="margin-left:auto;" onclick="simulateStatus()">▶ Simulate Status Flow</button>
+      </div>
+    </div>
+
+    <!-- FORM BODY -->
+    <div class="form-body">
+
+      <!-- SECTION: TRIP CREATION -->
+      <div class="form-section">
+        <div class="section-head accent" onclick="toggleSection(this)">
+          <span>🚛 Trip Creation</span>
+          <span class="toggle">▾</span>
+        </div>
+        <div class="section-body">
+          <div class="form-row cols-4">
+            <div class="field-wrap">
+              <div class="field-label"><span class="req-star">*</span> Trip ID <span class="auto-tag">AUTO</span></div>
+              <input class="field-input read-only has-value" value="SLPLP-2526-00001" readonly>
+            </div>
+            <div class="field-wrap">
+              <div class="field-label"><span class="req-star">*</span> TCN / Trip Date</div>
+              <input type="date" class="field-input has-value" value="2026-03-06">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label"><span class="req-star">*</span> Trip Type</div>
+              <select class="field-input has-value" id="trip-type-select" onchange="onTripTypeChange(this.value)">
+                <option>Primary Trip</option>
+                <option>RCPL Primary</option>
+                <option>RR Primary</option>
+                <option>Secondary Market</option>
+                <option>Secondary Dedicated</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Business Format</div>
+              <div class="link-input">
+                <input class="field-input has-value" value="RCPL" placeholder="Select…">
+                <span class="link-icon">⌕</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-row cols-4" style="margin-top:4px;">
+            <div class="field-wrap">
+              <div class="field-label">Business Sub Format</div>
+              <input class="field-input" placeholder="Select…">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label"><span class="req-star">*</span> Branch</div>
+              <div class="link-input">
+                <input class="field-input has-value" value="Ahmedabad">
+                <span class="link-icon">⌕</span>
+              </div>
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Trip Coordinator</div>
+              <div class="link-input">
+                <input class="field-input" placeholder="Select…">
+                <span class="link-icon">⌕</span>
+              </div>
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">TCN / Trip No</div>
+              <input class="field-input" placeholder="Enter TCN or Trip No">
+            </div>
+          </div>
+          <div class="form-row cols-4" style="margin-top:4px;" id="primary-fields">
+            <div class="field-wrap">
+              <div class="field-label">Indent Date</div>
+              <input type="date" class="field-input">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Indent No</div>
+              <input class="field-input" placeholder="For RRL/RCPL trips">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">SO No</div>
+              <input class="field-input" placeholder="RCPL only">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label"><span class="req-star">*</span> Vehicle Type</div>
+              <div class="link-input">
+                <input class="field-input has-value" value="32 FT SXL">
+                <span class="link-icon">⌕</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-row cols-2" style="margin-top:4px;">
+            <div class="field-wrap">
+              <div class="field-label"><span class="req-star">*</span> Customer</div>
+              <div class="link-input">
+                <input class="field-input has-value" value="Reliance Retail Ltd.">
+                <span class="link-icon">⌕</span>
+              </div>
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Customer Freight <span class="ro-tag">LOCKED AFTER CREATE</span></div>
+              <input class="field-input has-value" value="₹ 45,000" style="font-family:'IBM Plex Mono',monospace;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: ROUTE -->
+      <div class="form-section">
+        <div class="section-head" onclick="toggleSection(this)">
+          <span>🗺️ Route</span>
+          <span class="toggle">▾</span>
+        </div>
+        <div class="section-body">
+          <div class="form-row cols-2">
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Origin</div>
+              <div class="form-row cols-2">
+                <div class="field-wrap">
+                  <div class="field-label"><span class="req-star">*</span> Origin City 1</div>
+                  <div class="link-input">
+                    <input class="field-input has-value" value="Ahmedabad">
+                    <span class="link-icon">⌕</span>
+                  </div>
+                </div>
+                <div class="field-wrap">
+                  <div class="field-label">Origin State <span class="auto-tag">AUTO</span></div>
+                  <input class="field-input read-only has-value" value="Gujarat" readonly>
+                </div>
+              </div>
+              <div class="form-row cols-2" style="margin-top:4px;">
+                <div class="field-wrap">
+                  <div class="field-label">Origin City 2</div>
+                  <input class="field-input" placeholder="Optional">
+                </div>
+                <div class="field-wrap">
+                  <div class="field-label">Origin State 2 <span class="auto-tag">AUTO</span></div>
+                  <input class="field-input read-only" readonly placeholder="—">
+                </div>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Destination</div>
+              <div class="form-row cols-2">
+                <div class="field-wrap">
+                  <div class="field-label"><span class="req-star">*</span> Destination City 1</div>
+                  <div class="link-input">
+                    <input class="field-input has-value" value="Mumbai">
+                    <span class="link-icon">⌕</span>
+                  </div>
+                </div>
+                <div class="field-wrap">
+                  <div class="field-label">Destination State <span class="auto-tag">AUTO</span></div>
+                  <input class="field-input read-only has-value" value="Maharashtra" readonly>
+                </div>
+              </div>
+              <div class="form-row cols-2" style="margin-top:4px;">
+                <div class="field-wrap">
+                  <div class="field-label">Destination City 2</div>
+                  <input class="field-input" placeholder="Optional">
+                </div>
+                <div class="field-wrap">
+                  <div class="field-label">Destination State 2 <span class="auto-tag">AUTO</span></div>
+                  <input class="field-input read-only" readonly placeholder="—">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: LOADING SITE -->
+      <div class="form-section">
+        <div class="section-head" onclick="toggleSection(this)">
+          <span>📦 Loading Site</span>
+          <span class="toggle">▾</span>
+        </div>
+        <div class="section-body">
+          <div class="form-row cols-4">
+            <div class="field-wrap">
+              <div class="field-label">Vendor</div>
+              <div class="link-input">
+                <input class="field-input has-value" value="Sharma Logistics">
+                <span class="link-icon">⌕</span>
+              </div>
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Vehicle No</div>
+              <input class="field-input has-value" value="GJ-01-AB-1234">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Driver</div>
+              <input class="field-input has-value" value="Ramesh Patel">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Driver Mobile</div>
+              <input class="field-input has-value" value="9876543210">
+            </div>
+          </div>
+          <div class="form-row cols-4" style="margin-top:4px;">
+            <div class="field-wrap">
+              <div class="field-label">LR No</div>
+              <input class="field-input has-value" value="LR-2024-0381">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">LR Date</div>
+              <input type="date" class="field-input has-value" value="2026-03-06">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Packages</div>
+              <input class="field-input has-value" value="240" style="font-family:'IBM Plex Mono',monospace;">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Truck Returned Without Loading</div>
+              <select class="field-input"><option>No</option><option>Yes</option></select>
+            </div>
+          </div>
+          <div class="form-row cols-4" style="margin-top:4px;">
+            <div class="field-wrap">
+              <div class="field-label">Reach Date Time</div>
+              <input type="datetime-local" class="field-input has-value" value="2026-03-06T08:00" oninput="calcDetention()">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Dispatch Date Time</div>
+              <input type="datetime-local" class="field-input has-value" value="2026-03-06T11:30" oninput="calcDetention()">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Loading Detention Days <span class="auto-tag">AUTO</span></div>
+              <input class="field-input read-only calc-value" id="load-det-days" value="0.00" readonly>
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Loading Detention Amount <span class="auto-tag">AUTO</span></div>
+              <input class="field-input read-only calc-value" id="load-det-amt" value="₹ 0" readonly>
+            </div>
+          </div>
+          <div class="form-row cols-2" style="margin-top:4px;">
+            <div class="field-wrap">
+              <div class="field-label">Loading Detention Rate/Day</div>
+              <input class="field-input" id="load-det-rate" placeholder="₹ per day" oninput="calcDetention()">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Loading Charge</div>
+              <input class="field-input" placeholder="₹" oninput="calcTotals()">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: UNLOADING SITE -->
+      <div class="form-section">
+        <div class="section-head" onclick="toggleSection(this)">
+          <span>🏭 Unloading Site</span>
+          <span class="toggle">▾</span>
+        </div>
+        <div class="section-body">
+          <div class="form-row cols-4">
+            <div class="field-wrap">
+              <div class="field-label">Distance — Loading to Unloading (KM) <span class="auto-tag">AUTO</span></div>
+              <input class="field-input read-only calc-value" value="542" readonly>
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Journey Time @ 400 KM/Day (Hrs) <span class="auto-tag">AUTO</span></div>
+              <input class="field-input read-only calc-value" value="32.5" readonly>
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Arrival Date Time</div>
+              <input type="datetime-local" class="field-input has-value" value="2026-03-07T18:00">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Actual Journey Time (Hrs) <span class="auto-tag">AUTO</span></div>
+              <input class="field-input read-only calc-value" value="30.5" readonly>
+            </div>
+          </div>
+          <div class="form-row cols-4" style="margin-top:4px;">
+            <div class="field-wrap">
+              <div class="field-label">Release Date Time</div>
+              <input type="datetime-local" class="field-input" placeholder="—">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Unloading Detention Days <span class="auto-tag">AUTO</span></div>
+              <input class="field-input read-only calc-value" value="0.00" readonly>
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Total Detention Days <span class="auto-tag">AUTO</span></div>
+              <input class="field-input read-only calc-value" value="0.00" readonly>
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Total Detention Amount <span class="auto-tag">AUTO</span></div>
+              <input class="field-input read-only calc-value" value="₹ 0" readonly>
+            </div>
+          </div>
+          <div class="form-row cols-3" style="margin-top:4px;">
+            <div class="field-wrap">
+              <div class="field-label">Unloading Charge</div>
+              <input class="field-input" placeholder="₹">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Weighment Charges</div>
+              <input class="field-input" placeholder="₹">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Total Loading / Unloading <span class="auto-tag">AUTO</span></div>
+              <input class="field-input read-only calc-value" value="₹ 0" readonly>
+            </div>
+          </div>
+          <div class="form-row cols-3" style="margin-top:4px;">
+            <div class="field-wrap">
+              <div class="field-label">Packages Short</div>
+              <input class="field-input" placeholder="0">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Packages Excess</div>
+              <input class="field-input" placeholder="0">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Packages Damaged</div>
+              <input class="field-input" placeholder="0">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: DEDICATED KM (hidden by default) -->
+      <div class="form-section" id="dedicated-section" style="display:none;">
+        <div class="section-head" onclick="toggleSection(this)">
+          <span>📏 Dedicated KM</span>
+          <span class="toggle">▾</span>
+        </div>
+        <div class="section-body">
+          <div class="form-row cols-4">
+            <div class="field-wrap">
+              <div class="field-label">Start KM</div>
+              <input class="field-input" placeholder="0">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">End KM</div>
+              <input class="field-input" placeholder="0">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Total KM <span class="auto-tag">AUTO</span></div>
+              <input class="field-input read-only calc-value" value="0" readonly>
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Standard KM</div>
+              <input class="field-input" placeholder="From master">
+            </div>
+          </div>
+          <div class="form-row cols-2" style="margin-top:4px;">
+            <div class="field-wrap">
+              <div class="field-label">Variation (KM) <span class="auto-tag">AUTO</span></div>
+              <input class="field-input read-only calc-value" value="0" readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: POD & DISPATCH -->
+      <div class="form-section">
+        <div class="section-head" onclick="toggleSection(this)">
+          <span>📄 POD &amp; Dispatch</span>
+          <span class="toggle">▾</span>
+        </div>
+        <div class="section-body">
+          <div class="form-row cols-4">
+            <div class="field-wrap">
+              <div class="field-label">Date POD Uploaded on ERP</div>
+              <input type="date" class="field-input">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Original / Duplicate POD</div>
+              <select class="field-input"><option value="">— Select —</option><option>Original</option><option>Duplicate</option></select>
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">POD Status <span class="auto-tag">AUTO</span></div>
+              <input class="field-input read-only" value="POD Not Uploaded" style="color:#9aa0b0;" readonly>
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Date POD Sent to Customer</div>
+              <input type="date" class="field-input">
+            </div>
+          </div>
+          <div class="form-row cols-3" style="margin-top:4px;">
+            <div class="field-wrap">
+              <div class="field-label">Courier Name</div>
+              <input class="field-input" placeholder="e.g. Blue Dart">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">AWB No for Despatch</div>
+              <input class="field-input" placeholder="Airway Bill No">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Indemnity Bond Serial No</div>
+              <input class="field-input" placeholder="If applicable">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: BILLING SUMMARY -->
+      <div class="form-section">
+        <div class="section-head" onclick="toggleSection(this)">
+          <span>💰 Billing Summary</span>
+          <span class="toggle">▾</span>
+        </div>
+        <div class="section-body">
+          <div class="form-row cols-4">
+            <div class="field-wrap">
+              <div class="field-label">Total Additional Charges <span class="auto-tag">AUTO</span></div>
+              <input class="field-input read-only calc-value" value="₹ 0" readonly>
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Total Approved Additional <span class="auto-tag">AUTO</span></div>
+              <input class="field-input read-only calc-value" value="₹ 0" readonly>
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Trip Total Amount <span class="auto-tag">AUTO</span></div>
+              <input class="field-input read-only calc-value" value="₹ 45,000" readonly style="font-weight:700;font-size:14px;color:#065f46;">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Trip Total Amount Billed</div>
+              <input class="field-input" placeholder="₹ Final billed amount">
+            </div>
+          </div>
+          <div class="form-row cols-4" style="margin-top:4px;">
+            <div class="field-wrap">
+              <div class="field-label">Bill No / Date</div>
+              <input class="field-input" placeholder="Bill Number">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Date Bill Credited</div>
+              <input type="date" class="field-input">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Payment Advice No</div>
+              <input class="field-input" placeholder="Advice reference">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">UTR No</div>
+              <input class="field-input" placeholder="Bank UTR">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: VENDOR PAYMENT (Child Table) -->
+      <div class="form-section">
+        <div class="section-head" onclick="toggleSection(this)">
+          <span>🏦 Vendor Payment Schedule</span>
+          <span class="toggle">▾</span>
+        </div>
+        <div class="section-body">
+          <table class="child-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Payment Date</th>
+                <th>Payment Amount</th>
+                <th>Payment Reference</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="color:var(--text-muted);font-size:11px;">1</td>
+                <td><input type="date" style="border:none;outline:none;font-family:inherit;font-size:12px;width:100%;background:transparent;" value="2026-03-15"></td>
+                <td><input style="border:none;outline:none;font-family:'IBM Plex Mono',monospace;font-size:12px;width:100%;background:transparent;" value="₹ 20,000"></td>
+                <td><input style="border:none;outline:none;font-family:inherit;font-size:12px;width:100%;background:transparent;" value="NEFT/2026/1234"></td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-muted);font-size:11px;">2</td>
+                <td><input type="date" style="border:none;outline:none;font-family:inherit;font-size:12px;width:100%;background:transparent;"></td>
+                <td><input style="border:none;outline:none;font-family:'IBM Plex Mono',monospace;font-size:12px;width:100%;background:transparent;" placeholder="₹"></td>
+                <td><input style="border:none;outline:none;font-family:inherit;font-size:12px;width:100%;background:transparent;" placeholder="Reference"></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="add-row-btn">+ Add Row</div>
+        </div>
+      </div>
+
+      <!-- SECTION: REMARKS -->
+      <div class="form-section">
+        <div class="section-head" onclick="toggleSection(this)">
+          <span>📝 Remarks</span>
+          <span class="toggle">▾</span>
+        </div>
+        <div class="section-body">
+          <textarea class="field-input" rows="3" style="resize:vertical;" placeholder="Enter any remarks (always editable, audit logged)…"></textarea>
+        </div>
+      </div>
+
+    </div><!-- /form-body -->
+  </div><!-- /view-trip -->
+
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- VIEW: TMS SETTINGS                              -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="view" id="view-settings">
+    <div class="form-page-head">
+      <div class="form-title-bar" style="border-top:4px solid #374151;background:linear-gradient(to right,#f9fafb,#fff)">
+        <div class="doc-title">TMS Settings</div>
+        <span class="type-badge" style="background:#f3f4f6;color:#374151;">Single DocType</span>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary">Save</button>
+        <button class="btn btn-default">Discard</button>
+        <button class="btn btn-default" onclick="previewThemes()">👁 Preview Theme Colors</button>
+      </div>
+    </div>
+
+    <div class="form-body">
+      <div class="form-section">
+        <div class="section-head accent" onclick="toggleSection(this)">
+          <span>🏢 Company Settings</span>
+          <span class="toggle">▾</span>
+        </div>
+        <div class="section-body">
+          <div class="info-box">
+            ℹ️ Configure your company prefix and default trip type. The Company Code is used to auto-generate Trip IDs (e.g. <strong>SLPL</strong>P-2526-00001).
+          </div>
+          <div class="form-row cols-3">
+            <div class="field-wrap">
+              <div class="field-label"><span class="req-star">*</span> Company</div>
+              <div class="link-input">
+                <input class="field-input has-value" value="Shree Logistics Pvt Ltd">
+                <span class="link-icon">⌕</span>
+              </div>
+            </div>
+            <div class="field-wrap">
+              <div class="field-label"><span class="req-star">*</span> Company Code (Trip ID Prefix)</div>
+              <input class="field-input has-value" value="SLPL" maxlength="6" style="font-family:'IBM Plex Mono',monospace;font-weight:600;letter-spacing:1px;">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Default Trip Type</div>
+              <input class="field-input has-value" value="Primary Trip">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="section-head" onclick="toggleSection(this)">
+          <span>🎨 Trip Type Colors &amp; Themes</span>
+          <span class="toggle">▾</span>
+        </div>
+        <div class="section-body">
+          <div class="info-box">
+            🎨 Each Trip Type can have its own color and theme. The form header on the Trip DocType will change color based on the Trip Type selected. Mark one row as <strong>Default</strong>.
+          </div>
+          <table class="child-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Trip Type</th>
+                <th>Color</th>
+                <th>Theme</th>
+                <th>Is Default</th>
+              </tr>
+            </thead>
+            <tbody id="theme-rows">
+              <tr>
+                <td style="color:var(--text-muted);font-size:11px;">1</td>
+                <td><input style="border:none;outline:none;font-family:inherit;font-size:12px;width:100%;background:transparent;font-weight:500;" value="Primary Trip"></td>
+                <td>
+                  <div class="color-field">
+                    <div class="color-swatch" style="background:#2563eb;"></div>
+                    <input class="color-hex" value="#2563eb" style="width:90px;">
+                  </div>
+                </td>
+                <td><select style="border:1px solid var(--border);border-radius:4px;padding:3px 6px;font-size:12px;font-family:inherit;"><option>Light</option><option>Dark</option><option>Custom</option></select></td>
+                <td style="text-align:center;"><input type="checkbox" checked></td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-muted);font-size:11px;">2</td>
+                <td><input style="border:none;outline:none;font-family:inherit;font-size:12px;width:100%;background:transparent;font-weight:500;" value="RCPL Primary"></td>
+                <td>
+                  <div class="color-field">
+                    <div class="color-swatch" style="background:#7c3aed;"></div>
+                    <input class="color-hex" value="#7c3aed" style="width:90px;">
+                  </div>
+                </td>
+                <td><select style="border:1px solid var(--border);border-radius:4px;padding:3px 6px;font-size:12px;font-family:inherit;"><option>Light</option><option>Dark</option><option>Custom</option></select></td>
+                <td style="text-align:center;"><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-muted);font-size:11px;">3</td>
+                <td><input style="border:none;outline:none;font-family:inherit;font-size:12px;width:100%;background:transparent;font-weight:500;" value="Secondary Market"></td>
+                <td>
+                  <div class="color-field">
+                    <div class="color-swatch" style="background:#059669;"></div>
+                    <input class="color-hex" value="#059669" style="width:90px;">
+                  </div>
+                </td>
+                <td><select style="border:1px solid var(--border);border-radius:4px;padding:3px 6px;font-size:12px;font-family:inherit;"><option>Light</option><option>Dark</option><option>Custom</option></select></td>
+                <td style="text-align:center;"><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-muted);font-size:11px;">4</td>
+                <td><input style="border:none;outline:none;font-family:inherit;font-size:12px;width:100%;background:transparent;font-weight:500;" value="Secondary Dedicated"></td>
+                <td>
+                  <div class="color-field">
+                    <div class="color-swatch" style="background:#d97706;"></div>
+                    <input class="color-hex" value="#d97706" style="width:90px;">
+                  </div>
+                </td>
+                <td><select style="border:1px solid var(--border);border-radius:4px;padding:3px 6px;font-size:12px;font-family:inherit;"><option>Light</option><option>Dark</option><option>Custom</option></select></td>
+                <td style="text-align:center;"><input type="checkbox"></td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-muted);font-size:11px;">5</td>
+                <td><input style="border:none;outline:none;font-family:inherit;font-size:12px;width:100%;background:transparent;font-weight:500;" value="Other"></td>
+                <td>
+                  <div class="color-field">
+                    <div class="color-swatch" style="background:#64748b;"></div>
+                    <input class="color-hex" value="#64748b" style="width:90px;">
+                  </div>
+                </td>
+                <td><select style="border:1px solid var(--border);border-radius:4px;padding:3px 6px;font-size:12px;font-family:inherit;"><option>Light</option><option>Dark</option><option>Custom</option></select></td>
+                <td style="text-align:center;"><input type="checkbox"></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="add-row-btn">+ Add Row</div>
+
+          <!-- LIVE PREVIEW -->
+          <div style="margin-top:16px;">
+            <div style="font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Live Preview</div>
+            <div class="settings-theme-preview">
+              <div class="theme-chip" style="background:#2563eb;color:#fff;"><span class="dot"></span>Primary Trip</div>
+              <div class="theme-chip" style="background:#7c3aed;color:#fff;"><span class="dot"></span>RCPL Primary</div>
+              <div class="theme-chip" style="background:#059669;color:#fff;"><span class="dot"></span>Secondary Market</div>
+              <div class="theme-chip" style="background:#d97706;color:#fff;"><span class="dot"></span>Secondary Dedicated</div>
+              <div class="theme-chip" style="background:#64748b;color:#fff;"><span class="dot"></span>Other</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /view-settings -->
+
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- VIEW: TMS CITY                                  -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="view" id="view-city">
+    <div class="form-page-head">
+      <div class="form-title-bar" style="border-top:4px solid #0891b2;background:linear-gradient(to right,#ecfeff,#fff)">
+        <div class="doc-title">Mumbai</div>
+        <span class="type-badge" style="background:#cffafe;color:#0e7490;">TMS City</span>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary">Save</button>
+        <button class="btn btn-default">Discard</button>
+      </div>
+    </div>
+    <div class="form-body">
+      <div class="form-section">
+        <div class="section-head accent" onclick="toggleSection(this)">
+          <span>🏙️ City Details</span>
+          <span class="toggle">▾</span>
+        </div>
+        <div class="section-body">
+          <div class="form-row cols-4">
+            <div class="field-wrap">
+              <div class="field-label"><span class="req-star">*</span> City Name</div>
+              <input class="field-input has-value" value="Mumbai">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label"><span class="req-star">*</span> State</div>
+              <input class="field-input has-value" value="Maharashtra">
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Country</div>
+              <div class="link-input">
+                <input class="field-input has-value" value="India">
+                <span class="link-icon">⌕</span>
+              </div>
+            </div>
+            <div class="field-wrap">
+              <div class="field-label">Is Active</div>
+              <select class="field-input"><option>Yes</option><option>No</option></select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- City List Preview -->
+      <div class="form-section">
+        <div class="section-head" onclick="toggleSection(this)">
+          <span>📋 Sample City Master List</span>
+          <span class="toggle">▾</span>
+        </div>
+        <div class="section-body">
+          <table class="child-table">
+            <thead><tr><th>City Name</th><th>State</th><th>Country</th><th>Active</th></tr></thead>
+            <tbody>
+              <tr><td>Ahmedabad</td><td>Gujarat</td><td>India</td><td style="color:#16a34a;font-weight:600;">✓</td></tr>
+              <tr><td>Mumbai</td><td>Maharashtra</td><td>India</td><td style="color:#16a34a;font-weight:600;">✓</td></tr>
+              <tr><td>Delhi</td><td>Delhi</td><td>India</td><td style="color:#16a34a;font-weight:600;">✓</td></tr>
+              <tr><td>Bengaluru</td><td>Karnataka</td><td>India</td><td style="color:#16a34a;font-weight:600;">✓</td></tr>
+              <tr><td>Hyderabad</td><td>Telangana</td><td>India</td><td style="color:#16a34a;font-weight:600;">✓</td></tr>
+              <tr><td>Chennai</td><td>Tamil Nadu</td><td>India</td><td style="color:#16a34a;font-weight:600;">✓</td></tr>
+              <tr><td>Pune</td><td>Maharashtra</td><td>India</td><td style="color:#16a34a;font-weight:600;">✓</td></tr>
+              <tr><td>Surat</td><td>Gujarat</td><td>India</td><td style="color:#16a34a;font-weight:600;">✓</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div><!-- /view-city -->
+
+</div><!-- /page-wrapper -->
+
+<script>
+// ── TAB SWITCHING ──
+function switchView(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  event.target.classList.add('active');
+  document.getElementById('breadcrumb-name').textContent =
+    name === 'trip' ? 'SLPLP-2526-00001' :
+    name === 'settings' ? 'TMS Settings' : 'TMS City';
+}
+
+// ── SECTION COLLAPSE ──
+function toggleSection(head) {
+  const body = head.nextElementSibling;
+  const toggle = head.querySelector('.toggle');
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    toggle.textContent = '▾';
+  } else {
+    body.classList.add('collapsed');
+    toggle.textContent = '▸';
+  }
+}
+
+// ── TRIP TYPE CHANGE ──
+const tripTypeConfig = {
+  'Primary Trip':       { color:'#2563eb', bg:'#eff6ff', badgeBg:'#dbeafe', badgeText:'#1d4ed8', prefix:'SLPLP' },
+  'RCPL Primary':       { color:'#7c3aed', bg:'#f5f3ff', badgeBg:'#ede9fe', badgeText:'#5b21b6', prefix:'SLPLR' },
+  'RR Primary':         { color:'#1d4ed8', bg:'#eff6ff', badgeBg:'#dbeafe', badgeText:'#1e40af', prefix:'SLPLP' },
+  'Secondary Market':   { color:'#059669', bg:'#f0fdf4', badgeBg:'#dcfce7', badgeText:'#15803d', prefix:'SLPLS' },
+  'Secondary Dedicated':{ color:'#d97706', bg:'#fffbeb', badgeBg:'#fef3c7', badgeText:'#92400e', prefix:'SLPLD' },
+  'Other':              { color:'#64748b', bg:'#f8fafc', badgeBg:'#f1f5f9', badgeText:'#374151', prefix:'SLPLO' },
+};
+
+function setTripType(type, color) {
+  // Update buttons
+  document.querySelectorAll('.trip-type-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  // Update form
+  applyTripTypeTheme(type);
+  // Update select
+  const sel = document.getElementById('trip-type-select');
+  if (sel) {
+    for (let o of sel.options) { if (o.value === type) { sel.value = type; break; } }
+  }
+  // Dedicated section
+  document.getElementById('dedicated-section').style.display =
+    type === 'Secondary Dedicated' ? 'block' : 'none';
+}
+
+function onTripTypeChange(val) {
+  applyTripTypeTheme(val);
+  document.getElementById('dedicated-section').style.display =
+    val === 'Secondary Dedicated' ? 'block' : 'none';
+  // Sync buttons
+  document.querySelectorAll('.trip-type-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === val);
+  });
+}
+
+function applyTripTypeTheme(type) {
+  const cfg = tripTypeConfig[type] || tripTypeConfig['Primary Trip'];
+  const bar = document.getElementById('title-bar');
+  bar.style.borderTopColor = cfg.color;
+  bar.style.background = `linear-gradient(to right, ${cfg.bg}, #fff)`;
+
+  const badge = document.getElementById('type-badge');
+  badge.textContent = type;
+  badge.style.background = cfg.badgeBg;
+  badge.style.color = cfg.badgeText;
+
+  const docId = document.getElementById('doc-id');
+  docId.textContent = cfg.prefix + '-2526-00001';
+  document.getElementById('breadcrumb-name').textContent = cfg.prefix + '-2526-00001';
+}
+
+// ── STATUS SIMULATION ──
+const statuses = [
+  { key:'created',  label:'Trip Created',     cls:'status-created',  ts:[1], cur:2 },
+  { key:'transit',  label:'In Transit',       cls:'status-transit',  ts:[1,2], cur:3 },
+  { key:'billing',  label:'Awaiting Billing', cls:'status-billing',  ts:[1,2,3], cur:4 },
+  { key:'billed',   label:'Billed',           cls:'status-billed',   ts:[1,2,3,4], cur:5 },
+  { key:'paid',     label:'Payment Received', cls:'status-paid',     ts:[1,2,3,4,5], cur:6 },
+  { key:'closed',   label:'Closed',           cls:'status-closed',   ts:[1,2,3,4,5,6], cur:null },
+];
+let statusIdx = 0;
+
+function simulateStatus() {
+  statusIdx = (statusIdx + 1) % statuses.length;
+  const s = statuses[statusIdx];
+  const pill = document.getElementById('status-pill');
+  pill.textContent = s.label;
+  pill.className = 'status-pill ' + s.cls;
+
+  for (let i = 1; i <= 6; i++) {
+    const dot = document.getElementById('ts-' + i);
+    const lbl = document.getElementById('tl-' + i);
+    if (s.ts.includes(i) && i !== s.cur) {
+      dot.className = 'timeline-dot done'; dot.textContent = '✓';
+      lbl.className = 'timeline-label done';
+    } else if (i === s.cur) {
+      dot.className = 'timeline-dot current'; dot.textContent = i;
+      lbl.className = 'timeline-label current';
+    } else {
+      dot.className = 'timeline-dot'; dot.textContent = i;
+      lbl.className = 'timeline-label';
+    }
+  }
+}
+
+// ── DETENTION CALC ──
+function calcDetention() {
+  const reach = document.querySelector('[name="reach"], input[value^="2026-03-06T08"]');
+  const rows = document.querySelectorAll('input[type="datetime-local"]');
+  const r = rows[0] ? new Date(rows[0].value) : null;
+  const d = rows[1] ? new Date(rows[1].value) : null;
+  const rateEl = document.getElementById('load-det-rate');
+  if (!r || !d || isNaN(r) || isNaN(d)) return;
+  const hours = Math.max(0, (d - r) / 3600000);
+  const days = hours <= 24 ? 0 : Math.round(((hours - 24) / 24) * 100) / 100;
+  const rate = parseFloat(rateEl && rateEl.value) || 0;
+  const amt = Math.round(days * rate * 100) / 100;
+  document.getElementById('load-det-days').value = days.toFixed(2);
+  document.getElementById('load-det-amt').value = '₹ ' + amt.toLocaleString('en-IN');
+}
+
+function calcTotals() { /* extend as needed */ }
+
+function previewThemes() {
+  // Visual flash effect on theme chips
+  document.querySelectorAll('.theme-chip').forEach((chip, i) => {
+    setTimeout(() => {
+      chip.style.transform = 'translateY(-4px) scale(1.08)';
+      setTimeout(() => chip.style.transform = '', 300);
+    }, i * 100);
+  });
+}
+</script>
+</body>
+</html>

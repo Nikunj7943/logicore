@@ -1,0 +1,94 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "RITEM-.####",
+ "creation": "2026-05-12 12:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "repair_category",
+  "column_break_1",
+  "repair_sub_category",
+  "column_break_2",
+  "item_name",
+  "disabled"
+ ],
+ "fields": [
+  {
+   "fieldname": "repair_category",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Repair Category",
+   "options": "Repair Category",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "repair_sub_category",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Repair Sub Category",
+   "options": "Repair Sub Category",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Repair Item",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "description": "Disabled records stay on existing documents but stop appearing in dropdowns when creating new ones.",
+   "fieldname": "disabled",
+   "fieldtype": "Check",
+   "in_standard_filter": 1,
+   "label": "Disabled"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-05-13 17:19:14.371333",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Repair Item",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "row_format": "Dynamic",
+ "search_fields": "item_name,repair_category,repair_sub_category",
+ "show_title_field_in_link": 1,
+ "default_view": "Report",
+ "sort_field": "repair_category",
+ "sort_order": "ASC",
+ "states": [],
+ "title_field": "item_name",
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

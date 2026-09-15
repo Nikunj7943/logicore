@@ -1,0 +1,79 @@
+[
+ {
+  "cards": [
+   {
+    "card": "Fleet Fuel Cost MTD"
+   },
+   {
+    "card": "Fleet Fuel Liters MTD"
+   },
+   {
+    "card": "Fleet Repair Cost MTD"
+   },
+   {
+    "card": "Fleet Repair Count MTD"
+   },
+   {
+    "card": "Fleet Service Cost MTD"
+   },
+   {
+    "card": "Fleet Tyre Cost MTD"
+   },
+   {
+    "card": "Fleet Battery Count MTD"
+   },
+   {
+    "card": "Fleet Compliance Count"
+   },
+   {
+    "card": "Fleet Outstanding Loans"
+   },
+   {
+    "card": "Fleet EMI Total"
+   }
+  ],
+  "chart_options": null,
+  "charts": [
+   {
+    "chart": "Fleet Fuel Expenses Monthly",
+    "width": "Full"
+   },
+   {
+    "chart": "Fleet Fuel KPL Trend",
+    "width": "Full"
+   },
+   {
+    "chart": "Fleet Repair Expenses Monthly",
+    "width": "Full"
+   },
+   {
+    "chart": "Fleet Repairs by Category",
+    "width": "Half"
+   },
+   {
+    "chart": "Fleet Service Cost Monthly",
+    "width": "Full"
+   },
+   {
+    "chart": "Fleet Compliances by Type",
+    "width": "Half"
+   },
+   {
+    "chart": "Fleet Tyre Cost Monthly",
+    "width": "Half"
+   },
+   {
+    "chart": "Fleet Fuel by Vehicle",
+    "width": "Half"
+   }
+  ],
+  "dashboard_name": "Fleet Dashboard",
+  "docstatus": 0,
+  "doctype": "Dashboard",
+  "is_default": 0,
+  "is_standard": 0,
+  "modified": "2026-03-31 00:00:00",
+  "module": "LogiCore",
+  "name": "Fleet Dashboard"
+ }
+]

@@ -1,0 +1,12 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "doctype": "Report",
+ "filters": [],
+ "is_standard": "Yes",
+ "module": "LogiCore",
+ "name": "TDS Report",
+ "ref_doctype": "Trip",
+ "report_name": "TDS Report",
+ "report_type": "Script Report"
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "_note": "Vehicle Market sidebar entry — paste this into workspace_sidebar.json (Masters section ke andar) aur bench migrate chalao to re-enable",
+    "child": 1,
+    "collapsible": 1,
+    "display_depends_on": null,
+    "filters": null,
+    "icon": "🏪",
+    "indent": 0,
+    "keep_closed": 0,
+    "label": "Vehicle (Market)",
+    "link_to": "Vehicle Market",
+    "link_type": "DocType",
+    "navigate_to_tab": null,
+    "route_options": null,
+    "show_arrow": 0,
+    "type": "Link",
+    "url": null
+  }
+]

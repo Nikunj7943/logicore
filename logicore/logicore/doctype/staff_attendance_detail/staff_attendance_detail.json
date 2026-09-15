@@ -1,0 +1,87 @@
+{
+ "actions": [],
+ "creation": "2026-04-27 00:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "link_doctype",
+  "employee_link",
+  "employee_name",
+  "designation",
+  "branch",
+  "status",
+  "work_at"
+ ],
+ "fields": [
+  {
+   "fieldname": "link_doctype",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Link Doctype",
+   "options": "DocType",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "employee_link",
+   "fieldtype": "Dynamic Link",
+   "label": "Employee / Driver ID",
+   "options": "link_doctype",
+   "reqd": 1
+  },
+  {
+   "columns": 4,
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee / Driver",
+   "read_only": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Designation",
+   "read_only": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "branch",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Branch",
+   "read_only": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "\nPresent\nAbsent\nOn Leave With Pay\nOn Leave Without Pay\nSunday/Holiday",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "work_at",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Work At",
+   "options": "On Duty\nOn Site\nWork From Home"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2026-04-28 11:17:36.838530",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Staff Attendance Detail",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

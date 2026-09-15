@@ -1,0 +1,102 @@
+{
+ "actions": [],
+ "autoname": "field:chat_id",
+ "creation": "2026-05-28 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "chat_id",
+  "telegram_user_map",
+  "language",
+  "state",
+  "pending_trip",
+  "pending_images",
+  "ocr_draft",
+  "last_activity",
+  "expires_at"
+ ],
+ "fields": [
+  {
+   "fieldname": "chat_id",
+   "fieldtype": "Data",
+   "label": "Telegram Chat ID",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "telegram_user_map",
+   "fieldtype": "Link",
+   "label": "Telegram User",
+   "options": "Telegram User Map",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "language",
+   "fieldtype": "Select",
+   "label": "Language",
+   "options": "en\nhi",
+   "description": "Selected reply language (en = English, hi = Hindi)"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Select",
+   "label": "Current State",
+   "options": "IDLE\nAWAITING_MOBILE\nAWAITING_POD_PHOTOS\nAWAITING_TRIP_PDF\nAWAITING_TRIP_CONFIRM\nAWAITING_OCR_CONFIRM",
+   "default": "IDLE",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "pending_trip",
+   "fieldtype": "Link",
+   "label": "Pending Trip",
+   "options": "Trip",
+   "description": "Trip being worked on in this session"
+  },
+  {
+   "fieldname": "pending_images",
+   "fieldtype": "Long Text",
+   "label": "Pending Image File IDs",
+   "description": "JSON array of Telegram file_ids waiting for /done command"
+  },
+  {
+   "fieldname": "ocr_draft",
+   "fieldtype": "Long Text",
+   "label": "OCR Draft Data",
+   "description": "JSON of extracted fields awaiting ops confirmation"
+  },
+  {
+   "fieldname": "last_activity",
+   "fieldtype": "Datetime",
+   "label": "Last Activity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "expires_at",
+   "fieldtype": "Datetime",
+   "label": "Session Expires At",
+   "read_only": 1,
+   "description": "Auto-cleared 24h after last activity"
+  }
+ ],
+ "links": [],
+ "modified": "2026-05-28 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Telegram Session",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ],
+ "default_view": "Report",
+ "sort_field": "last_activity",
+ "sort_order": "DESC",
+ "track_changes": 0
+}

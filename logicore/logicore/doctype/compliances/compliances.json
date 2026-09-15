@@ -1,0 +1,211 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "COMP-.YYYY.-.#####",
+ "creation": "2026-03-26 17:03:19.139517",
+ "default_view": "Report",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_basic",
+  "vehicle",
+  "column_break_basic",
+  "document_type",
+  "section_dates",
+  "issue_date",
+  "column_break_yxei",
+  "validity_period_months",
+  "column_break_rwys",
+  "expiry_date",
+  "section_payment",
+  "amount",
+  "payment_mode",
+  "is_reconciled",
+  "bank_reconciliation",
+  "column_break_pay",
+  "payment_date",
+  "bank_name",
+  "reference_no",
+  "upi_id",
+  "section_attachment",
+  "document",
+  "column_break_attachment",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_basic",
+   "fieldtype": "Section Break",
+   "label": "Vehicle & Document"
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Link",
+   "label": "Vehicle",
+   "options": "Vehicle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_basic",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "document_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Document Type",
+   "options": "Compliance Document Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_dates",
+   "fieldtype": "Section Break",
+   "label": "Validity"
+  },
+  {
+   "fieldname": "issue_date",
+   "fieldtype": "Date",
+   "label": "Issue Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_rwys",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "expiry_date",
+   "fieldtype": "Date",
+   "label": "Expiry Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_payment",
+   "fieldtype": "Section Break",
+   "label": "Payment"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_pay",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Bank Transfer",
+   "fieldname": "payment_mode",
+   "fieldtype": "Select",
+   "label": "Payment Mode",
+   "options": "Cash\nBank Transfer\nCheque\nUPI",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:in_list(['Bank Transfer','Cheque','Cash','UPI'], doc.payment_mode)",
+   "fieldname": "bank_name",
+   "fieldtype": "Link",
+   "label": "Bank Account No",
+   "options": "Account Head"
+  },
+  {
+   "depends_on": "eval:in_list(['Bank Transfer','Cheque','Cash','UPI'], doc.payment_mode)",
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Reference No."
+  },
+  {
+   "depends_on": "eval:doc.payment_mode === 'UPI'",
+   "fieldname": "upi_id",
+   "fieldtype": "Data",
+   "label": "UPI ID",
+   "mandatory_depends_on": "eval:doc.payment_mode === 'UPI'"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_reconciled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Reconciled",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "bank_reconciliation",
+   "fieldtype": "Link",
+   "label": "Bank Reconciliation",
+   "no_copy": 1,
+   "options": "TMS Bank Reconciliation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_attachment",
+   "fieldtype": "Section Break",
+   "label": "Attachment"
+  },
+  {
+   "fieldname": "document",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Document",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_attachment",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "validity_period_months",
+   "fieldtype": "Int",
+   "label": "Validity Period (Months)",
+   "length": 3,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_yxei",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_date",
+   "fieldtype": "Date",
+   "label": "Payment Date"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-24 08:42:00.571583",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Compliances",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "issue_date",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

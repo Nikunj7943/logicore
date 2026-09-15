@@ -1,0 +1,913 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "autoincrement",
+ "creation": "2026-03-09 13:25:45.545339",
+ "default_view": "Report",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "sec_main_info",
+  "company_name",
+  "cb_r1c2",
+  "branch",
+  "cb_r1c3",
+  "amazon_business_format",
+  "cb_r1c4",
+  "trip_type",
+  "section_break_agyw",
+  "customer",
+  "column_break_kbcc",
+  "manual_trip",
+  "sec_relay_info",
+  "trip_coordinator",
+  "cb_r2c2",
+  "trip_date",
+  "cb_r2c3",
+  "tour_id_relay",
+  "cb_r2c4",
+  "equipment_type",
+  "cb_r2c5",
+  "status",
+  "sec_row3",
+  "facility_sequence",
+  "cb_r3c2",
+  "cpt",
+  "cb_r3c3",
+  "is_cpt_truck",
+  "cb_r3c4",
+  "cr_id",
+  "cb_r3c5",
+  "shipper_accounts",
+  "cb_r3c6",
+  "estimated_cost",
+  "section_break_jsms",
+  "tender_status",
+  "sec_vehicle_vendor",
+  "driver_relay",
+  "cb_r5c2",
+  "vehicle_id",
+  "cb_r5c3",
+  "vendor",
+  "sec_market_fields",
+  "vehicle_id_market",
+  "cb_mkt_2",
+  "driver_market",
+  "cb_mkt_3",
+  "driver_mobile_market",
+  "sec_km_row",
+  "start_km",
+  "cb_r5c4",
+  "end_km",
+  "cb_r5c5",
+  "total_km",
+  "sec_charges",
+  "freight",
+  "cb_r6c2",
+  "fuel_surcharge_manual",
+  "cb_r6c3",
+  "cancellation_charge_manual",
+  "cb_r6c4",
+  "detention_charge_manual",
+  "cb_r6c5",
+  "ot_cost_manual",
+  "sec_row7",
+  "extra_distance_cost_manual",
+  "cb_r7c2",
+  "toll_parking_charges_manual",
+  "cb_r7c3",
+  "trip_cost",
+  "cb_r7c4",
+  "vendor_freight",
+  "cb_r7c5",
+  "vendor_freight_extra",
+  "cb_r7c6",
+  "total_vendor_freight",
+  "sec_duplication",
+  "duplicate_trips",
+  "cb_r8c2",
+  "duplicate_record_no",
+  "sec_misc_info",
+  "vr_cancellation_date_time_utc",
+  "cb_misc_1",
+  "transit_operator_type",
+  "cb_misc_2",
+  "spot_work",
+  "sec_billing",
+  "computed_total_freight",
+  "cb_bill_r1b",
+  "computed_billed_amount",
+  "cb_bill_r1c",
+  "freight_difference",
+  "cb_bill_r1d",
+  "trip_status",
+  "sec_bill_row2",
+  "original_sadashiv_bill_no",
+  "cb_r9c2",
+  "original_bill_date",
+  "cb_bill_r2c",
+  "apply_bill_btn_html",
+  "sec_amazon_data_grid",
+  "amazon_trip_details",
+  "vr_id",
+  "load_id",
+  "tour_id_amazon",
+  "vehicle_no",
+  "start_date",
+  "end_date",
+  "lane",
+  "city",
+  "operator_type_amazon",
+  "total_distance",
+  "contract_type",
+  "rate_type",
+  "base_rate",
+  "item_type",
+  "work_type",
+  "fuel_surcharge_amazon",
+  "cancellation_charge_amazon",
+  "detention_charge_amazon",
+  "ot_cost_amazon",
+  "extra_distance_cost_amazon",
+  "toll_parking_charges_amazon",
+  "tax_percent",
+  "gross_pay_amt_excl_tax",
+  "gross_tax_amt",
+  "gross_pay_amt",
+  "extra_hours",
+  "extra_km",
+  "comments_amazon",
+  "remarks_amazon",
+  "section_break_remarks",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "sec_main_info",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Trip and Relay Info Section"
+  },
+  {
+   "fieldname": "company_name",
+   "fieldtype": "Link",
+   "label": "Company Name",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cb_r1c2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "default": "AMAZON SELLER SERVICES",
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cb_r1c3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "AMAZON",
+   "fieldname": "amazon_business_format",
+   "fieldtype": "Link",
+   "label": "Amazon Business Format",
+   "link_filters": "[[\"Business Format\",\"applies_to\",\"=\",\"Amazon\"]]",
+   "options": "Business Format"
+  },
+  {
+   "fieldname": "cb_r1c4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "trip_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Amazon Trip Type",
+   "link_filters": "[[\"Trip Type\",\"applies_to\",\"=\",\"Amazon\"]]",
+   "options": "Trip Type"
+  },
+  {
+   "default": "0",
+   "fieldname": "manual_trip",
+   "fieldtype": "Check",
+   "label": "Manual Trip"
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "sec_relay_info",
+   "fieldtype": "Section Break",
+   "label": "Trip Details"
+  },
+  {
+   "fieldname": "trip_coordinator",
+   "fieldtype": "Link",
+   "label": "Trip Coordinator",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "cb_r2c2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "fieldname": "trip_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Trip Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cb_r2c3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "fieldname": "tour_id_relay",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Tour ID"
+  },
+  {
+   "fieldname": "cb_r2c4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "equipment_type",
+   "fieldtype": "Link",
+   "label": "Equipment Type",
+   "link_filters": "[[\"Vehicle Type\",\"applies_to\",\"=\",\"Amazon\"]]",
+   "options": "Vehicle Type"
+  },
+  {
+   "fieldname": "cb_r2c5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nCompleted\nCancelled\nDummy"
+  },
+  {
+   "fieldname": "sec_row3",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "facility_sequence",
+   "fieldtype": "Data",
+   "label": "Facility Sequence",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_r3c2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "cpt",
+   "fieldtype": "Data",
+   "label": "CPT",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_r3c3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_cpt_truck",
+   "fieldtype": "Check",
+   "label": "Is CPT Truck",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_r3c4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "cr_id",
+   "fieldtype": "Data",
+   "label": "GR_ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_r3c5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "-",
+   "fieldname": "shipper_accounts",
+   "fieldtype": "Data",
+   "label": "Shipper Accounts",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_r3c6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "estimated_cost",
+   "fieldtype": "Currency",
+   "label": "Estimated Cost",
+   "read_only": 1
+  },
+  {
+   "default": "-",
+   "fieldname": "tender_status",
+   "fieldtype": "Data",
+   "label": "Tender Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sec_vehicle_vendor",
+   "fieldtype": "Section Break",
+   "label": "Vehicle and Vendor"
+  },
+  {
+   "fieldname": "driver_relay",
+   "fieldtype": "Link",
+   "label": "Driver",
+   "options": "Driver"
+  },
+  {
+   "fieldname": "cb_r5c2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vehicle_id",
+   "fieldtype": "Link",
+   "label": "Vehicle ID",
+   "options": "Vehicle"
+  },
+  {
+   "fieldname": "cb_r5c3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vendor",
+   "fieldtype": "Link",
+   "label": "Vendor",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "sec_market_fields",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "vehicle_id_market",
+   "fieldtype": "Data",
+   "label": "Vehicle ID (Market)"
+  },
+  {
+   "fieldname": "cb_mkt_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "driver_market",
+   "fieldtype": "Data",
+   "label": "Driver (Market)"
+  },
+  {
+   "fieldname": "cb_mkt_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "driver_mobile_market",
+   "fieldtype": "Data",
+   "label": "Driver Mobile (Market)"
+  },
+  {
+   "fieldname": "sec_km_row",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "depends_on": "eval:doc.trip_type==\"SCHEDULED TRIP\"",
+   "fieldname": "start_km",
+   "fieldtype": "Int",
+   "label": "Start KM"
+  },
+  {
+   "fieldname": "cb_r5c4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.trip_type==\"SCHEDULED TRIP\"",
+   "fieldname": "end_km",
+   "fieldtype": "Int",
+   "label": "End KM"
+  },
+  {
+   "fieldname": "cb_r5c5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.trip_type==\"SCHEDULED TRIP\"",
+   "fieldname": "total_km",
+   "fieldtype": "Int",
+   "label": "Total KM",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sec_charges",
+   "fieldtype": "Section Break",
+   "label": "Customer Charges"
+  },
+  {
+   "fieldname": "freight",
+   "fieldtype": "Currency",
+   "label": "Customer Freight"
+  },
+  {
+   "fieldname": "cb_r6c2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fuel_surcharge_manual",
+   "fieldtype": "Currency",
+   "label": "RLB Fuel Surcharge1"
+  },
+  {
+   "fieldname": "cb_r6c3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cancellation_charge_manual",
+   "fieldtype": "Currency",
+   "label": "RLB Cancellation Charge1"
+  },
+  {
+   "fieldname": "cb_r6c4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "detention_charge_manual",
+   "fieldtype": "Currency",
+   "label": "RLB Detention Charge1"
+  },
+  {
+   "fieldname": "cb_r6c5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ot_cost_manual",
+   "fieldtype": "Currency",
+   "label": "RLB OT Cost1"
+  },
+  {
+   "fieldname": "sec_row7",
+   "fieldtype": "Section Break",
+   "label": "Vendor Freight"
+  },
+  {
+   "fieldname": "extra_distance_cost_manual",
+   "fieldtype": "Currency",
+   "label": "RLB Extra Distance Cost1"
+  },
+  {
+   "fieldname": "cb_r7c2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "toll_parking_charges_manual",
+   "fieldtype": "Currency",
+   "label": "RLB Toll-Parking Charges1"
+  },
+  {
+   "fieldname": "cb_r7c3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "default": "0",
+   "fieldname": "trip_cost",
+   "fieldtype": "Currency",
+   "label": "Total Trip Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_r7c4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vendor_freight",
+   "fieldtype": "Currency",
+   "label": "Vendor Freight"
+  },
+  {
+   "fieldname": "cb_r7c5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vendor_freight_extra",
+   "fieldtype": "Currency",
+   "label": "Vendor Freight (Extra)"
+  },
+  {
+   "fieldname": "cb_r7c6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "default": "0",
+   "fieldname": "total_vendor_freight",
+   "fieldtype": "Currency",
+   "label": "Total Vendor Freight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sec_duplication",
+   "fieldtype": "Section Break",
+   "label": "Duplication Info"
+  },
+  {
+   "fieldname": "duplicate_trips",
+   "fieldtype": "Int",
+   "label": "Duplicate Trips",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_r8c2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "duplicate_record_no",
+   "fieldtype": "Data",
+   "label": "Duplicate Record No",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sec_billing",
+   "fieldtype": "Section Break",
+   "label": "Billing and Status"
+  },
+  {
+   "default": "0",
+   "fieldname": "computed_total_freight",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Computed Total Freight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_bill_r1b",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "computed_billed_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Computed Billed Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_bill_r1c",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "freight_difference",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Freight Difference",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_bill_r1d",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "fieldname": "trip_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Trip Status",
+   "options": "\nClosed\nUnbilled\nUnder Dispute"
+  },
+  {
+   "fieldname": "sec_bill_row2",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "original_sadashiv_bill_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Bill No"
+  },
+  {
+   "fieldname": "cb_r9c2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "original_bill_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Bill Date"
+  },
+  {
+   "fieldname": "cb_bill_r2c",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "apply_bill_btn_html",
+   "fieldtype": "HTML",
+   "label": "Apply Bill Button"
+  },
+  {
+   "fieldname": "sec_amazon_data_grid",
+   "fieldtype": "Section Break",
+   "label": "Amazon Payment Data"
+  },
+  {
+   "fieldname": "amazon_trip_details",
+   "fieldtype": "Table",
+   "label": "Amazon Trip Details",
+   "options": "Amazon Trip Detail"
+  },
+  {
+   "fieldname": "vr_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "VR ID"
+  },
+  {
+   "fieldname": "load_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Load ID"
+  },
+  {
+   "fieldname": "tour_id_amazon",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Tour ID (Amazon)"
+  },
+  {
+   "fieldname": "vehicle_no",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Vehicle No",
+   "options": "Vehicle"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Datetime",
+   "hidden": 1,
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Datetime",
+   "hidden": 1,
+   "label": "End Date"
+  },
+  {
+   "fieldname": "lane",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Lane"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "City"
+  },
+  {
+   "fieldname": "operator_type_amazon",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Operator Type",
+   "options": "\nSP\nFleet"
+  },
+  {
+   "fieldname": "total_distance",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Total Distance"
+  },
+  {
+   "default": "-",
+   "fieldname": "contract_type",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Contract Type"
+  },
+  {
+   "fieldname": "rate_type",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Rate Type",
+   "options": "\nFixed\nPer KM\nPer Trip\nHourly"
+  },
+  {
+   "fieldname": "base_rate",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Base Rate"
+  },
+  {
+   "fieldname": "item_type",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Item Type"
+  },
+  {
+   "fieldname": "work_type",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Work Type",
+   "options": "\nLinehaulling\nFirst Mile\nLast Mile\nMiddle Mile"
+  },
+  {
+   "fieldname": "fuel_surcharge_amazon",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Fuel Surcharge (Amazon)"
+  },
+  {
+   "fieldname": "cancellation_charge_amazon",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Cancellation Charge (Amazon)"
+  },
+  {
+   "fieldname": "detention_charge_amazon",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Detention Charge (Amazon)"
+  },
+  {
+   "fieldname": "ot_cost_amazon",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "OT Cost (Amazon)"
+  },
+  {
+   "fieldname": "extra_distance_cost_amazon",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Extra Distance (Amazon)"
+  },
+  {
+   "fieldname": "toll_parking_charges_amazon",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Toll-Parking (Amazon)"
+  },
+  {
+   "fieldname": "tax_percent",
+   "fieldtype": "Percent",
+   "hidden": 1,
+   "label": "Tax %"
+  },
+  {
+   "fieldname": "gross_pay_amt_excl_tax",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Gross Pay (Excl. Tax)"
+  },
+  {
+   "fieldname": "gross_tax_amt",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Gross Tax Amt"
+  },
+  {
+   "bold": 1,
+   "fieldname": "gross_pay_amt",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Gross Pay Amt"
+  },
+  {
+   "fieldname": "extra_hours",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Extra Hours"
+  },
+  {
+   "fieldname": "extra_km",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Extra Km"
+  },
+  {
+   "fieldname": "sec_misc_info",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "vr_cancellation_date_time_utc",
+   "fieldtype": "Datetime",
+   "label": "VR Cancellation Date Time (UTC)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_misc_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "-",
+   "fieldname": "transit_operator_type",
+   "fieldtype": "Data",
+   "label": "Transit Operator Type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_misc_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "spot_work",
+   "fieldtype": "Check",
+   "label": "Spot Work",
+   "read_only": 1
+  },
+  {
+   "fieldname": "comments_amazon",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Comments (Amazon)"
+  },
+  {
+   "fieldname": "remarks_amazon",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Remarks (Amazon)"
+  },
+  {
+   "fieldname": "section_break_jsms",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_agyw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_kbcc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_remarks",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "links": [],
+ "modified": "2026-08-24 08:42:00.571583",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Amazon Trip",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "trip_date",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

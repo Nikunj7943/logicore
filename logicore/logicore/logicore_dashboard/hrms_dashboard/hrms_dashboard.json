@@ -1,0 +1,94 @@
+{
+ "cards": [
+  {
+   "card": "HR Total Active Employees"
+  },
+  {
+   "card": "HR Active Drivers"
+  },
+  {
+   "card": "HR Active Staff"
+  },
+  {
+   "card": "HR Employees on Leave Today"
+  },
+  {
+   "card": "HR Leave Pending Approval"
+  },
+  {
+   "card": "HR Present MTD"
+  },
+  {
+   "card": "HR Absent MTD"
+  },
+  {
+   "card": "HR Net Pay MTD"
+  },
+  {
+   "card": "HR Expense Claims MTD"
+  },
+  {
+   "card": "HR Approved Claims Amount MTD"
+  },
+  {
+   "card": "HR Driver License Expired"
+  },
+  {
+   "card": "HR Salary Slips MTD"
+  }
+ ],
+ "charts": [
+  {
+   "chart": "HR Employee Count by Designation",
+   "width": "Half"
+  },
+  {
+   "chart": "HR Driver License Status",
+   "width": "Half"
+  },
+  {
+   "chart": "HR Salary Trend Monthly",
+   "width": "Full"
+  },
+  {
+   "chart": "HR Leave Applications Monthly",
+   "width": "Full"
+  },
+  {
+   "chart": "HR Attendance Status Distribution",
+   "width": "Half"
+  },
+  {
+   "chart": "HR Leave by Type",
+   "width": "Half"
+  },
+  {
+   "chart": "HR Absent Trend Monthly",
+   "width": "Half"
+  },
+  {
+   "chart": "HR Leave by Status",
+   "width": "Half"
+  },
+  {
+   "chart": "HR Expense Claims Monthly",
+   "width": "Full"
+  },
+  {
+   "chart": "HR Salary by Department",
+   "width": "Full"
+  }
+ ],
+ "creation": "2026-04-09 00:00:00.000000",
+ "dashboard_name": "HRMS Dashboard",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "modified": "2026-04-09 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "HRMS Dashboard",
+ "owner": "Administrator"
+}

@@ -1,0 +1,86 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "Alert Settings",
+ "creation": "2026-05-29 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "enable_alerts",
+  "enable_email_alerts",
+  "send_time",
+  "notify_users",
+  "alert_rules",
+  "email_log_section",
+  "email_log_html"
+ ],
+ "fields": [
+  {
+   "default": "1",
+   "fieldname": "enable_alerts",
+   "fieldtype": "Check",
+   "label": "Enable Alerts"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_email_alerts",
+   "fieldtype": "Check",
+   "label": "Send Email Alerts"
+  },
+  {
+   "fieldname": "send_time",
+   "fieldtype": "Time",
+   "label": "Send Time",
+   "description": "Daily alert emails will be sent at this time. Leave blank to send at midnight."
+  },
+  {
+   "fieldname": "notify_users",
+   "fieldtype": "Table MultiSelect",
+   "label": "Notify Users",
+   "options": "Alert Recipient",
+   "description": "Pick users once here. Emails go to their linked email addresses automatically."
+  },
+  {
+   "fieldname": "alert_rules",
+   "fieldtype": "Table",
+   "label": "Alert Rules",
+   "options": "Alert Rule"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "email_log_section",
+   "fieldtype": "Section Break",
+   "label": "Email History"
+  },
+  {
+   "fieldname": "email_log_html",
+   "fieldtype": "HTML",
+   "label": "Email History",
+   "options": "<div id='alert-email-history'>Loading...</div>"
+  }
+ ],
+ "grid_page_length": 50,
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-05-29 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Alert Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ],
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

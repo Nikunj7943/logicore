@@ -1,0 +1,166 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "field:bank_account",
+ "creation": "2026-07-28 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "bank_account",
+  "bank_account_name",
+  "column_break_bst",
+  "section_break_rows",
+  "header_row",
+  "column_break_rows",
+  "data_start_row",
+  "section_break_cols",
+  "transaction_date_column",
+  "debit_column",
+  "credit_column",
+  "section_break_display_cols",
+  "narration_column",
+  "reference_column",
+  "balance_column"
+ ],
+ "fields": [
+  {
+   "fieldname": "bank_account",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Bank Account",
+   "link_filters": "[[\"Account Head\",\"group\",\"=\",\"BANK\"]]",
+   "options": "Account Head",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fetch_from": "bank_account.name1",
+   "fieldname": "bank_account_name",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Bank Account Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_bst",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_rows",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Row Numbers"
+  },
+  {
+   "description": "Row number (1-indexed, as counted in the raw statement file) containing the column headers.",
+   "fieldname": "header_row",
+   "fieldtype": "Int",
+   "label": "Header Row",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_rows",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Row number (1-indexed) where the first actual transaction row begins. Does not need to be immediately after the header row — any rows in between (blank rows, decorative dividers, etc.) are simply skipped.",
+   "fieldname": "data_start_row",
+   "fieldtype": "Int",
+   "label": "Data Start Row",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_cols",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Column Mapping"
+  },
+  {
+   "description": "Exact column header text from the statement file, e.g. \"Transaction Date\".",
+   "fieldname": "transaction_date_column",
+   "fieldtype": "Data",
+   "label": "Transaction Date Column",
+   "reqd": 1
+  },
+  {
+   "description": "Exact column header text for the withdrawal/debit amount, e.g. \"Withdrawal Amt (INR)\".",
+   "fieldname": "debit_column",
+   "fieldtype": "Data",
+   "label": "Debit Column",
+   "reqd": 1
+  },
+  {
+   "description": "Exact column header text for the deposit/credit amount, e.g. \"Deposit Amt (INR)\". Used to match Receipts (money coming into the account).",
+   "fieldname": "credit_column",
+   "fieldtype": "Data",
+   "label": "Credit Column",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_display_cols",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Display-Only Columns"
+  },
+  {
+   "description": "Optional. Column header text for a free-text description of the transaction, shown for reference only.",
+   "fieldname": "narration_column",
+   "fieldtype": "Data",
+   "label": "Narration Column"
+  },
+  {
+   "description": "Optional. Column header text for cheque/UTR/reference number, shown for reference only.",
+   "fieldname": "reference_column",
+   "fieldtype": "Data",
+   "label": "Reference Column"
+  },
+  {
+   "description": "Optional. Column header text for the running account balance after each transaction row, e.g. \"Balance (INR)\". Used to auto-compute Opening Balance and Closing Balance on Parse & Match — leave blank to skip that.",
+   "fieldname": "balance_column",
+   "fieldtype": "Data",
+   "label": "Balance Column"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-28 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "TMS Bank Reconciliation Setting",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "default_view": "Report",
+ "title_field": "bank_account_name",
+ "track_changes": 1
+}

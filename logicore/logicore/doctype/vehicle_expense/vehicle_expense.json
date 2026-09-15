@@ -1,0 +1,288 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:voucher_no",
+ "creation": "2025-12-05 10:17:24.081302",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_yrbd",
+  "voucher_date",
+  "column_break_tmuy",
+  "voucher_no",
+  "column_break_yvtx",
+  "vehicle_no",
+  "column_break_anoq",
+  "driver",
+  "section_break_szee",
+  "km_start",
+  "column_break_cnpb",
+  "km_end",
+  "column_break_phow",
+  "km_total",
+  "column_break_vpdo",
+  "kpl",
+  "section_break_hglb",
+  "payment_mode",
+  "column_break_bdyy",
+  "bank_cash",
+  "section_break_bhxu",
+  "supplier",
+  "column_break_xxfm",
+  "gst_no",
+  "column_break_mapt",
+  "pan_card",
+  "section_break_ogbe",
+  "address",
+  "section_break_ptqk",
+  "expense_items",
+  "section_break_dyyh",
+  "column_break_nxcu",
+  "column_break_zwrt",
+  "total_qty",
+  "column_break_lodu",
+  "total_amount",
+  "section_break_ekbh",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_yrbd",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "voucher_date",
+   "fieldtype": "Date",
+   "label": "Voucher Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_tmuy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "voucher_no",
+   "fieldtype": "Data",
+   "label": "Voucher No",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_yvtx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vehicle_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Vehicle No",
+   "options": "Vehicle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_anoq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "driver",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Driver",
+   "options": "Driver"
+  },
+  {
+   "fieldname": "section_break_szee",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "km_start",
+   "fieldtype": "Int",
+   "label": "KM-Start"
+  },
+  {
+   "fieldname": "column_break_cnpb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "km_end",
+   "fieldtype": "Int",
+   "label": "KM-End"
+  },
+  {
+   "fieldname": "column_break_phow",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "km_total",
+   "fieldtype": "Float",
+   "label": "KM-Total"
+  },
+  {
+   "fieldname": "column_break_vpdo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "kpl",
+   "fieldtype": "Float",
+   "label": "KPL"
+  },
+  {
+   "fieldname": "section_break_hglb",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "payment_mode",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Payment Mode",
+   "options": "SELECT\nCREDIT\nPAID",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_bdyy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bank_cash",
+   "fieldtype": "Link",
+   "label": "Bank / Cash",
+   "options": "Bank"
+  },
+  {
+   "fieldname": "section_break_bhxu",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_xxfm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "supplier.gstin",
+   "fieldname": "gst_no",
+   "fieldtype": "Data",
+   "label": "GST No",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_mapt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "supplier.pan",
+   "fieldname": "pan_card",
+   "fieldtype": "Data",
+   "label": "Pan Card",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_ogbe",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_ptqk",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "expense_items",
+   "fieldtype": "Table",
+   "label": "Expense Items",
+   "options": "Vehicle Expense Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_dyyh",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "column_break_nxcu",
+   "fieldtype": "Column Break",
+   "hidden": 1
+  },
+  {
+   "fieldname": "column_break_zwrt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_qty",
+   "fieldtype": "Float",
+   "label": "Total Qty"
+  },
+  {
+   "fieldname": "column_break_lodu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount"
+  },
+  {
+   "fieldname": "section_break_ekbh",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-13 12:11:51.217503",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Vehicle Expense",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

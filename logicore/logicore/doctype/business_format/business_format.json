@@ -1,0 +1,164 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:business_format",
+ "creation": "2026-03-10 09:45:59.877502",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_tcgg",
+  "business_format",
+  "column_break_pphl",
+  "trip_type",
+  "applies_to",
+  "column_break_upaf",
+  "default_customer",
+  "section_break_rvvs",
+  "description",
+  "section_break_qsmu",
+  "billing_start_date",
+  "column_break_zlor",
+  "billing_end_date",
+  "section_break_gajo",
+  "disabled",
+  "section_break_trip_cols",
+  "trip_export_columns"
+ ],
+ "fields": [
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "section_break_qsmu",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "billing_start_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Billing Start date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_zlor",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "billing_end_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Billing End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_gajo",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "section_break_tcgg",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "section_break_rvvs",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "business_format",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Business Format",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "default": "Trip",
+   "fieldname": "applies_to",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Applies To",
+   "options": "Trip\nAmazon",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "disabled",
+   "fieldtype": "Check",
+   "label": "Disabled"
+  },
+  {
+   "fieldname": "section_break_trip_cols",
+   "fieldtype": "Section Break",
+   "label": "Trip Export Columns"
+  },
+  {
+   "fieldname": "trip_export_columns",
+   "fieldtype": "Table",
+   "label": "Trip Export Columns",
+   "options": "Business Format Column"
+  },
+  {
+   "fieldname": "column_break_pphl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "default_customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Default Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "column_break_upaf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "trip_type",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Trip Type",
+   "options": "Trip Type"
+  }
+ ],
+ "grid_page_length": 50,
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-24 09:33:13.379978",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Business Format",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Director",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "default_view": "Report",
+ "sort_field": "business_format",
+ "sort_order": "ASC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

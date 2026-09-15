@@ -1,0 +1,318 @@
+{
+ "actions": [],
+ "autoname": "custom",
+ "creation": "2026-07-28 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "column_break_header",
+  "company",
+  "section_break_bank",
+  "reconciliation_date",
+  "column_break_bank",
+  "bank_account",
+  "column_break_bank_2",
+  "reconciliation_setting",
+  "section_break_range",
+  "from_date",
+  "column_break_range",
+  "to_date",
+  "column_break_gjvn",
+  "statement_file",
+  "parse_and_match_btn",
+  "section_break_balances",
+  "opening_balance",
+  "column_break_balances",
+  "closing_balance",
+  "section_break_period_summary",
+  "period_summary_html",
+  "section_break_summary",
+  "total_transactions",
+  "column_break_summary_1",
+  "matched_count",
+  "column_break_summary_2",
+  "unmatched_count",
+  "section_break_summary_2",
+  "total_amount",
+  "column_break_summary_4",
+  "total_matched_amount",
+  "section_break_transactions",
+  "transactions",
+  "section_break_remarks",
+  "remarks",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "column_break_header",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_bank",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Bank"
+  },
+  {
+   "fieldname": "bank_account",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Bank Account",
+   "link_filters": "[[\"Account Head\",\"group\",\"=\",\"BANK\"]]",
+   "options": "Account Head",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_bank",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Auto-filled from Bank Account \u2014 not manually editable.",
+   "fieldname": "reconciliation_setting",
+   "fieldtype": "Link",
+   "label": "Reconciliation Setting",
+   "options": "TMS Bank Reconciliation Setting",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_bank_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "reconciliation_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Reconciliation Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_range",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Statement"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "From Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_range",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "statement_file",
+   "fieldtype": "Attach",
+   "label": "Statement File (CSV/XLSX/XLS)",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.docstatus===0",
+   "fieldname": "parse_and_match_btn",
+   "fieldtype": "Button",
+   "label": "Parse & Match"
+  },
+  {
+   "fieldname": "section_break_balances",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "description": "Auto-calculated from the statement file on Parse & Match \u2014 not manually editable.",
+   "fieldname": "opening_balance",
+   "fieldtype": "Currency",
+   "label": "Opening Balance",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_balances",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Auto-calculated from the statement file on Parse & Match \u2014 not manually editable.",
+   "fieldname": "closing_balance",
+   "fieldtype": "Currency",
+   "label": "Closing Balance",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_period_summary",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "description": "Preview only \u2014 counted from our own records for this Bank Account and date range, independent of the statement file/Parse & Match above.",
+   "fieldname": "period_summary_html",
+   "fieldtype": "HTML",
+   "label": "Transactions in this Period (Our Records)"
+  },
+  {
+   "fieldname": "section_break_summary",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Summary"
+  },
+  {
+   "fieldname": "total_transactions",
+   "fieldtype": "Int",
+   "label": "Total Transactions",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_summary_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "matched_count",
+   "fieldtype": "Int",
+   "label": "Matched",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_summary_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "unmatched_count",
+   "fieldtype": "Int",
+   "label": "Unmatched",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_summary_2",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_summary_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_matched_amount",
+   "fieldtype": "Currency",
+   "label": "Total Matched Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_transactions",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Transactions"
+  },
+  {
+   "fieldname": "transactions",
+   "fieldtype": "Table",
+   "label": "Transactions",
+   "options": "TMS Bank Reconciliation Transaction"
+  },
+  {
+   "fieldname": "section_break_remarks",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "TMS Bank Reconciliation",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "column_break_gjvn",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-08-24 15:10:00.000000",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "TMS Bank Reconciliation",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Administrator",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "default_view": "Report",
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

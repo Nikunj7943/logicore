@@ -1,0 +1,65 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "field:trip_type",
+ "creation": "2026-03-12 11:18:37.762077",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "trip_type",
+  "trip_field_settings",
+  "trip_color"
+ ],
+ "fields": [
+  {
+   "fieldname": "trip_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Trip Type",
+   "options": "Trip Type",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "trip_field_settings",
+   "fieldtype": "Table",
+   "hidden": 1,
+   "label": "Trip Field Settings",
+   "options": "Trip Field Setting"
+  },
+  {
+   "fieldname": "trip_color",
+   "fieldtype": "Color",
+   "hidden": 1,
+   "label": "Trip Color"
+  }
+ ],
+ "grid_page_length": 50,
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-05-13 16:59:59.839265",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Trip Settings",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "default_view": "Report",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

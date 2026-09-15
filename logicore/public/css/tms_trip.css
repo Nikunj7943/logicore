@@ -1,0 +1,1035 @@
+/* ============================================================
+   LogiCore — Trip Form Styles
+   Migrated from trip.js inject_trip_styles() — edit here only.
+   ============================================================ */
+
+/* ── CSS Variables (defaults; overridden at runtime via JS apply_combo) ── */
+:root {
+	--tms-primary:          #3B4FE4;
+	--tms-accent:           #06B6D4;
+	--tms-page-bg:          #EEF2FF;
+	--tms-card-bg:          #FFFFFF;
+	--tms-section-border:   #C7D7FF;
+	--tms-field-bg:         #F0F4FF;
+	--tms-field-border:     #A5B4FC;
+	--tms-label-color:      #3730A3;
+	--tms-heading-color:    #1E1B4B;
+	--tms-radius:           10px;
+	--tms-primary-light:    rgba(59, 79, 228, 0.10);
+	--tms-primary-border:   rgba(59, 79, 228, 0.28);
+	--tms-field-focus-glow: rgba(59, 79, 228, 0.12);
+}
+
+/* ── Form Container ── */
+#page-Trip .layout-main-section-wrapper,
+#page-Trip .page-content,
+#page-Amazon-Trip .layout-main-section-wrapper,
+#page-Amazon-Trip .page-content {
+	border: 2px solid var(--tms-section-border) !important;
+	border-radius: calc(var(--tms-radius) + 4px) !important;
+	box-shadow: 0 0 0 1px var(--tms-primary-border), 0 8px 32px rgba(0, 0, 0, 0.10) !important;
+	background: var(--tms-page-bg) !important;
+	overflow: visible !important;
+	transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+/* ── Required asterisk — uses primary color ── */
+#page-Trip .control-label .reqd,
+#page-Trip .frappe-control .reqd,
+#page-Amazon-Trip .control-label .reqd,
+#page-Amazon-Trip .frappe-control .reqd {
+	color: var(--tms-primary) !important;
+	font-weight: 900 !important;
+}
+
+/* ── Tab Navigation ── */
+#page-Trip .form-tabs .nav-link,
+#page-Amazon-Trip .form-tabs .nav-link {
+	min-height: 44px !important;
+	padding-top: 10px !important;
+	padding-bottom: 10px !important;
+	display: flex !important;
+	align-items: center !important;
+	line-height: 1.4 !important;
+	font-size: 12px !important;
+	font-weight: 600 !important;
+	color: #64748B !important;
+	border-bottom: 2.5px solid transparent !important;
+	transition: color 0.18s, border-color 0.18s !important;
+}
+#page-Trip .form-tabs .nav-link.active,
+#page-Amazon-Trip .form-tabs .nav-link.active {
+	color: var(--tms-primary) !important;
+	font-weight: 800 !important;
+	border-bottom: 2.5px solid var(--tms-primary) !important;
+}
+#page-Trip .form-tabs .nav-link:hover:not(.active),
+#page-Amazon-Trip .form-tabs .nav-link:hover:not(.active) {
+	color: var(--tms-label-color) !important;
+	border-bottom-color: var(--tms-primary-border) !important;
+}
+
+/* ── Ensure all field wrappers in Trip tabs stay visible ──
+   :not(.hide-control) is required -- .hide-control is the class Frappe's native
+   permlevel enforcement adds to a field the current user has no read access to
+   (see base_control.js refresh()). Without this exclusion, the #page-Trip ID
+   selector's higher specificity beats .hide-control's `display:none !important`
+   outright, silently re-showing (as an empty, bordered box) any field a TMS User
+   Group has marked Hidden. */
+#page-Trip .frappe-control:not(.hide-control),
+#page-Amazon-Trip .frappe-control:not(.hide-control) {
+	display: block !important;
+	visibility: visible !important;
+}
+#page-Trip .frappe-control .control-label,
+#page-Amazon-Trip .frappe-control .control-label {
+	display: block !important;
+	visibility: visible !important;
+	opacity: 1 !important;
+}
+
+#page-Trip .page-head,
+#page-Trip .page-header-actions-block,
+#page-Amazon-Trip .page-head,
+#page-Amazon-Trip .page-header-actions-block {
+	background: var(--tms-card-bg) !important;
+	border-bottom: 1.5px solid var(--tms-section-border) !important;
+}
+
+#page-Trip .title-text,
+#page-Trip .page-title .title-text,
+#page-Amazon-Trip .title-text,
+#page-Amazon-Trip .page-title .title-text {
+	color: var(--tms-heading-color) !important;
+	font-weight: 800 !important;
+}
+
+/* ── Labels ── */
+#page-Trip .control-label,
+#page-Trip .frappe-control label.control-label,
+#page-Amazon-Trip .control-label,
+#page-Amazon-Trip .frappe-control label.control-label {
+	color: var(--tms-label-color) !important;
+	font-size: 10px !important;
+	font-weight: 700 !important;
+	letter-spacing: 0.07em !important;
+	text-transform: uppercase !important;
+	margin-bottom: 4px !important;
+}
+
+/* ── Section Headers ── */
+#page-Trip .section-head,
+#page-Trip .form-section-heading,
+#page-Amazon-Trip .section-head,
+#page-Amazon-Trip .form-section-heading {
+	color: var(--tms-heading-color) !important;
+	font-size: 10px !important;
+	font-weight: 800 !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.10em !important;
+	border-left: 3px solid var(--tms-primary) !important;
+	padding-left: 9px !important;
+	margin-bottom: 10px !important;
+}
+
+.tms-sec-icon {
+	font-size: 13px;
+	line-height: 1;
+	margin-right: 5px;
+}
+
+/* ── Input Fields ── */
+#page-Trip .frappe-control .form-control,
+#page-Trip .frappe-control input:not([type="checkbox"]):not([type="radio"]),
+#page-Trip .frappe-control textarea,
+#page-Trip .frappe-control select,
+#page-Amazon-Trip .frappe-control .form-control,
+#page-Amazon-Trip .frappe-control input:not([type="checkbox"]):not([type="radio"]),
+#page-Amazon-Trip .frappe-control textarea,
+#page-Amazon-Trip .frappe-control select {
+	background: var(--tms-field-bg) !important;
+	border: 1.5px solid var(--tms-field-border) !important;
+	border-radius: calc(var(--tms-radius) - 2px) !important;
+	color: var(--tms-heading-color) !important;
+	font-size: 13px !important;
+	font-weight: 500 !important;
+	padding: 8px 12px !important;
+	height: 36px !important;
+	line-height: 1.4 !important;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03) !important;
+	transition: border-color 0.18s, box-shadow 0.18s, background 0.18s !important;
+	outline: none !important;
+}
+
+#page-Trip .frappe-control textarea,
+#page-Amazon-Trip .frappe-control textarea {
+	height: auto !important;
+	min-height: 72px !important;
+}
+
+#page-Trip .frappe-control .form-control:hover:not([readonly]):not([disabled]),
+#page-Trip .frappe-control input:hover:not([readonly]):not([disabled]),
+#page-Trip .frappe-control textarea:hover:not([readonly]):not([disabled]),
+#page-Trip .frappe-control select:hover:not([disabled]),
+#page-Amazon-Trip .frappe-control .form-control:hover:not([readonly]):not([disabled]),
+#page-Amazon-Trip .frappe-control input:hover:not([readonly]):not([disabled]),
+#page-Amazon-Trip .frappe-control textarea:hover:not([readonly]):not([disabled]),
+#page-Amazon-Trip .frappe-control select:hover:not([disabled]) {
+	border-color: var(--tms-primary) !important;
+	background: var(--tms-card-bg) !important;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03), 0 0 0 3px var(--tms-field-focus-glow) !important;
+}
+
+#page-Trip .frappe-control .form-control:focus,
+#page-Trip .frappe-control input:focus,
+#page-Trip .frappe-control textarea:focus,
+#page-Trip .frappe-control select:focus,
+#page-Amazon-Trip .frappe-control .form-control:focus,
+#page-Amazon-Trip .frappe-control input:focus,
+#page-Amazon-Trip .frappe-control textarea:focus,
+#page-Amazon-Trip .frappe-control select:focus {
+	border-color: var(--tms-primary) !important;
+	background: var(--tms-card-bg) !important;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03), 0 0 0 3.5px var(--tms-field-focus-glow) !important;
+	outline: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   COMPUTED (AUTO-CALCULATED) READONLY FIELDS
+   JS adds .tms-computed-field class via _do_force()
+   Single class replaces 400+ lines of per-field selectors.
+   ═══════════════════════════════════════════════════════════ */
+
+.frappe-control.tms-computed-field {
+	display: block !important;
+	visibility: visible !important;
+	opacity: 1 !important;
+	position: relative;
+}
+
+.frappe-control.tms-computed-field .control-label {
+	display: block !important;
+	visibility: visible !important;
+	opacity: 1 !important;
+}
+
+.frappe-control.tms-computed-field .like-disabled-input {
+	display: block !important;
+	min-height: 36px !important;
+	opacity: 1 !important;
+	background: rgba(99, 102, 241, 0.05) !important;
+	border: 1.5px solid rgba(99, 102, 241, 0.18) !important;
+	border-radius: calc(var(--tms-radius) - 2px) !important;
+	color: var(--tms-heading-color) !important;
+	font-size: 13px !important;
+	font-weight: 600 !important;
+	padding: 8px 32px 8px 10px !important;
+	cursor: default !important;
+}
+
+/* Empty state: show dash */
+.frappe-control.tms-computed-field .like-disabled-input:empty::before {
+	content: "—";
+	color: #CBD5E1;
+	font-style: italic;
+}
+
+/* Fallback: disabled inputs */
+.frappe-control.tms-computed-field input[disabled],
+.frappe-control.tms-computed-field select[disabled] {
+	display: block !important;
+	min-height: 36px !important;
+	opacity: 1 !important;
+	pointer-events: none !important;
+}
+
+/* ── ⚙ Auto badge — injected by _do_force() ── */
+.tms-auto-badge {
+	position: absolute;
+	top: 3px;
+	right: 5px;
+	font-size: 8px;
+	font-weight: 700;
+	color: rgba(99, 102, 241, 0.40);
+	letter-spacing: 0.04em;
+	pointer-events: none;
+	line-height: 1;
+	white-space: nowrap;
+	user-select: none;
+}
+
+/* ── Special overrides on top of .tms-computed-field ── */
+
+/* SO No — bold primary highlight */
+.frappe-control[data-fieldname="so_no"].tms-computed-field .like-disabled-input {
+	background: var(--tms-primary-light) !important;
+	color: var(--tms-primary) !important;
+	font-weight: 800 !important;
+	border-color: var(--tms-primary-border) !important;
+	font-size: 14px !important;
+	letter-spacing: -0.01em !important;
+}
+
+/* Billing dates — teal tint */
+.frappe-control[data-fieldname="billing_start_date"].tms-computed-field .like-disabled-input,
+.frappe-control[data-fieldname="billing_end_date"].tms-computed-field .like-disabled-input {
+	background: rgba(13, 148, 136, 0.06) !important;
+	border-color: rgba(13, 148, 136, 0.28) !important;
+	color: #0F766E !important;
+	font-weight: 700 !important;
+}
+
+/* POD Status — green tint */
+.frappe-control[data-fieldname="pod_status"].tms-computed-field .like-disabled-input {
+	background: rgba(16, 185, 129, 0.06) !important;
+	border-color: rgba(16, 185, 129, 0.25) !important;
+	color: #065F46 !important;
+	font-weight: 600 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   STAGE-LOCKED FIELDS
+   JS adds .tms-stage-locked via apply_status_locks()
+   These were editable; locked by workflow progression.
+   ═══════════════════════════════════════════════════════════ */
+
+.frappe-control.tms-stage-locked .form-control[disabled],
+.frappe-control.tms-stage-locked input[disabled],
+.frappe-control.tms-stage-locked .like-disabled-input {
+	background: rgba(148, 163, 184, 0.07) !important;
+	border: 1.5px dashed rgba(148, 163, 184, 0.38) !important;
+	color: #64748B !important;
+	cursor: not-allowed !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SLIM BANNER  (height: 44px)
+   Removed: eyebrow label, date chip, trip-type chip, P badge
+   Kept: SO No, route (when set), progress dots, status pill
+   ═══════════════════════════════════════════════════════════ */
+
+.tms-trip-banner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 56px;
+	padding: 0 22px;
+	border-radius: var(--tms-radius);
+	margin: 0 0 14px 0;
+	box-shadow: 0 4px 24px rgba(0, 0, 0, 0.22), 0 1px 0 rgba(255,255,255,.12) inset;
+	gap: 16px;
+	overflow: hidden;
+	flex-wrap: nowrap;
+	box-sizing: border-box;
+	width: 100%;
+	position: relative;
+}
+/* Subtle gloss overlay */
+.tms-trip-banner::before {
+	content: '';
+	position: absolute; inset: 0;
+	background: linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 60%);
+	pointer-events: none;
+	border-radius: inherit;
+}
+
+/* Trip type pill in banner */
+.tms-trip-type-pill {
+	display: inline-flex; align-items: center; gap: 4px;
+	background: rgba(255,255,255,.15);
+	border: 1px solid rgba(255,255,255,.28);
+	border-radius: 20px; padding: 3px 10px;
+	font-size: 10px; font-weight: 800; color: rgba(255,255,255,.92);
+	letter-spacing: .07em; text-transform: uppercase;
+	flex-shrink: 0; white-space: nowrap;
+	backdrop-filter: blur(4px);
+}
+
+/* Left: icon + SO No + optional route */
+.tms-bid {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex-shrink: 0;
+	min-width: 0;
+}
+
+.tms-bid-icon {
+	font-size: 17px;
+	line-height: 1;
+	flex-shrink: 0;
+}
+
+.tms-bid-sono {
+	color: #fff;
+	font-size: 14px;
+	font-weight: 800;
+	letter-spacing: -0.01em;
+	white-space: nowrap;
+}
+
+.tms-bid-route {
+	color: rgba(255, 255, 255, 0.78);
+	font-size: 10.5px;
+	font-weight: 600;
+	white-space: nowrap;
+	background: rgba(255, 255, 255, 0.13);
+	padding: 2px 9px;
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.20);
+}
+
+/* Center: 6 dots + current stage name */
+.tms-bprogress {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex: 1;
+	justify-content: center;
+	min-width: 0;
+}
+
+.tms-dots {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	flex-shrink: 0;
+}
+
+.tms-dot {
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	flex-shrink: 0;
+	transition: all 0.2s;
+}
+
+.tms-dot-done    { background: rgba(255, 255, 255, 0.88); }
+.tms-dot-current { background: #fff; box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.28); width: 9px; height: 9px; }
+.tms-dot-pending { background: rgba(255, 255, 255, 0.22); }
+
+.tms-bstage {
+	color: rgba(255, 255, 255, 0.92);
+	font-size: 11px;
+	font-weight: 700;
+	white-space: nowrap;
+	letter-spacing: 0.03em;
+}
+
+/* Right: status pill */
+.tms-bstatus {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	padding: 3px 11px;
+	border-radius: 16px;
+	font-size: 10px;
+	font-weight: 800;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	border: 1.5px solid;
+	backdrop-filter: blur(4px);
+	flex-shrink: 0;
+	white-space: nowrap;
+}
+
+.tms-status-dot {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	flex-shrink: 0;
+}
+
+/* ── Tab Indicators ── */
+.tms-tab-check {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	background: rgba(16, 185, 129, 0.18);
+	color: #059669;
+	border-radius: 50%;
+	font-size: 8px;
+	line-height: 14px;
+	text-align: center;
+	margin-left: 5px;
+	vertical-align: middle;
+	font-weight: 800;
+}
+
+.tms-stage-dot {
+	display: inline-block;
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: var(--tms-primary);
+	margin-left: 6px;
+	vertical-align: middle;
+	box-shadow: 0 0 0 2px var(--tms-primary-light);
+}
+
+/* ── Buttons ── */
+#page-Trip .page-actions .btn-primary,
+#page-Amazon-Trip .page-actions .btn-primary {
+	background: var(--tms-primary) !important;
+	border-color: var(--tms-primary) !important;
+	color: #fff !important;
+	font-weight: 700 !important;
+	border-radius: var(--tms-radius) !important;
+	transition: filter 0.15s, transform 0.12s !important;
+}
+
+#page-Trip .page-actions .btn-primary:hover,
+#page-Amazon-Trip .page-actions .btn-primary:hover {
+	filter: brightness(1.1) !important;
+	transform: translateY(-1px) !important;
+}
+
+#page-Trip .page-actions .btn-default,
+#page-Trip .page-actions .btn-secondary,
+#page-Amazon-Trip .page-actions .btn-default,
+#page-Amazon-Trip .page-actions .btn-secondary {
+	border: 1.5px solid var(--tms-field-border) !important;
+	border-radius: var(--tms-radius) !important;
+	color: var(--tms-label-color) !important;
+	font-weight: 600 !important;
+}
+
+#page-Trip .page-actions .btn-default:hover,
+#page-Amazon-Trip .page-actions .btn-default:hover {
+	border-color: var(--tms-primary) !important;
+	color: var(--tms-primary) !important;
+}
+
+/* ── Email Template Dialog ── */
+.modal-dialog.modal-lg { max-width: min(760px, 95vw) !important; }
+
+.etpl-card { border: 1.5px solid var(--tms-section-border); border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 2px 14px rgba(0,0,0,0.08); margin-top: 8px; }
+.etpl-head { background: linear-gradient(135deg, var(--tms-primary), var(--tms-accent)); padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; }
+.etpl-chip { background: rgba(255,255,255,0.2); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: 2px 10px; border-radius: 20px; display: inline-block; margin-bottom: 4px; }
+.etpl-name { color: rgba(255,255,255,.92); font-size: 13px; font-weight: 700; }
+.etpl-open { color: rgba(255,255,255,.9); font-size: 11px; font-weight: 600; text-decoration: none; border: 1px solid rgba(255,255,255,.35); padding: 3px 10px; border-radius: 6px; }
+.etpl-open:hover { background: rgba(255,255,255,.2); color: #fff; }
+.etpl-copy { background: #F0FDF4; border: 1px solid #BBF7D0; color: #15803D; border-radius: 6px; font-size: 11px; font-weight: 600; padding: 3px 10px; cursor: pointer; }
+.etpl-copy:hover { background: #DCFCE7; }
+.etpl-copy-inv { background: rgba(255,255,255,.18) !important; border: 1px solid rgba(255,255,255,.35) !important; color: #fff !important; }
+.etpl-copy-inv:hover { background: rgba(255,255,255,.3) !important; }
+.etpl-subject-row { display: flex; align-items: center; gap: 10px; padding: 12px 18px; background: #F9FAFB; border-bottom: 1px solid #E5E7EB; }
+.etpl-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #9CA3AF; flex-shrink: 0; }
+.etpl-subject-val { font-size: 14px; font-weight: 700; color: #111827; flex: 1; }
+.etpl-body-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 18px 4px; }
+.etpl-body { padding: 4px 18px 16px; font-size: 13px; line-height: 1.8; color: #374151; min-height: 60px; max-height: 280px; overflow-y: auto; white-space: pre-wrap; }
+.etpl-footer { padding: 8px 18px; background: #F9FAFB; border-top: 1px solid #E5E7EB; font-size: 11px; color: #9CA3AF; }
+.etpl-empty { text-align: center; padding: 40px 20px; }
+
+/* ── Trip Summary Dialog ── */
+@media (max-width: 600px) { .tms-sum-grid { grid-template-columns: 1fr !important; } }
+
+/* ── Animations ── */
+@keyframes tms-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* ── Responsive ── */
+@media (max-width: 767px) {
+	.tms-bprogress .tms-dots { display: none; }
+	.tms-bid-route            { display: none; }
+	.tms-trip-banner          { padding: 0 12px; gap: 10px; }
+	.tms-bid-sono             { font-size: 13px; }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	.tms-bid-sono { font-size: 13px; }
+	.tms-bstage   { font-size: 10.5px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DARK MODE — instant CSS fallback before JS applies palette
+   JS (MutationObserver) will override with hue-tinted values
+   ═══════════════════════════════════════════════════════════ */
+
+[data-theme-mode="dark"] #page-Trip {
+	--tms-page-bg:          #1a1f35;
+	--tms-card-bg:          #21273d;
+	--tms-field-bg:         #1e2438;
+	--tms-section-border:   rgba(99, 102, 241, 0.22);
+	--tms-field-border:     rgba(99, 102, 241, 0.35);
+	--tms-label-color:      #a5b4fc;
+	--tms-heading-color:    #e0e7ff;
+	--tms-primary-light:    rgba(99, 102, 241, 0.14);
+	--tms-primary-border:   rgba(99, 102, 241, 0.30);
+	--tms-field-focus-glow: rgba(99, 102, 241, 0.18);
+}
+
+[data-theme-mode="dark"] #page-Trip .layout-main-section-wrapper {
+	background: var(--tms-page-bg) !important;
+}
+
+[data-theme-mode="dark"] #page-Trip .frappe-control .form-control:not([disabled]):not([readonly]) {
+	background: var(--tms-field-bg) !important;
+	border-color: var(--tms-field-border) !important;
+	color: var(--tms-heading-color) !important;
+}
+
+[data-theme-mode="dark"] #page-Trip .frappe-control .control-label,
+[data-theme-mode="dark"] #page-Trip label.control-label {
+	color: var(--tms-label-color) !important;
+}
+
+[data-theme-mode="dark"] #page-Trip .form-section .section-head {
+	color: var(--tms-heading-color) !important;
+}
+
+[data-theme-mode="dark"] #page-Trip .like-disabled-input {
+	background: var(--tms-field-bg) !important;
+	color: var(--tms-label-color) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   AMAZON TRIP — specific overrides
+   ═══════════════════════════════════════════════════════════ */
+
+/* trip_status field: inline pill */
+#page-Amazon-Trip [data-fieldname="trip_status"] .like-disabled-input,
+#page-Amazon-Trip [data-fieldname="trip_status"] .form-control {
+	display: inline-flex !important;
+	align-items: center !important;
+	width: auto !important;
+	min-width: 100px !important;
+}
+
+/* Banner: tour ID chips — keep narrow on small screens */
+#page-Amazon-Trip .tms-bid-route {
+	font-size: 10px;
+	max-width: 140px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   Entry Highlight System — A + D + E
+   A = Gradient top bar (primary→accent) via ::before pseudo-element
+   D = Fill-status dot via ::after (orange=empty  green-check=filled)
+   E = Progress bar injected by JS via tms_inject_progress_bar() in trip.js
+   Colors auto-adapt via --tms-primary / --tms-accent / --tms-hl-border vars.
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Card base — ALL highlight fields (editable + read-only) ── */
+#page-Trip .frappe-control[data-fieldname="tcntrip_date"],
+#page-Trip .frappe-control[data-fieldname="trip_type"],
+#page-Trip .frappe-control[data-fieldname="business_format"],
+#page-Trip .frappe-control[data-fieldname="tcntrip_no"],
+#page-Trip .frappe-control[data-fieldname="vehicle_type"],
+#page-Trip .frappe-control[data-fieldname="reach_date_time"],
+#page-Trip .frappe-control[data-fieldname="dispatch_date_time"],
+#page-Trip .frappe-control[data-fieldname="arrival_date_time"],
+#page-Trip .frappe-control[data-fieldname="release_date_time"],
+#page-Trip .frappe-control[data-fieldname="customer_freight"],
+#page-Trip .frappe-control[data-fieldname="vendor_freight"],
+#page-Trip .frappe-control[data-fieldname="loading_charge"],
+#page-Trip .frappe-control[data-fieldname="loading_charge_payment_by"],
+#page-Trip .frappe-control[data-fieldname="unloading_charge"],
+#page-Trip .frappe-control[data-fieldname="employee_lr_money"],
+#page-Trip .frappe-control[data-fieldname="company_lr_money"],
+#page-Trip .frappe-control[data-fieldname="loading_site_detention_amount"],
+#page-Trip .frappe-control[data-fieldname="unloading_site_detention_amount"] {
+	position: relative !important;
+	border-radius: 6px !important;
+	background: var(--bg-color, #fff) !important;
+	padding: 9px 8px 4px !important;
+	transition: box-shadow 0.2s ease !important;
+}
+
+/* Editable card shadow */
+#page-Trip .frappe-control[data-fieldname="tcntrip_date"],
+#page-Trip .frappe-control[data-fieldname="trip_type"],
+#page-Trip .frappe-control[data-fieldname="business_format"],
+#page-Trip .frappe-control[data-fieldname="tcntrip_no"],
+#page-Trip .frappe-control[data-fieldname="vehicle_type"],
+#page-Trip .frappe-control[data-fieldname="reach_date_time"],
+#page-Trip .frappe-control[data-fieldname="dispatch_date_time"],
+#page-Trip .frappe-control[data-fieldname="arrival_date_time"],
+#page-Trip .frappe-control[data-fieldname="release_date_time"],
+#page-Trip .frappe-control[data-fieldname="customer_freight"],
+#page-Trip .frappe-control[data-fieldname="vendor_freight"],
+#page-Trip .frappe-control[data-fieldname="loading_charge"],
+#page-Trip .frappe-control[data-fieldname="loading_charge_payment_by"],
+#page-Trip .frappe-control[data-fieldname="unloading_charge"],
+#page-Trip .frappe-control[data-fieldname="employee_lr_money"],
+#page-Trip .frappe-control[data-fieldname="company_lr_money"] {
+	box-shadow: 0 2px 10px rgba(0,0,0,0.07), 0 0 0 1px var(--tms-hl-border, rgba(59,79,228,0.18)) !important;
+}
+
+/* Read-only card shadow */
+#page-Trip .frappe-control[data-fieldname="loading_site_detention_amount"],
+#page-Trip .frappe-control[data-fieldname="unloading_site_detention_amount"] {
+	box-shadow: 0 2px 8px rgba(0,0,0,0.05), 0 0 0 1px rgba(6,182,212,0.22) !important;
+}
+
+/* Focus glow ring */
+#page-Trip .frappe-control[data-fieldname="tcntrip_date"]:focus-within,
+#page-Trip .frappe-control[data-fieldname="trip_type"]:focus-within,
+#page-Trip .frappe-control[data-fieldname="business_format"]:focus-within,
+#page-Trip .frappe-control[data-fieldname="tcntrip_no"]:focus-within,
+#page-Trip .frappe-control[data-fieldname="vehicle_type"]:focus-within,
+#page-Trip .frappe-control[data-fieldname="reach_date_time"]:focus-within,
+#page-Trip .frappe-control[data-fieldname="dispatch_date_time"]:focus-within,
+#page-Trip .frappe-control[data-fieldname="arrival_date_time"]:focus-within,
+#page-Trip .frappe-control[data-fieldname="release_date_time"]:focus-within,
+#page-Trip .frappe-control[data-fieldname="customer_freight"]:focus-within,
+#page-Trip .frappe-control[data-fieldname="vendor_freight"]:focus-within,
+#page-Trip .frappe-control[data-fieldname="loading_charge"]:focus-within,
+#page-Trip .frappe-control[data-fieldname="loading_charge_payment_by"]:focus-within,
+#page-Trip .frappe-control[data-fieldname="unloading_charge"]:focus-within,
+#page-Trip .frappe-control[data-fieldname="employee_lr_money"]:focus-within,
+#page-Trip .frappe-control[data-fieldname="company_lr_money"]:focus-within {
+	box-shadow: 0 4px 16px rgba(0,0,0,0.10), 0 0 0 2px var(--tms-primary, #3B4FE4) !important;
+}
+
+/* ── A. Gradient top bar — editable fields (primary → accent) ── */
+#page-Trip .frappe-control[data-fieldname="tcntrip_date"]::before,
+#page-Trip .frappe-control[data-fieldname="trip_type"]::before,
+#page-Trip .frappe-control[data-fieldname="business_format"]::before,
+#page-Trip .frappe-control[data-fieldname="tcntrip_no"]::before,
+#page-Trip .frappe-control[data-fieldname="vehicle_type"]::before,
+#page-Trip .frappe-control[data-fieldname="reach_date_time"]::before,
+#page-Trip .frappe-control[data-fieldname="dispatch_date_time"]::before,
+#page-Trip .frappe-control[data-fieldname="arrival_date_time"]::before,
+#page-Trip .frappe-control[data-fieldname="release_date_time"]::before,
+#page-Trip .frappe-control[data-fieldname="customer_freight"]::before,
+#page-Trip .frappe-control[data-fieldname="vendor_freight"]::before,
+#page-Trip .frappe-control[data-fieldname="loading_charge"]::before,
+#page-Trip .frappe-control[data-fieldname="loading_charge_payment_by"]::before,
+#page-Trip .frappe-control[data-fieldname="unloading_charge"]::before,
+#page-Trip .frappe-control[data-fieldname="employee_lr_money"]::before,
+#page-Trip .frappe-control[data-fieldname="company_lr_money"]::before {
+	content: '' !important;
+	position: absolute !important;
+	top: 0 !important; left: 0 !important; right: 0 !important;
+	height: 3px !important;
+	background: linear-gradient(90deg, var(--tms-primary, #3B4FE4), var(--tms-accent, #06B6D4)) !important;
+	border-radius: 6px 6px 0 0 !important;
+	pointer-events: none !important;
+}
+
+/* ── A. Gradient top bar — read-only fields (accent → primary) ── */
+#page-Trip .frappe-control[data-fieldname="loading_site_detention_amount"]::before,
+#page-Trip .frappe-control[data-fieldname="unloading_site_detention_amount"]::before {
+	content: '' !important;
+	position: absolute !important;
+	top: 0 !important; left: 0 !important; right: 0 !important;
+	height: 3px !important;
+	background: linear-gradient(90deg, var(--tms-accent, #06B6D4), var(--tms-primary, #3B4FE4)) !important;
+	border-radius: 6px 6px 0 0 !important;
+	pointer-events: none !important;
+}
+
+/* ── D. Status dot — empty state (orange, top-right corner) ── */
+#page-Trip .frappe-control[data-fieldname="tcntrip_date"]::after,
+#page-Trip .frappe-control[data-fieldname="trip_type"]::after,
+#page-Trip .frappe-control[data-fieldname="business_format"]::after,
+#page-Trip .frappe-control[data-fieldname="tcntrip_no"]::after,
+#page-Trip .frappe-control[data-fieldname="vehicle_type"]::after,
+#page-Trip .frappe-control[data-fieldname="reach_date_time"]::after,
+#page-Trip .frappe-control[data-fieldname="dispatch_date_time"]::after,
+#page-Trip .frappe-control[data-fieldname="arrival_date_time"]::after,
+#page-Trip .frappe-control[data-fieldname="release_date_time"]::after,
+#page-Trip .frappe-control[data-fieldname="customer_freight"]::after,
+#page-Trip .frappe-control[data-fieldname="vendor_freight"]::after,
+#page-Trip .frappe-control[data-fieldname="loading_charge"]::after,
+#page-Trip .frappe-control[data-fieldname="loading_charge_payment_by"]::after,
+#page-Trip .frappe-control[data-fieldname="unloading_charge"]::after,
+#page-Trip .frappe-control[data-fieldname="employee_lr_money"]::after,
+#page-Trip .frappe-control[data-fieldname="company_lr_money"]::after,
+#page-Trip .frappe-control[data-fieldname="loading_site_detention_amount"]::after,
+#page-Trip .frappe-control[data-fieldname="unloading_site_detention_amount"]::after {
+	content: '' !important;
+	position: absolute !important;
+	top: 6px !important;
+	right: 8px !important;
+	width: 8px !important;
+	height: 8px !important;
+	border-radius: 50% !important;
+	background: #f59e0b !important;
+	box-shadow: 0 0 0 2px rgba(245,158,11,0.20) !important;
+	pointer-events: none !important;
+	transition: background 0.25s ease, box-shadow 0.25s ease, width 0.2s ease, height 0.2s ease, top 0.2s ease, right 0.2s ease !important;
+}
+
+/* ── D. Status dot — filled state (green checkmark circle) ── */
+#page-Trip .tms-hl-filled[data-fieldname="tcntrip_date"]::after,
+#page-Trip .tms-hl-filled[data-fieldname="trip_type"]::after,
+#page-Trip .tms-hl-filled[data-fieldname="business_format"]::after,
+#page-Trip .tms-hl-filled[data-fieldname="tcntrip_no"]::after,
+#page-Trip .tms-hl-filled[data-fieldname="vehicle_type"]::after,
+#page-Trip .tms-hl-filled[data-fieldname="reach_date_time"]::after,
+#page-Trip .tms-hl-filled[data-fieldname="dispatch_date_time"]::after,
+#page-Trip .tms-hl-filled[data-fieldname="arrival_date_time"]::after,
+#page-Trip .tms-hl-filled[data-fieldname="release_date_time"]::after,
+#page-Trip .tms-hl-filled[data-fieldname="customer_freight"]::after,
+#page-Trip .tms-hl-filled[data-fieldname="vendor_freight"]::after,
+#page-Trip .tms-hl-filled[data-fieldname="loading_charge"]::after,
+#page-Trip .tms-hl-filled[data-fieldname="loading_charge_payment_by"]::after,
+#page-Trip .tms-hl-filled[data-fieldname="unloading_charge"]::after,
+#page-Trip .tms-hl-filled[data-fieldname="employee_lr_money"]::after,
+#page-Trip .tms-hl-filled[data-fieldname="company_lr_money"]::after,
+#page-Trip .tms-hl-filled[data-fieldname="loading_site_detention_amount"]::after,
+#page-Trip .tms-hl-filled[data-fieldname="unloading_site_detention_amount"]::after {
+	content: '\2713' !important;
+	width: 14px !important;
+	height: 14px !important;
+	top: 5px !important;
+	right: 7px !important;
+	background: #10b981 !important;
+	box-shadow: 0 0 0 2px rgba(16,185,129,0.20) !important;
+	color: #fff !important;
+	font-size: 9px !important;
+	font-weight: 900 !important;
+	line-height: 14px !important;
+	text-align: center !important;
+}
+
+/* ── Auto badge repositioned for calc-highlight cards ─────────────────────
+   Status dot (::after) sits at top:5-6px, right:7-8px (up to 14px wide).
+   Slide ⚙ Auto badge to the LEFT of the dot so both are visible. */
+#page-Trip .frappe-control[data-fieldname="loading_site_detention_amount"] .tms-auto-badge,
+#page-Trip .frappe-control[data-fieldname="unloading_site_detention_amount"] .tms-auto-badge {
+	top: 4px !important;
+	right: 26px !important;
+	color: rgba(6, 182, 212, 0.60) !important;
+}
+
+/* Input inside card — reset left border so card ring is the only frame */
+#page-Trip .frappe-control[data-fieldname="tcntrip_date"] input.form-control,
+#page-Trip .frappe-control[data-fieldname="trip_type"] input.form-control,
+#page-Trip .frappe-control[data-fieldname="business_format"] input.form-control,
+#page-Trip .frappe-control[data-fieldname="tcntrip_no"] input.form-control,
+#page-Trip .frappe-control[data-fieldname="vehicle_type"] input.form-control,
+#page-Trip .frappe-control[data-fieldname="reach_date_time"] input.form-control,
+#page-Trip .frappe-control[data-fieldname="dispatch_date_time"] input.form-control,
+#page-Trip .frappe-control[data-fieldname="arrival_date_time"] input.form-control,
+#page-Trip .frappe-control[data-fieldname="release_date_time"] input.form-control,
+#page-Trip .frappe-control[data-fieldname="customer_freight"] input.form-control,
+#page-Trip .frappe-control[data-fieldname="vendor_freight"] input.form-control,
+#page-Trip .frappe-control[data-fieldname="loading_charge"] input.form-control,
+#page-Trip .frappe-control[data-fieldname="loading_charge_payment_by"] input.form-control,
+#page-Trip .frappe-control[data-fieldname="unloading_charge"] input.form-control,
+#page-Trip .frappe-control[data-fieldname="employee_lr_money"] input.form-control,
+#page-Trip .frappe-control[data-fieldname="company_lr_money"] input.form-control {
+	background: transparent !important;
+	border-left-width: 1px !important;
+	border-color: var(--border-color) !important;
+}
+
+/* ── Labels — bold + primary color ── */
+#page-Trip .frappe-control[data-fieldname="tcntrip_date"] label.control-label,
+#page-Trip .frappe-control[data-fieldname="trip_type"] label.control-label,
+#page-Trip .frappe-control[data-fieldname="business_format"] label.control-label,
+#page-Trip .frappe-control[data-fieldname="tcntrip_no"] label.control-label,
+#page-Trip .frappe-control[data-fieldname="vehicle_type"] label.control-label,
+#page-Trip .frappe-control[data-fieldname="reach_date_time"] label.control-label,
+#page-Trip .frappe-control[data-fieldname="dispatch_date_time"] label.control-label,
+#page-Trip .frappe-control[data-fieldname="arrival_date_time"] label.control-label,
+#page-Trip .frappe-control[data-fieldname="release_date_time"] label.control-label,
+#page-Trip .frappe-control[data-fieldname="customer_freight"] label.control-label,
+#page-Trip .frappe-control[data-fieldname="vendor_freight"] label.control-label,
+#page-Trip .frappe-control[data-fieldname="loading_charge"] label.control-label,
+#page-Trip .frappe-control[data-fieldname="loading_charge_payment_by"] label.control-label,
+#page-Trip .frappe-control[data-fieldname="unloading_charge"] label.control-label,
+#page-Trip .frappe-control[data-fieldname="employee_lr_money"] label.control-label,
+#page-Trip .frappe-control[data-fieldname="company_lr_money"] label.control-label,
+#page-Trip .frappe-control[data-fieldname="loading_site_detention_amount"] label.control-label,
+#page-Trip .frappe-control[data-fieldname="unloading_site_detention_amount"] label.control-label {
+	color: var(--tms-primary, #3B4FE4) !important;
+	font-weight: 700 !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   E. Entry Progress Bar  (DOM injected by tms_inject_progress_bar in trip.js)
+   ══════════════════════════════════════════════════════════════════════════════ */
+.tms-progress-wrap {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	padding: 10px 14px;
+	background: var(--card-bg, #fff);
+	border: 1px solid var(--tms-hl-border, rgba(59,79,228,0.18));
+	border-radius: 8px;
+	margin: 0 0 14px 0;
+	box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+	transition: border-color 0.3s ease, background 0.3s ease;
+}
+.tms-progress-header {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 12px;
+	color: var(--text-muted);
+}
+.tms-progress-label { font-weight: 600; flex: 1; }
+.tms-progress-fraction {
+	font-weight: 700;
+	font-size: 13px;
+	color: var(--tms-primary, #3B4FE4);
+	transition: color 0.3s ease;
+}
+.tms-progress-track {
+	height: 5px;
+	background: var(--border-color, #e5e7eb);
+	border-radius: 3px;
+	overflow: hidden;
+}
+.tms-progress-fill {
+	height: 100%;
+	background: linear-gradient(90deg, var(--tms-primary, #3B4FE4), var(--tms-accent, #06B6D4));
+	border-radius: 3px;
+	transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+	min-width: 0;
+}
+.tms-progress-wrap.tms-all-done {
+	border-color: #10b981 !important;
+	background: #f0fdf4 !important;
+}
+.tms-progress-wrap.tms-all-done .tms-progress-fill {
+	background: linear-gradient(90deg, #10b981, #34d399) !important;
+}
+.tms-progress-wrap.tms-all-done .tms-progress-fraction { color: #10b981 !important; }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   F. Tab Badge Counter  (injected by tms_update_tab_badges in trip.js)
+   ══════════════════════════════════════════════════════════════════════════════ */
+#page-Trip .form-tabs-list .nav-link {
+	position: relative;
+}
+#page-Trip .tms-tab-badge {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 17px;
+	height: 17px;
+	padding: 0 4px;
+	border-radius: 9px;
+	font-size: 10px;
+	font-weight: 700;
+	line-height: 1;
+	margin-left: 5px;
+	vertical-align: middle;
+	background: #f59e0b;
+	color: #fff;
+	transition: background 0.25s ease;
+}
+#page-Trip .tms-tab-badge.tms-tab-done {
+	background: #10b981;
+}
+
+/* Frappe's column.js distributes columns equally regardless of DocField `columns`.
+   Override per-section using stable section_break fieldnames. */
+
+/* Trip Creation: Vehicle Type (4) + Origin City 1/2 + Destination City 1/2 (2 each) */
+#page-Trip .form-section[data-fieldname="section_break_csrw"] > .section-body > .form-column:nth-child(1) {
+	flex: 0 0 33.3333% !important;
+	max-width: 33.3333% !important;
+}
+#page-Trip .form-section[data-fieldname="section_break_csrw"] > .section-body > .form-column:nth-child(n+2) {
+	flex: 0 0 16.6667% !important;
+	max-width: 16.6667% !important;
+}
+
+/* Trip Creation: Origin/Destination Address 1+2 (5 each) + State (2) */
+#page-Trip .form-section[data-fieldname="section_break_wnyr"] > .section-body > .form-column:nth-child(1),
+#page-Trip .form-section[data-fieldname="section_break_wnyr"] > .section-body > .form-column:nth-child(2),
+#page-Trip .form-section[data-fieldname="section_break_ictb"] > .section-body > .form-column:nth-child(1),
+#page-Trip .form-section[data-fieldname="section_break_ictb"] > .section-body > .form-column:nth-child(2) {
+	flex: 0 0 41.6667% !important;
+	max-width: 41.6667% !important;
+}
+#page-Trip .form-section[data-fieldname="section_break_wnyr"] > .section-body > .form-column:nth-child(3),
+#page-Trip .form-section[data-fieldname="section_break_ictb"] > .section-body > .form-column:nth-child(3) {
+	flex: 0 0 16.6667% !important;
+	max-width: 16.6667% !important;
+}
+
+/* Trip Creation: Billing Start/End Date (3 each) + Customer (6) */
+#page-Trip .form-section[data-fieldname="section_break_enns"] > .section-body > .form-column:nth-child(1),
+#page-Trip .form-section[data-fieldname="section_break_enns"] > .section-body > .form-column:nth-child(2) {
+	flex: 0 0 25% !important;
+	max-width: 25% !important;
+}
+#page-Trip .form-section[data-fieldname="section_break_enns"] > .section-body > .form-column:nth-child(3) {
+	flex: 0 0 50% !important;
+	max-width: 50% !important;
+}
+
+/* Loading & Unloading: Trip Coord + LR No + LR Date + Vehicle No (2 each) + Vendor (4) */
+#page-Trip .form-section[data-fieldname="section_break_bnez"] > .section-body > .form-column:nth-child(1),
+#page-Trip .form-section[data-fieldname="section_break_bnez"] > .section-body > .form-column:nth-child(2),
+#page-Trip .form-section[data-fieldname="section_break_bnez"] > .section-body > .form-column:nth-child(3),
+#page-Trip .form-section[data-fieldname="section_break_bnez"] > .section-body > .form-column:nth-child(5) {
+	flex: 0 0 16.6667% !important;
+	max-width: 16.6667% !important;
+}
+#page-Trip .form-section[data-fieldname="section_break_bnez"] > .section-body > .form-column:nth-child(4) {
+	flex: 0 0 33.3333% !important;
+	max-width: 33.3333% !important;
+}
+
+/* "Download POD" button — Trip List View + Report View */
+.tms-pod-download-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	height: 30px;
+	margin: 2px;
+	padding: 0 14px;
+	border: none;
+	border-radius: 8px;
+	background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+	color: #fff;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.3px;
+	cursor: pointer;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+	transition: transform 0.12s, box-shadow 0.12s, filter 0.12s;
+	box-sizing: border-box;
+	vertical-align: middle;
+}
+.tms-pod-download-btn:hover {
+	transform: translateY(-1px);
+	filter: brightness(1.08);
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+}
+.tms-pod-download-btn:active {
+	transform: translateY(0);
+	filter: brightness(0.96);
+}
+.tms-pod-download-icon {
+	font-size: 13px;
+	line-height: 1;
+}
+
+/* Compact variant — Report View grid rows are only 35px tall (cellHeight: 35
+   in report_view.js), so the full-size pill above gets clipped by the cell's
+   overflow:hidden. This variant is sized to fit inside that row. */
+.tms-pod-download-btn--compact {
+	height: 16px;
+	margin: 1px;
+	padding: 0 6px;
+	font-size: 10px;
+	border-radius: 5px;
+	gap: 4px;
+	box-shadow: none;
+}
+.tms-pod-download-btn--compact .tms-pod-download-icon {
+	font-size: 10px;
+}
+
+/* List View wraps our label inside Frappe's own default action-button chrome
+   (.btn.btn-action.btn-default) — strip that chrome so our pill is the only
+   visible button. */
+.list-row-col .btn.btn-action:has(.tms-pod-download-btn) {
+	background: transparent !important;
+	border: none !important;
+	padding: 0 !important;
+	height: auto !important;
+	box-shadow: none !important;
+}

@@ -1,0 +1,289 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "format:POD-IMP-{YYYY}-{#####}",
+ "creation": "2026-04-03 17:15:35.872007",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "import_no",
+  "top_column_break",
+  "import_date",
+  "column_break_ggee",
+  "import_by",
+  "top_section_break",
+  "trip_type",
+  "upload_pdfs",
+  "importload",
+  "source_mode",
+  "source_folder_path",
+  "column_break_sosc",
+  "batch",
+  "column_break_upao",
+  "pod_type",
+  "status_section",
+  "scan_status",
+  "import_status",
+  "result_report_file",
+  "summary_section",
+  "total_files_count",
+  "ready_files_count",
+  "imported_files_count",
+  "failed_files_count",
+  "unmatched_files_count",
+  "duplicate_match_files_count",
+  "duplicate_target_files_count",
+  "invalid_files_count",
+  "pod_files_section",
+  "pod_files",
+  "preview_section",
+  "preview_summary_html"
+ ],
+ "fields": [
+  {
+   "default": "AUTO GENERATED",
+   "fieldname": "import_no",
+   "fieldtype": "Data",
+   "label": "Import No",
+   "read_only": 1
+  },
+  {
+   "fieldname": "top_column_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "import_date",
+   "fieldtype": "Date",
+   "label": "Import Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_ggee",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "import_by",
+   "fieldtype": "Data",
+   "label": "Import By",
+   "read_only": 1
+  },
+  {
+   "fieldname": "top_section_break",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "trip_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Trip Type",
+   "options": "Trip Type",
+   "reqd": 1
+  },
+  {
+   "default": "Original POD",
+   "fieldname": "pod_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "POD Type",
+   "options": "Original POD\nDuplicate POD",
+   "reqd": 1
+  },
+  {
+   "fieldname": "upload_pdfs",
+   "fieldtype": "Button",
+   "label": "Select Folder"
+  },
+  {
+   "fieldname": "importload",
+   "fieldtype": "Button",
+   "label": "Import"
+  },
+  {
+   "default": "Browser Folder",
+   "fieldname": "source_mode",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Source Mode",
+   "options": "Browser Folder\nServer Folder"
+  },
+  {
+   "fieldname": "source_folder_path",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Server Folder Path"
+  },
+  {
+   "fieldname": "column_break_sosc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "10",
+   "fieldname": "batch",
+   "fieldtype": "Select",
+   "label": "Batch",
+   "options": "5\n10\n15\n20\n25\n50",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_upao",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status_section",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Job Status"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "scan_status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Scan Status",
+   "options": "Pending\nQueued\nRunning\nCompleted\nFailed",
+   "read_only": 1
+  },
+  {
+   "default": "Pending",
+   "fieldname": "import_status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Import Status",
+   "options": "Pending\nQueued\nRunning\nCompleted\nFailed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "result_report_file",
+   "fieldtype": "Attach",
+   "hidden": 1,
+   "label": "Result Report",
+   "read_only": 1
+  },
+  {
+   "fieldname": "summary_section",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Summary Counters"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_files_count",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Total Files",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "ready_files_count",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Ready Files",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "imported_files_count",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Imported Files",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "failed_files_count",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Failed Files",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "unmatched_files_count",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Unmatched Files",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "duplicate_match_files_count",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Multiple Match Files",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "duplicate_target_files_count",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Duplicate Target Files",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "invalid_files_count",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Invalid Files",
+   "read_only": 1
+  },
+  {
+   "fieldname": "pod_files_section",
+   "fieldtype": "Section Break",
+   "label": "Uploaded POD Files"
+  },
+  {
+   "fieldname": "pod_files",
+   "fieldtype": "Table",
+   "label": "POD Files",
+   "options": "Trip POD Import File"
+  },
+  {
+   "fieldname": "preview_section",
+   "fieldtype": "Section Break",
+   "label": "Preview"
+  },
+  {
+   "fieldname": "preview_summary_html",
+   "fieldtype": "HTML",
+   "label": "Preview Summary"
+  }
+ ],
+ "grid_page_length": 20,
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-06-30 16:55:16.626572",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Trip POD Import",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "default_view": "Report",
+ "sort_field": "import_date",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

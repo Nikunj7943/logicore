@@ -1,0 +1,12 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "doctype": "Report",
+ "filters": [],
+ "is_standard": "Yes",
+ "module": "LogiCore",
+ "name": "Vendor Payment Summary",
+ "ref_doctype": "Vendor Payment",
+ "report_name": "Vendor Payment Summary",
+ "report_type": "Script Report"
+}

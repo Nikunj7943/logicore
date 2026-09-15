@@ -1,0 +1,1095 @@
+// Copyright (c) 2026, LogiCore and contributors
+// For license information, please see license.txt
+
+frappe.ui.form.on("Trip Settings", {
+	refresh(frm) {
+		frm.disable_save();
+		frm.page.set_title("⚙️ Trip Field Settings");
+
+		// Inject global styles
+		if (!document.getElementById("trip-settings-styles")) {
+			const style = document.createElement("style");
+			style.id = "trip-settings-styles";
+			style.textContent = `
+				@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+				.trip-settings-root {
+					font-family: 'DM Sans', sans-serif;
+					background: #0d0f14;
+					min-height: 100vh;
+					padding: 0;
+					margin: -15px -15px 0 -15px;
+					color: #e8eaf0;
+				}
+
+				.ts-hero {
+					background: linear-gradient(135deg, #0d0f14 0%, #141824 50%, #0d1520 100%);
+					border-bottom: 1px solid rgba(99, 179, 237, 0.15);
+					padding: 36px 48px 28px;
+					position: relative;
+					overflow: hidden;
+				}
+
+				.ts-hero::before {
+					content: '';
+					position: absolute;
+					top: -60px; right: -60px;
+					width: 300px; height: 300px;
+					background: radial-gradient(circle, rgba(99,179,237,0.08) 0%, transparent 70%);
+					pointer-events: none;
+				}
+
+				.ts-hero::after {
+					content: '';
+					position: absolute;
+					bottom: -40px; left: 20%;
+					width: 200px; height: 200px;
+					background: radial-gradient(circle, rgba(167,139,250,0.06) 0%, transparent 70%);
+					pointer-events: none;
+				}
+
+				.ts-hero-label {
+					font-family: 'Syne', sans-serif;
+					font-size: 11px;
+					font-weight: 700;
+					letter-spacing: 0.2em;
+					text-transform: uppercase;
+					color: #63b3ed;
+					margin-bottom: 8px;
+					opacity: 0.8;
+				}
+
+				.ts-hero-title {
+					font-family: 'Syne', sans-serif;
+					font-size: 28px;
+					font-weight: 800;
+					color: #fff;
+					margin-bottom: 4px;
+					letter-spacing: -0.02em;
+				}
+
+				.ts-hero-sub {
+					font-size: 14px;
+					color: #7a8299;
+					font-weight: 300;
+				}
+
+				.ts-body {
+					padding: 32px 48px;
+				}
+
+				/* Trip Type Selector */
+				.ts-selector-wrap {
+					margin-bottom: 36px;
+				}
+
+				.ts-selector-label {
+					font-family: 'Syne', sans-serif;
+					font-size: 12px;
+					font-weight: 600;
+					letter-spacing: 0.12em;
+					text-transform: uppercase;
+					color: #63b3ed;
+					margin-bottom: 12px;
+				}
+
+				.ts-selector {
+					position: relative;
+					display: inline-block;
+					min-width: 320px;
+				}
+
+				.ts-selector select {
+					appearance: none;
+					-webkit-appearance: none;
+					width: 100%;
+					background: #181c28;
+					border: 1px solid rgba(99,179,237,0.25);
+					border-radius: 10px;
+					color: #e8eaf0;
+					font-family: 'DM Sans', sans-serif;
+					font-size: 15px;
+					font-weight: 500;
+					padding: 14px 48px 14px 20px;
+					cursor: pointer;
+					outline: none;
+					transition: border-color 0.2s, box-shadow 0.2s;
+					letter-spacing: 0.01em;
+				}
+
+				.ts-selector select:focus {
+					border-color: #63b3ed;
+					box-shadow: 0 0 0 3px rgba(99,179,237,0.12);
+				}
+
+				.ts-selector select option {
+					background: #181c28;
+					color: #e8eaf0;
+				}
+
+				.ts-selector-icon {
+					position: absolute;
+					right: 16px;
+					top: 50%;
+					transform: translateY(-50%);
+					color: #63b3ed;
+					pointer-events: none;
+					font-size: 16px;
+				}
+
+				.ts-selector-badge {
+					display: inline-block;
+					margin-left: 14px;
+					padding: 4px 12px;
+					background: rgba(99,179,237,0.1);
+					border: 1px solid rgba(99,179,237,0.2);
+					border-radius: 20px;
+					font-size: 12px;
+					color: #63b3ed;
+					font-weight: 500;
+					vertical-align: middle;
+					transition: all 0.3s;
+				}
+
+				/* Config Panel */
+				.ts-config-panel {
+					display: none;
+					animation: fadeSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+				}
+
+				.ts-config-panel.visible {
+					display: block;
+				}
+
+				@keyframes fadeSlideUp {
+					from { opacity: 0; transform: translateY(16px); }
+					to { opacity: 1; transform: translateY(0); }
+				}
+
+				/* Tab Bar */
+				.ts-tabs {
+					display: flex;
+					gap: 4px;
+					margin-bottom: 24px;
+					border-bottom: 1px solid rgba(255,255,255,0.06);
+					padding-bottom: 0;
+				}
+
+				.ts-tab {
+					font-family: 'Syne', sans-serif;
+					font-size: 12px;
+					font-weight: 600;
+					letter-spacing: 0.06em;
+					text-transform: uppercase;
+					padding: 10px 18px;
+					border-radius: 8px 8px 0 0;
+					cursor: pointer;
+					color: #7a8299;
+					border-bottom: 2px solid transparent;
+					transition: all 0.2s;
+					position: relative;
+					bottom: -1px;
+					user-select: none;
+				}
+
+				.ts-tab:hover {
+					color: #c0c8e0;
+					background: rgba(255,255,255,0.03);
+				}
+
+				.ts-tab.active {
+					color: #63b3ed;
+					border-bottom: 2px solid #63b3ed;
+					background: rgba(99,179,237,0.05);
+				}
+
+				.ts-tab-badge {
+					display: inline-block;
+					margin-left: 6px;
+					padding: 1px 7px;
+					background: rgba(99,179,237,0.15);
+					border-radius: 10px;
+					font-size: 10px;
+					color: #63b3ed;
+				}
+
+				/* Toolbar */
+				.ts-toolbar {
+					display: flex;
+					align-items: center;
+					gap: 10px;
+					margin-bottom: 20px;
+				}
+
+				.ts-search {
+					position: relative;
+					flex: 1;
+					max-width: 320px;
+				}
+
+				.ts-search input {
+					width: 100%;
+					background: #181c28;
+					border: 1px solid rgba(255,255,255,0.08);
+					border-radius: 8px;
+					color: #e8eaf0;
+					font-family: 'DM Sans', sans-serif;
+					font-size: 13px;
+					padding: 9px 12px 9px 36px;
+					outline: none;
+					transition: border-color 0.2s;
+				}
+
+				.ts-search input:focus {
+					border-color: rgba(99,179,237,0.4);
+				}
+
+				.ts-search input::placeholder { color: #4a5270; }
+
+				.ts-search-icon {
+					position: absolute;
+					left: 11px; top: 50%;
+					transform: translateY(-50%);
+					color: #4a5270;
+					font-size: 14px;
+				}
+
+				.ts-btn {
+					padding: 8px 16px;
+					border-radius: 7px;
+					font-family: 'DM Sans', sans-serif;
+					font-size: 12px;
+					font-weight: 500;
+					cursor: pointer;
+					border: 1px solid transparent;
+					transition: all 0.18s;
+					letter-spacing: 0.02em;
+				}
+
+				.ts-btn-ghost {
+					background: transparent;
+					border-color: rgba(255,255,255,0.1);
+					color: #9aa3c0;
+				}
+
+				.ts-btn-ghost:hover {
+					border-color: rgba(255,255,255,0.2);
+					color: #c0c8e0;
+					background: rgba(255,255,255,0.04);
+				}
+
+				.ts-btn-primary {
+					background: #2563eb;
+					border-color: transparent;
+					color: #fff;
+				}
+
+				.ts-btn-primary:hover {
+					background: #3b82f6;
+					box-shadow: 0 4px 16px rgba(37,99,235,0.35);
+				}
+
+				.ts-btn-success {
+					background: rgba(16,185,129,0.15);
+					border-color: rgba(16,185,129,0.3);
+					color: #10b981;
+				}
+				.ts-btn-success:hover {
+					background: rgba(16,185,129,0.25);
+				}
+
+				.ts-btn-danger {
+					background: rgba(239,68,68,0.1);
+					border-color: rgba(239,68,68,0.25);
+					color: #f87171;
+				}
+				.ts-btn-danger:hover {
+					background: rgba(239,68,68,0.2);
+				}
+
+				/* Fields Grid */
+				.ts-fields-grid {
+					display: grid;
+					grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+					gap: 10px;
+				}
+
+				.ts-field-card {
+					background: #181c28;
+					border: 1px solid rgba(255,255,255,0.06);
+					border-radius: 10px;
+					padding: 14px 16px;
+					display: flex;
+					align-items: center;
+					gap: 14px;
+					transition: all 0.18s;
+					cursor: pointer;
+					position: relative;
+					overflow: hidden;
+				}
+
+				.ts-field-card::before {
+					content: '';
+					position: absolute;
+					left: 0; top: 0; bottom: 0;
+					width: 3px;
+					border-radius: 3px 0 0 3px;
+					background: transparent;
+					transition: background 0.18s;
+				}
+
+				.ts-field-card:hover {
+					border-color: rgba(99,179,237,0.2);
+					background: #1e2234;
+					transform: translateY(-1px);
+					box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+				}
+
+				.ts-field-card.shown::before { background: #10b981; }
+				.ts-field-card.hidden-field::before { background: #ef4444; }
+				.ts-field-card.mandatory::before { background: #f59e0b; }
+
+				.ts-field-toggle {
+					position: relative;
+					width: 36px;
+					height: 20px;
+					flex-shrink: 0;
+				}
+
+				.ts-field-toggle input {
+					opacity: 0;
+					width: 0; height: 0;
+					position: absolute;
+				}
+
+				.ts-toggle-track {
+					position: absolute;
+					inset: 0;
+					background: rgba(239,68,68,0.25);
+					border-radius: 20px;
+					transition: background 0.2s;
+					cursor: pointer;
+				}
+
+				.ts-toggle-track::after {
+					content: '';
+					position: absolute;
+					width: 14px; height: 14px;
+					background: #ef4444;
+					border-radius: 50%;
+					top: 3px; left: 3px;
+					transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+				}
+
+				.ts-field-toggle input:checked + .ts-toggle-track {
+					background: rgba(16,185,129,0.3);
+				}
+
+				.ts-field-toggle input:checked + .ts-toggle-track::after {
+					left: 19px;
+					background: #10b981;
+				}
+
+				.ts-field-info {
+					flex: 1;
+					min-width: 0;
+				}
+
+				.ts-field-name {
+					font-size: 13px;
+					font-weight: 500;
+					color: #d0d8f0;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					margin-bottom: 2px;
+				}
+
+				.ts-field-meta {
+					display: flex;
+					gap: 6px;
+					flex-wrap: wrap;
+				}
+
+				.ts-badge {
+					font-size: 10px;
+					padding: 1px 7px;
+					border-radius: 4px;
+					font-weight: 500;
+					letter-spacing: 0.04em;
+				}
+
+				.ts-badge-type {
+					background: rgba(99,179,237,0.1);
+					color: #93c5fd;
+					border: 1px solid rgba(99,179,237,0.15);
+				}
+
+				.ts-badge-reqd {
+					background: rgba(245,158,11,0.1);
+					color: #fbbf24;
+					border: 1px solid rgba(245,158,11,0.2);
+				}
+
+				.ts-badge-tab {
+					background: rgba(167,139,250,0.1);
+					color: #c4b5fd;
+					border: 1px solid rgba(167,139,250,0.15);
+				}
+
+				/* Mandatory select */
+				.ts-field-mandatory {
+					flex-shrink: 0;
+				}
+
+				.ts-mandatory-btn {
+					width: 28px; height: 28px;
+					border-radius: 6px;
+					border: 1px solid rgba(255,255,255,0.08);
+					background: transparent;
+					color: #4a5270;
+					cursor: pointer;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					transition: all 0.18s;
+					font-size: 14px;
+				}
+
+				.ts-mandatory-btn:hover, .ts-mandatory-btn.active {
+					border-color: rgba(245,158,11,0.4);
+					background: rgba(245,158,11,0.1);
+					color: #fbbf24;
+				}
+
+				/* Stats Bar */
+				.ts-stats {
+					display: flex;
+					gap: 20px;
+					margin-bottom: 24px;
+					padding: 16px 20px;
+					background: #181c28;
+					border-radius: 10px;
+					border: 1px solid rgba(255,255,255,0.06);
+				}
+
+				.ts-stat {
+					text-align: center;
+				}
+
+				.ts-stat-num {
+					font-family: 'Syne', sans-serif;
+					font-size: 22px;
+					font-weight: 800;
+					line-height: 1;
+					margin-bottom: 3px;
+				}
+
+				.ts-stat-num.green { color: #10b981; }
+				.ts-stat-num.red { color: #ef4444; }
+				.ts-stat-num.yellow { color: #f59e0b; }
+				.ts-stat-num.blue { color: #63b3ed; }
+
+				.ts-stat-label {
+					font-size: 10px;
+					color: #4a5270;
+					text-transform: uppercase;
+					letter-spacing: 0.08em;
+					font-weight: 500;
+				}
+
+				.ts-stat-divider {
+					width: 1px;
+					background: rgba(255,255,255,0.06);
+					margin: 0 4px;
+				}
+
+				/* Save bar */
+				.ts-save-bar {
+					position: sticky;
+					bottom: 0;
+					background: #0d0f14;
+					border-top: 1px solid rgba(255,255,255,0.06);
+					padding: 16px 48px;
+					display: flex;
+					align-items: center;
+					gap: 14px;
+					margin: 32px -48px -32px;
+					backdrop-filter: blur(10px);
+				}
+
+				.ts-save-info {
+					flex: 1;
+					font-size: 13px;
+					color: #7a8299;
+				}
+
+				.ts-save-info strong {
+					color: #c0c8e0;
+				}
+
+				/* Empty state */
+				.ts-empty {
+					text-align: center;
+					padding: 60px 20px;
+					color: #4a5270;
+				}
+
+				.ts-empty-icon {
+					font-size: 48px;
+					margin-bottom: 16px;
+				}
+
+				.ts-empty-title {
+					font-family: 'Syne', sans-serif;
+					font-size: 18px;
+					color: #7a8299;
+					margin-bottom: 8px;
+				}
+
+				.ts-empty-sub {
+					font-size: 13px;
+				}
+
+				/* Notification toast */
+				.ts-toast {
+					position: fixed;
+					bottom: 80px;
+					right: 32px;
+					background: #1e2234;
+					border: 1px solid rgba(16,185,129,0.3);
+					border-radius: 10px;
+					padding: 14px 20px;
+					color: #10b981;
+					font-size: 13px;
+					font-weight: 500;
+					z-index: 9999;
+					transform: translateY(20px);
+					opacity: 0;
+					transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+					pointer-events: none;
+					display: flex;
+					align-items: center;
+					gap: 10px;
+					box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+				}
+
+				.ts-toast.show {
+					opacity: 1;
+					transform: translateY(0);
+				}
+
+				/* Filter chips */
+				.ts-filter-chips {
+					display: flex;
+					gap: 6px;
+					flex-wrap: wrap;
+					margin-left: auto;
+				}
+
+				.ts-chip {
+					padding: 5px 12px;
+					border-radius: 20px;
+					font-size: 11px;
+					font-weight: 500;
+					cursor: pointer;
+					border: 1px solid rgba(255,255,255,0.08);
+					color: #7a8299;
+					background: transparent;
+					transition: all 0.18s;
+					letter-spacing: 0.04em;
+				}
+
+				.ts-chip:hover { border-color: rgba(255,255,255,0.2); color: #c0c8e0; }
+				.ts-chip.active-all { border-color: rgba(99,179,237,0.4); color: #63b3ed; background: rgba(99,179,237,0.08); }
+				.ts-chip.active-shown { border-color: rgba(16,185,129,0.4); color: #10b981; background: rgba(16,185,129,0.08); }
+				.ts-chip.active-hidden { border-color: rgba(239,68,68,0.4); color: #f87171; background: rgba(239,68,68,0.08); }
+				.ts-chip.active-mandatory { border-color: rgba(245,158,11,0.4); color: #fbbf24; background: rgba(245,158,11,0.08); }
+			`;
+			document.head.appendChild(style);
+		}
+
+		// ── Field definitions from Trip DocType ──────────────────────────────
+		const TRIP_FIELDS = [
+			// Trip Info tab
+			{ fieldname: "so_no",                label: "SO No",                        fieldtype: "Data",     tab: "Trip Info",          reqd: false },
+			{ fieldname: "tcntrip_date",          label: "TCN/Trip Date",                fieldtype: "Date",     tab: "Trip Info",          reqd: true  },
+			{ fieldname: "trip_type",             label: "Trip Type",                    fieldtype: "Link",     tab: "Trip Info",          reqd: true  },
+			{ fieldname: "business_format",       label: "Business Format",              fieldtype: "Link",     tab: "Trip Info",          reqd: false },
+			{ fieldname: "business_sub_format",   label: "Business Sub Format",          fieldtype: "Link",     tab: "Trip Info",          reqd: false },
+			{ fieldname: "branch",                label: "Branch",                       fieldtype: "Link",     tab: "Trip Info",          reqd: true  },
+			{ fieldname: "trip_coordinator",      label: "Trip Coordinator",             fieldtype: "Link",     tab: "Trip Info",          reqd: false },
+			{ fieldname: "indent_date",           label: "Indent Date",                  fieldtype: "Date",     tab: "Trip Info",          reqd: false },
+			{ fieldname: "indent_no",             label: "Indent No",                    fieldtype: "Data",     tab: "Trip Info",          reqd: false },
+			{ fieldname: "tcntrip_no",            label: "TCN/Trip No",                  fieldtype: "Data",     tab: "Trip Info",          reqd: false },
+			{ fieldname: "vehicle_type",          label: "Vehicle Type",                 fieldtype: "Link",     tab: "Trip Info",          reqd: false },
+			{ fieldname: "origin_city",           label: "Origin City",                  fieldtype: "Link",     tab: "Trip Info",          reqd: true  },
+			{ fieldname: "origin_city_2",         label: "Origin City 2",                fieldtype: "Link",     tab: "Trip Info",          reqd: false },
+			{ fieldname: "destination_city_1",    label: "Destination City 1",           fieldtype: "Link",     tab: "Trip Info",          reqd: true  },
+			{ fieldname: "destination_city_2",    label: "Destination City 2",           fieldtype: "Link",     tab: "Trip Info",          reqd: false },
+			{ fieldname: "origin_address_1",      label: "Origin Address 1",             fieldtype: "Link",     tab: "Trip Info",          reqd: false },
+			{ fieldname: "origin_address_2",      label: "Origin Address 2",             fieldtype: "Link",     tab: "Trip Info",          reqd: false },
+			{ fieldname: "origin_state",          label: "Origin State",                 fieldtype: "Data",     tab: "Trip Info",          reqd: false },
+			{ fieldname: "destination_address_1", label: "Destination Address 1",        fieldtype: "Link",     tab: "Trip Info",          reqd: false },
+			{ fieldname: "destination_address_2", label: "Destination Address 2",        fieldtype: "Link",     tab: "Trip Info",          reqd: false },
+			{ fieldname: "destination_state",     label: "Destination State",            fieldtype: "Data",     tab: "Trip Info",          reqd: false },
+			{ fieldname: "billing_start_date",    label: "Billing Start Date",           fieldtype: "Date",     tab: "Trip Info",          reqd: false },
+			{ fieldname: "billing_end_date",      label: "Billing End Date",             fieldtype: "Date",     tab: "Trip Info",          reqd: false },
+			{ fieldname: "customer",              label: "Customer",                     fieldtype: "Link",     tab: "Trip Info",          reqd: true  },
+			{ fieldname: "customer_freight",      label: "Customer Freight",             fieldtype: "Currency", tab: "Trip Info",          reqd: false },
+
+			// Loading & Unloading tab
+			{ fieldname: "vendor",                        label: "Vendor",                            fieldtype: "Link",     tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "vehicle_no",                    label: "Vehicle No",                        fieldtype: "Link",     tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "driver",                        label: "Driver",                            fieldtype: "Link",     tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "driver_mobile",                 label: "Driver Mobile",                     fieldtype: "Data",     tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "lr_no",                         label: "LR No",                             fieldtype: "Data",     tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "lr_date",                       label: "LR Date",                           fieldtype: "Date",     tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "packages",                      label: "Packages",                          fieldtype: "Int",      tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "eway_bill_no",                  label: "Eway Bill No",                      fieldtype: "Data",     tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "customer_invoice_no",           label: "Customer Invoice No",               fieldtype: "Data",     tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "seal_no",                       label: "Seal No",                           fieldtype: "Data",     tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "reach_date_time",               label: "Reach Date Time",                   fieldtype: "Datetime", tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "dispatch_date_time",            label: "Dispatch Date Time",                fieldtype: "Datetime", tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "loading_detention_days",        label: "Loading Detention Days",            fieldtype: "Int",      tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "loading_detention_rate_per_day",label: "Loading Detention Rate/Day",        fieldtype: "Currency", tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "loading_site_detention_amount", label: "Loading Site Detention Amount",      fieldtype: "Currency", tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "loading_charge",                label: "Loading Charge",                    fieldtype: "Currency", tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "truck_return_without_loading",  label: "Truck Return Without Loading",      fieldtype: "Select",   tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "distance_loadingunloading_site",label: "Distance Loading/Unloading Site",   fieldtype: "Float",    tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "journey_time",                  label: "Journey Time",                      fieldtype: "Data",     tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "journey_time_400_kmsday",       label: "Journey Time @400 Kms/Day",         fieldtype: "Data",     tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "arrival_date_time",             label: "Arrival Date Time",                 fieldtype: "Datetime", tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "release_date_time",             label: "Release Date Time",                 fieldtype: "Datetime", tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "unloading_detention_days",      label: "Unloading Detention Days",          fieldtype: "Int",      tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "unloading_detention_rate_per_day",label:"Unloading Detention Rate/Day",     fieldtype: "Currency", tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "unloading_site_detention_amount",label:"Unloading Site Detention Amount",   fieldtype: "Currency", tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "total_detention_days",          label: "Total Detention Days",              fieldtype: "Int",      tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "total_detention_amount",        label: "Total Detention Amount",            fieldtype: "Currency", tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "unloading_charge",              label: "Unloading Charge",                  fieldtype: "Currency", tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "total_loading_unloading_charge",label: "Loading/Unloading Total",           fieldtype: "Currency", tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "weighment_charges",             label: "Weighment Charges",                 fieldtype: "Currency", tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "extra_expenses",                label: "Extra Expenses",                    fieldtype: "Currency", tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "total_additional_charges",      label: "Total Additional Charges",          fieldtype: "Currency", tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "packages_found_short",          label: "Packages Found Short",              fieldtype: "Int",      tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "packages_found_excess",         label: "Packages Found Excess",             fieldtype: "Int",      tab: "Loading & Unloading", reqd: false },
+			{ fieldname: "packages_found_damage",         label: "Packages Found Damage",             fieldtype: "Int",      tab: "Loading & Unloading", reqd: false },
+
+			// KM & Vendor tab
+			{ fieldname: "start_km",              label: "Start Km",              fieldtype: "Int",      tab: "KM & Vendor", reqd: false },
+			{ fieldname: "end_km",                label: "End Km",                fieldtype: "Int",      tab: "KM & Vendor", reqd: false },
+			{ fieldname: "total_km",              label: "Total Km",              fieldtype: "Int",      tab: "KM & Vendor", reqd: false },
+			{ fieldname: "standard_km",           label: "Standard KM",           fieldtype: "Data",     tab: "KM & Vendor", reqd: false },
+			{ fieldname: "variation",             label: "Variation",             fieldtype: "Float",    tab: "KM & Vendor", reqd: false },
+			{ fieldname: "vendor_freight",        label: "Vendor Freight",        fieldtype: "Currency", tab: "KM & Vendor", reqd: false },
+			{ fieldname: "vendor_freight_extra",  label: "Vendor Freight (Extra)","fieldtype": "Currency", tab: "KM & Vendor", reqd: false },
+			{ fieldname: "total_vendor_freight",  label: "Total Vendor Freight",  fieldtype: "Currency", tab: "KM & Vendor", reqd: false },
+			{ fieldname: "vendor_tds_to_be_deducted", label: "Vendor TDS To Be Deducted", fieldtype: "Currency", tab: "KM & Vendor", reqd: false },
+
+			// POD & Approval tab
+			{ fieldname: "date_pod_uploaded_on_erp",       label: "Date POD Uploaded On ERP",        fieldtype: "Date",     tab: "POD & Approval", reqd: false },
+			{ fieldname: "uploaded_pod_originalduplicate", label: "Uploaded POD Original/Duplicate",  fieldtype: "Select",   tab: "POD & Approval", reqd: false },
+			{ fieldname: "pod_status",                     label: "POD Status",                       fieldtype: "Select",   tab: "POD & Approval", reqd: false },
+			{ fieldname: "date_pod_sent_to_customer",      label: "Date POD Sent to Customer",        fieldtype: "Date",     tab: "POD & Approval", reqd: false },
+			{ fieldname: "courier_name",                   label: "Courier Name",                     fieldtype: "Data",     tab: "POD & Approval", reqd: false },
+			{ fieldname: "awb_no_for_dispatch",            label: "AWB No for Dispatch",              fieldtype: "Data",     tab: "POD & Approval", reqd: false },
+			{ fieldname: "indemnity_bond_serial_no",       label: "Indemnity Bond Serial No",         fieldtype: "Data",     tab: "POD & Approval", reqd: false },
+			{ fieldname: "indemnity_bond_date",            label: "Indemnity Bond Date",              fieldtype: "Date",     tab: "POD & Approval", reqd: false },
+			{ fieldname: "date_approval_additional_charge",label: "Date Approval Additional Charge",  fieldtype: "Date",     tab: "POD & Approval", reqd: false },
+			{ fieldname: "approved_origin_detention",      label: "Approved Origin Detention",        fieldtype: "Currency", tab: "POD & Approval", reqd: false },
+			{ fieldname: "approved_destination_detention", label: "Approved Destination Detention",   fieldtype: "Currency", tab: "POD & Approval", reqd: false },
+			{ fieldname: "approved_detention_charge",      label: "Approved Detention Charge",        fieldtype: "Currency", tab: "POD & Approval", reqd: false },
+			{ fieldname: "approved_loading_charge",        label: "Approved Loading Charge",          fieldtype: "Currency", tab: "POD & Approval", reqd: false },
+			{ fieldname: "approved_unloading_charge",      label: "Approved Unloading Charge",        fieldtype: "Currency", tab: "POD & Approval", reqd: false },
+			{ fieldname: "approved_loadingunloading_charge",label:"Approved Loading/Unloading Charge",fieldtype: "Currency", tab: "POD & Approval", reqd: false },
+			{ fieldname: "approved_weighment_charge",      label: "Approved Weighment Charge",        fieldtype: "Currency", tab: "POD & Approval", reqd: false },
+			{ fieldname: "approved_extra_expenses",        label: "Approved Extra Expenses",          fieldtype: "Currency", tab: "POD & Approval", reqd: false },
+			{ fieldname: "brokerage_amount",               label: "Brokerage Amount",                 fieldtype: "Currency", tab: "POD & Approval", reqd: false },
+			{ fieldname: "lr_money",                       label: "Broker LR Money",                  fieldtype: "Currency", tab: "POD & Approval", reqd: false },
+			{ fieldname: "tds_deducted_by_customer",       label: "TDS Deducted By Customer",         fieldtype: "Currency", tab: "POD & Approval", reqd: false },
+			{ fieldname: "total_approved_addl_amount",     label: "Net Approved Additional Amount",   fieldtype: "Currency", tab: "POD & Approval", reqd: false },
+			{ fieldname: "difference_claimedapproved",     label: "Excess Claimed Over Approved",     fieldtype: "Currency", tab: "POD & Approval", reqd: false },
+			{ fieldname: "total_trip_amount",              label: "Total Trip Amount",                fieldtype: "Currency", tab: "POD & Approval", reqd: false },
+
+			// Billing & Payment tab
+			{ fieldname: "trip_total_amount_billed",   label: "Trip Total Amount Billed",   fieldtype: "Currency", tab: "Billing & Payment", reqd: false },
+			{ fieldname: "bill_nodate",                label: "Bill No/Date",               fieldtype: "Data",     tab: "Billing & Payment", reqd: false },
+			{ fieldname: "date_bill_credited",         label: "Date Bill Credited",          fieldtype: "Date",     tab: "Billing & Payment", reqd: false },
+			{ fieldname: "payment_advice_no",          label: "Payment Advice No",           fieldtype: "Data",     tab: "Billing & Payment", reqd: false },
+			{ fieldname: "payment_advice_date",        label: "Payment Advice Date",         fieldtype: "Date",     tab: "Billing & Payment", reqd: false },
+			{ fieldname: "utr_no",                     label: "UTR No",                     fieldtype: "Data",     tab: "Billing & Payment", reqd: false },
+			{ fieldname: "trip_status",                label: "Trip Status",                fieldtype: "Select",   tab: "Billing & Payment", reqd: false },
+			{ fieldname: "amount_to_be_paid_to_vendor",label: "Amount to be Paid to Vendor",fieldtype: "Currency", tab: "Billing & Payment", reqd: false },
+			{ fieldname: "vendor_payment_date_1",      label: "Vendor Payment Date 1",       fieldtype: "Date",     tab: "Billing & Payment", reqd: false },
+			{ fieldname: "vendor_payment_amount_1",    label: "Vendor Payment Amount 1",     fieldtype: "Currency", tab: "Billing & Payment", reqd: false },
+			{ fieldname: "vendor_payment_reference_1", label: "Vendor Payment Reference 1",  fieldtype: "Data",     tab: "Billing & Payment", reqd: false },
+			{ fieldname: "employee_lr_money",          label: "Employee LR Money",           fieldtype: "Currency", tab: "Billing & Payment", reqd: false },
+			{ fieldname: "remarks",                    label: "Remarks",                    fieldtype: "Small Text",tab: "Billing & Payment", reqd: false },
+		];
+
+		const TABS = ["Trip Info", "Loading & Unloading", "KM & Vendor", "POD & Approval", "Billing & Payment"];
+
+		// ── State ─────────────────────────────────────────────────────────────
+		let currentTripType = null;
+		let tripTypes = [];
+		let fieldState = {};      // { fieldname: { hidden: bool, reqd: bool } }
+		let activeTab = TABS[0];
+		let filterMode = "all";   // all | shown | hidden | mandatory
+		let searchQuery = "";
+		let isDirty = false;
+
+		// ── Build root DOM ────────────────────────────────────────────────────
+		const $wrapper = frm.fields_dict.trip_type.$wrapper.closest(".frappe-card, .page-content, .main-section") ||
+			frm.layout.wrapper;
+
+		// Find form body and replace
+		const $formBody = $(frm.layout.wrapper).find(".form-layout").first();
+
+		const $root = $(`<div class="trip-settings-root"></div>`);
+
+		$root.html(`
+			<div class="ts-hero">
+				<div class="ts-hero-label">LogiCore</div>
+				<div class="ts-hero-title">Trip Field Configurator</div>
+				<div class="ts-hero-sub">Control which fields appear on the Trip form based on Trip Type</div>
+			</div>
+			<div class="ts-body">
+				<div class="ts-selector-wrap">
+					<div class="ts-selector-label">Select Trip Type</div>
+					<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+						<div class="ts-selector">
+							<select id="ts-trip-type-select">
+								<option value="">— Choose a Trip Type —</option>
+							</select>
+							<span class="ts-selector-icon">▾</span>
+						</div>
+						<span class="ts-selector-badge" id="ts-type-badge" style="display:none"></span>
+					</div>
+				</div>
+
+				<div class="ts-config-panel" id="ts-config-panel">
+					<div class="ts-stats" id="ts-stats"></div>
+
+					<div class="ts-tabs" id="ts-tabs"></div>
+
+					<div class="ts-toolbar">
+						<div class="ts-search">
+							<span class="ts-search-icon">⌕</span>
+							<input type="text" id="ts-search" placeholder="Search fields…">
+						</div>
+						<div class="ts-filter-chips" id="ts-filter-chips">
+							<button class="ts-chip active-all" data-filter="all">All</button>
+							<button class="ts-chip" data-filter="shown">Shown</button>
+							<button class="ts-chip" data-filter="hidden">Hidden</button>
+							<button class="ts-chip" data-filter="mandatory">Mandatory</button>
+						</div>
+						<button class="ts-btn ts-btn-ghost" id="ts-show-all">Show All</button>
+						<button class="ts-btn ts-btn-ghost" id="ts-hide-all">Hide All</button>
+					</div>
+
+					<div class="ts-fields-grid" id="ts-fields-grid"></div>
+
+					<div class="ts-save-bar">
+						<div class="ts-save-info" id="ts-save-info">Configure fields above to define what's visible for this trip type</div>
+						<button class="ts-btn ts-btn-ghost" id="ts-reset-btn">↺ Reset</button>
+						<button class="ts-btn ts-btn-primary" id="ts-save-btn">Save Configuration</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="ts-toast" id="ts-toast">
+				<span>✓</span>
+				<span id="ts-toast-msg">Configuration saved!</span>
+			</div>
+		`);
+
+		// Replace form content
+		$formBody.empty().append($root);
+
+		// ── Fetch trip types ──────────────────────────────────────────────────
+		frappe.call({
+			method: "frappe.client.get_list",
+			args: { doctype: "Trip Type", fields: ["name"], limit: 100 },
+			callback(r) {
+				tripTypes = (r.message || []).map(t => t.name);
+				const $sel = $root.find("#ts-trip-type-select");
+				tripTypes.forEach(tt => {
+					$sel.append(`<option value="${tt}">${tt}</option>`);
+				});
+			}
+		});
+
+		// ── Helpers ───────────────────────────────────────────────────────────
+		function getDefaultState() {
+			const state = {};
+			TRIP_FIELDS.forEach(f => {
+				state[f.fieldname] = { hidden: false, reqd: f.reqd };
+			});
+			return state;
+		}
+
+		function loadConfig(tripType) {
+			const key = `trip_settings_${tripType}`;
+			try {
+				const saved = localStorage.getItem(key);
+				if (saved) return JSON.parse(saved);
+			} catch(e) {}
+			return getDefaultState();
+		}
+
+		function saveConfig(tripType) {
+			const key = `trip_settings_${tripType}`;
+			localStorage.setItem(key, JSON.stringify(fieldState));
+
+			// Also save to Frappe (custom doc or single doctype approach)
+			// Storing as JSON in a custom field or using a child table can be done here
+			// For now, we also try to save via frappe.call to a server script
+			frappe.call({
+				method: "frappe.client.set_value",
+				args: {
+					doctype: "Trip Settings",
+					name: tripType,
+					fieldname: "trip_type",  // ensure doc exists
+					value: tripType
+				},
+				callback() {}
+			}).catch(() => {});
+		}
+
+		function showToast(msg, type = "success") {
+			const $t = $root.find("#ts-toast");
+			$root.find("#ts-toast-msg").text(msg);
+			$t.css("border-color", type === "success" ? "rgba(16,185,129,0.3)" : "rgba(99,179,237,0.3)");
+			$t.css("color", type === "success" ? "#10b981" : "#63b3ed");
+			$t.addClass("show");
+			setTimeout(() => $t.removeClass("show"), 2500);
+		}
+
+		function countStats() {
+			const all = TRIP_FIELDS.length;
+			const hidden = Object.values(fieldState).filter(s => s.hidden).length;
+			const shown = all - hidden;
+			const mandatory = Object.values(fieldState).filter(s => s.reqd).length;
+			return { all, shown, hidden, mandatory };
+		}
+
+		function renderStats() {
+			const s = countStats();
+			$root.find("#ts-stats").html(`
+				<div class="ts-stat"><div class="ts-stat-num blue">${s.all}</div><div class="ts-stat-label">Total Fields</div></div>
+				<div class="ts-stat-divider"></div>
+				<div class="ts-stat"><div class="ts-stat-num green">${s.shown}</div><div class="ts-stat-label">Shown</div></div>
+				<div class="ts-stat-divider"></div>
+				<div class="ts-stat"><div class="ts-stat-num red">${s.hidden}</div><div class="ts-stat-label">Hidden</div></div>
+				<div class="ts-stat-divider"></div>
+				<div class="ts-stat"><div class="ts-stat-num yellow">${s.mandatory}</div><div class="ts-stat-label">Mandatory</div></div>
+			`);
+		}
+
+		function renderTabs() {
+			const $tabs = $root.find("#ts-tabs");
+			$tabs.empty();
+			TABS.forEach(tab => {
+				const count = TRIP_FIELDS.filter(f => f.tab === tab).length;
+				const hiddenCount = TRIP_FIELDS.filter(f => f.tab === tab && fieldState[f.fieldname]?.hidden).length;
+				const $tab = $(`<div class="ts-tab${tab === activeTab ? ' active' : ''}" data-tab="${tab}">
+					${tab} <span class="ts-tab-badge">${count - hiddenCount}/${count}</span>
+				</div>`);
+				$tab.on("click", () => {
+					activeTab = tab;
+					renderTabs();
+					renderFields();
+				});
+				$tabs.append($tab);
+			});
+		}
+
+		function getFieldTypeColor(ft) {
+			const map = {
+				"Currency": "#10b981", "Date": "#63b3ed", "Datetime": "#818cf8",
+				"Link": "#a78bfa", "Data": "#94a3b8", "Int": "#fb923c",
+				"Float": "#f97316", "Select": "#e879f9", "Small Text": "#6ee7b7"
+			};
+			return map[ft] || "#94a3b8";
+		}
+
+		function renderFields() {
+			const $grid = $root.find("#ts-fields-grid");
+			$grid.empty();
+
+			let fields = TRIP_FIELDS.filter(f => f.tab === activeTab);
+
+			// Apply search
+			if (searchQuery) {
+				fields = fields.filter(f => f.label.toLowerCase().includes(searchQuery) || f.fieldname.includes(searchQuery));
+			}
+
+			// Apply filter
+			if (filterMode === "shown")    fields = fields.filter(f => !fieldState[f.fieldname]?.hidden);
+			if (filterMode === "hidden")   fields = fields.filter(f =>  fieldState[f.fieldname]?.hidden);
+			if (filterMode === "mandatory") fields = fields.filter(f => fieldState[f.fieldname]?.reqd);
+
+			if (!fields.length) {
+				$grid.html(`<div class="ts-empty" style="grid-column:1/-1">
+					<div class="ts-empty-icon">◎</div>
+					<div class="ts-empty-title">No fields match</div>
+					<div class="ts-empty-sub">Try adjusting your search or filter</div>
+				</div>`);
+				return;
+			}
+
+			fields.forEach(f => {
+				const state = fieldState[f.fieldname] || { hidden: false, reqd: f.reqd };
+				const isHidden = state.hidden;
+				const isMandatory = state.reqd;
+				const cardClass = isMandatory ? "mandatory" : (isHidden ? "hidden-field" : "shown");
+
+				const $card = $(`
+					<div class="ts-field-card ${cardClass}" data-field="${f.fieldname}">
+						<label class="ts-field-toggle">
+							<input type="checkbox" ${!isHidden ? 'checked' : ''} data-field="${f.fieldname}">
+							<span class="ts-toggle-track"></span>
+						</label>
+						<div class="ts-field-info">
+							<div class="ts-field-name" title="${f.fieldname}">${f.label}</div>
+							<div class="ts-field-meta">
+								<span class="ts-badge ts-badge-type">${f.fieldtype}</span>
+								${f.reqd || isMandatory ? '<span class="ts-badge ts-badge-reqd">Required</span>' : ''}
+							</div>
+						</div>
+						<div class="ts-field-mandatory">
+							<button class="ts-mandatory-btn ${isMandatory ? 'active' : ''}" data-field="${f.fieldname}" title="Toggle Mandatory">★</button>
+						</div>
+					</div>
+				`);
+
+				// Toggle visibility
+				$card.find("input[type=checkbox]").on("change", function() {
+					const fn = $(this).data("field");
+					fieldState[fn].hidden = !this.checked;
+					isDirty = true;
+					updateSaveInfo();
+					renderStats();
+					renderTabs();
+					const $c = $card;
+					$c.removeClass("shown hidden-field mandatory");
+					$c.addClass(fieldState[fn].hidden ? "hidden-field" : (fieldState[fn].reqd ? "mandatory" : "shown"));
+					if (filterMode !== "all") renderFields();
+				});
+
+				// Toggle mandatory
+				$card.find(".ts-mandatory-btn").on("click", function(e) {
+					e.stopPropagation();
+					const fn = $(this).data("field");
+					fieldState[fn].reqd = !fieldState[fn].reqd;
+					isDirty = true;
+					$(this).toggleClass("active");
+					// Update badge in card
+					const $meta = $card.find(".ts-field-meta");
+					if (fieldState[fn].reqd) {
+						if (!$meta.find(".ts-badge-reqd").length) {
+							$meta.append('<span class="ts-badge ts-badge-reqd">Required</span>');
+						}
+						$card.removeClass("shown hidden-field").addClass("mandatory");
+					} else {
+						$meta.find(".ts-badge-reqd").remove();
+						$card.removeClass("mandatory").addClass(fieldState[fn].hidden ? "hidden-field" : "shown");
+					}
+					updateSaveInfo();
+					renderStats();
+					renderTabs();
+				});
+
+				$grid.append($card);
+			});
+		}
+
+		function updateSaveInfo() {
+			if (!isDirty) {
+				$root.find("#ts-save-info").text("Configure fields above to define what's visible for this trip type");
+			} else {
+				const s = countStats();
+				$root.find("#ts-save-info").html(`<strong>${s.shown} fields shown</strong>, ${s.hidden} hidden, ${s.mandatory} mandatory — unsaved changes`);
+			}
+		}
+
+		// ── Trip type change ──────────────────────────────────────────────────
+		$root.find("#ts-trip-type-select").on("change", function() {
+			currentTripType = this.value;
+			if (!currentTripType) {
+				$root.find("#ts-config-panel").removeClass("visible");
+				$root.find("#ts-type-badge").hide();
+				return;
+			}
+
+			fieldState = loadConfig(currentTripType);
+			isDirty = false;
+			activeTab = TABS[0];
+			filterMode = "all";
+			searchQuery = "";
+			$root.find("#ts-search").val("");
+
+			$root.find("#ts-type-badge").text(currentTripType).show();
+			$root.find("#ts-config-panel").addClass("visible");
+
+			// Update filter chips
+			$root.find(".ts-chip").removeClass("active-all active-shown active-hidden active-mandatory");
+			$root.find(".ts-chip[data-filter='all']").addClass("active-all");
+
+			renderStats();
+			renderTabs();
+			renderFields();
+			updateSaveInfo();
+		});
+
+		// ── Search ────────────────────────────────────────────────────────────
+		$root.find("#ts-search").on("input", function() {
+			searchQuery = this.value.toLowerCase().trim();
+			renderFields();
+		});
+
+		// ── Filter chips ──────────────────────────────────────────────────────
+		$root.find("#ts-filter-chips").on("click", ".ts-chip", function() {
+			filterMode = $(this).data("filter");
+			$root.find(".ts-chip").removeClass("active-all active-shown active-hidden active-mandatory");
+			$(this).addClass(`active-${filterMode}`);
+			renderFields();
+		});
+
+		// ── Show All / Hide All ───────────────────────────────────────────────
+		$root.find("#ts-show-all").on("click", () => {
+			TRIP_FIELDS.filter(f => f.tab === activeTab).forEach(f => { fieldState[f.fieldname].hidden = false; });
+			isDirty = true;
+			renderStats(); renderTabs(); renderFields(); updateSaveInfo();
+		});
+
+		$root.find("#ts-hide-all").on("click", () => {
+			TRIP_FIELDS.filter(f => f.tab === activeTab).forEach(f => { fieldState[f.fieldname].hidden = true; });
+			isDirty = true;
+			renderStats(); renderTabs(); renderFields(); updateSaveInfo();
+		});
+
+		// ── Reset ─────────────────────────────────────────────────────────────
+		$root.find("#ts-reset-btn").on("click", () => {
+			if (!currentTripType) return;
+			frappe.confirm("Reset to default field visibility for this trip type?", () => {
+				fieldState = getDefaultState();
+				isDirty = false;
+				renderStats(); renderTabs(); renderFields(); updateSaveInfo();
+				showToast("Reset to defaults", "info");
+			});
+		});
+
+		// ── Save ──────────────────────────────────────────────────────────────
+		$root.find("#ts-save-btn").on("click", () => {
+			if (!currentTripType) {
+				frappe.msgprint("Please select a Trip Type first.");
+				return;
+			}
+			saveConfig(currentTripType);
+			isDirty = false;
+			updateSaveInfo();
+			showToast("Configuration saved for " + currentTripType);
+		});
+	},
+});

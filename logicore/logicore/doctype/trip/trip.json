@@ -1,0 +1,1696 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "custom",
+ "creation": "2026-03-03 17:07:27.728681",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "tab_trip_info",
+  "section_break_cdly",
+  "column_break_ohje",
+  "so_no",
+  "column_break_bnhz",
+  "company",
+  "column_break_jktr",
+  "tcntrip_date",
+  "column_break_pkkd",
+  "trip_type",
+  "column_break_ewby",
+  "business_format",
+  "column_break_efmw",
+  "business_sub_format",
+  "section_break_kxiv",
+  "branch",
+  "column_break_qlyf",
+  "indent_date",
+  "column_break_ypon",
+  "indent_no",
+  "column_break_tylz",
+  "tcntrip_no",
+  "column_break_hfyg",
+  "so",
+  "section_break_csrw",
+  "vehicle_type",
+  "column_break_ngkx",
+  "origin_city",
+  "column_break_kzir",
+  "origin_city_2",
+  "column_break_lkin",
+  "destination_city_1",
+  "column_break_zxew",
+  "destination_city_2",
+  "section_break_wnyr",
+  "column_break_frcc",
+  "origin_address_1",
+  "origin_address_1_full",
+  "column_break_nfia",
+  "origin_address_2",
+  "origin_address_2_full",
+  "column_break_rxiz",
+  "origin_state",
+  "section_break_ictb",
+  "column_break_klgm",
+  "destination_address_1",
+  "destination_address_1_full",
+  "column_break_jhmq",
+  "destination_address_2",
+  "destination_address_2_full",
+  "column_break_iaiz",
+  "destination_state",
+  "section_break_enns",
+  "billing_start_date",
+  "column_break_jqnv",
+  "billing_end_date",
+  "column_break_qxsn",
+  "customer",
+  "tab_loading_unloading",
+  "section_break_bnez",
+  "column_break_ayhb",
+  "trip_coordinator",
+  "column_break_ykjl",
+  "lr_no",
+  "column_break_esdb",
+  "lr_date",
+  "column_break_gcbg",
+  "vendor",
+  "column_break_pssf",
+  "vehicle_no",
+  "section_break_vopg",
+  "column_break_qupa",
+  "driver",
+  "column_break_cfdo",
+  "driver_mobile",
+  "column_break_lvxt",
+  "vehicle_market",
+  "column_break_pqvo",
+  "driver_market",
+  "column_break_ozgl",
+  "driver_mobile_market",
+  "section_break_fmok",
+  "column_break_kqjn",
+  "packages",
+  "column_break_njgp",
+  "types_of_good",
+  "column_break_fzog",
+  "eway_bill_no",
+  "column_break_wdoj",
+  "eway_bill_date",
+  "column_break_vuzy",
+  "eway_bill_expiry_date",
+  "section_break_gajr",
+  "column_break_jiae",
+  "customer_invoice_no",
+  "column_break_stxz",
+  "seal_no",
+  "column_break_yzok",
+  "reach_date_time",
+  "column_break_juaz",
+  "dispatch_date_time",
+  "column_break_mvsp",
+  "truck_return_without_loading",
+  "section_break_qqqc",
+  "arrival_date_time",
+  "column_break_yuzx",
+  "release_date_time",
+  "column_break_fgkc",
+  "journey_time",
+  "column_break_kajg",
+  "distance_loadingunloading_site",
+  "column_break_jkdk",
+  "journey_time_400_kmsday",
+  "section_break_xumv",
+  "column_break_wjaa",
+  "packages_found_short",
+  "column_break_rhqx",
+  "packages_found_excess",
+  "column_break_htkc",
+  "packages_found_damage",
+  "tab_6_tab",
+  "section_break_fwyz",
+  "column_break_spuw",
+  "customer_freight",
+  "column_break_uytj",
+  "vendor_freight",
+  "column_break_slkt",
+  "vendor_freight_extra",
+  "column_break_awla",
+  "total_vendor_freight",
+  "column_break_awla2",
+  "vendor_tds_to_be_deducted",
+  "section_break_pyra",
+  "loading_detention_days",
+  "column_break_bcbc",
+  "loading_detention_rate_per_day",
+  "column_break_jfrt",
+  "loading_site_detention_amount",
+  "column_break_hgso",
+  "loading_charge",
+  "column_break_mvsp2",
+  "loading_charge_payment_by",
+  "section_break_qhxu",
+  "unloading_detention_days",
+  "column_break_uphx",
+  "unloading_detention_rate_per_day",
+  "column_break_ywxl",
+  "unloading_site_detention_amount",
+  "column_break_thnx",
+  "total_detention_days",
+  "column_break_xjph",
+  "total_detention_amount",
+  "column_break_hoce",
+  "unloading_charge",
+  "section_break_yuxn",
+  "column_break_ihpz",
+  "unloading_charge_payment_by",
+  "column_break_nixu",
+  "total_loading_unloading_charge",
+  "column_break_qlgl",
+  "weighment_charges",
+  "column_break_gcnx",
+  "extra_expenses",
+  "column_break_sykg",
+  "extra_charges_reason",
+  "column_break_oael",
+  "extra_expense_paid_by",
+  "section_break_hjir",
+  "column_break_iocv",
+  "total_additional_charges",
+  "column_break_ddqa",
+  "employee_lr_money",
+  "column_break_rvie",
+  "company_lr_money",
+  "column_break_ejoi",
+  "approved_origin_detention",
+  "column_break_eayf",
+  "approved_destination_detention",
+  "column_break_vavu",
+  "approved_detention_charge",
+  "section_break_rdjc",
+  "column_break_dgit",
+  "approved_loading_charge",
+  "column_break_uqvn",
+  "approved_unloading_charge",
+  "column_break_pwcp",
+  "approved_loadingunloading_charge",
+  "column_break_mwyz",
+  "approved_weighment_charge",
+  "column_break_txqs",
+  "approved_extra_expenses",
+  "section_break_wlpt",
+  "column_break_synu",
+  "brokerage_amount",
+  "column_break_ftft",
+  "lr_money",
+  "column_break_owko",
+  "tds_deducted_by_customer",
+  "column_break_mehi",
+  "total_approved_addl_amount",
+  "column_break_uqvs",
+  "difference_claimedapproved",
+  "section_break_zlqb",
+  "column_break_hyjn",
+  "total_trip_amount",
+  "trip_total_freight",
+  "column_break_lmjt",
+  "trip_total_amount_billed",
+  "tab_km_vendor",
+  "section_break_afib",
+  "start_km",
+  "column_break_rivj",
+  "end_km",
+  "column_break_hizj",
+  "total_km",
+  "column_break_acri",
+  "standard_km",
+  "column_break_bmyb",
+  "variation",
+  "tab_pod_approval",
+  "section_break_qadp",
+  "date_pod_uploaded_on_erp",
+  "column_break_wrph",
+  "uploaded_pod_originalduplicate",
+  "column_break_drec",
+  "pod_status",
+  "column_break_jjvm",
+  "date_pod_sent_to_customer",
+  "column_break_vbhw",
+  "courier_name",
+  "section_break_rzro",
+  "awb_no_for_dispatch",
+  "column_break_piwb",
+  "indemnity_bond_serial_no",
+  "column_break_febn",
+  "indemnity_bond_date",
+  "tab_billing_payment",
+  "section_break_zlqb2",
+  "column_break_ocua",
+  "bill_nodate",
+  "column_break_tnfl",
+  "bill_date",
+  "column_break_zbjs2",
+  "date_bill_credited",
+  "section_break_vqrx",
+  "payment_advice_no",
+  "column_break_auly",
+  "payment_advice_date",
+  "column_break_wukl",
+  "utr_no",
+  "vendor_payment_tab",
+  "section_break_lbsa",
+  "amount_to_be_paid_to_vendor",
+  "column_break_tckq",
+  "vendor_payment_date_1",
+  "column_break_njbn",
+  "vendor_payment_amount_1",
+  "column_break_mwgh",
+  "vendor_payment_reference_1",
+  "vendor_payment_details_html",
+  "control_tab",
+  "section_break_uhqr",
+  "column_break_vwxt",
+  "trip_status",
+  "bookingid",
+  "column_break_hdll",
+  "trip_no_not_yet_provided",
+  "section_break_meup",
+  "remarks",
+  "column_break_zbjs"
+ ],
+ "fields": [
+  {
+   "fieldname": "tab_trip_info",
+   "fieldtype": "Tab Break",
+   "label": "Trip Creation"
+  },
+  {
+   "fieldname": "section_break_cdly",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "column_break_ohje",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "so_no",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Trip ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_bnhz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "column_break_jktr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tcntrip_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "TCN/Trip Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_pkkd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "trip_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Trip Type",
+   "link_filters": "[[\"Trip Type\",\"applies_to\",\"=\",\"Trip\"]]",
+   "options": "Trip Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ewby",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "business_format",
+   "fieldtype": "Link",
+   "label": "Business Format",
+   "link_filters": "[[\"Business Format\",\"applies_to\",\"=\",\"Trip\"]]",
+   "options": "Business Format"
+  },
+  {
+   "fieldname": "column_break_efmw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "business_sub_format",
+   "fieldtype": "Link",
+   "label": "Business Sub Format",
+   "options": "Business Subformat"
+  },
+  {
+   "fieldname": "section_break_kxiv",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Branch",
+   "options": "Branch",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ayhb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fieldname": "trip_coordinator",
+   "fieldtype": "Link",
+   "label": "Trip Coordinator",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "column_break_qlyf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "indent_date",
+   "fieldtype": "Date",
+   "label": "Indent Date"
+  },
+  {
+   "fieldname": "column_break_ypon",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "indent_no",
+   "fieldtype": "Data",
+   "label": "Indent No",
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_tylz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tcntrip_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tcn/Trip No",
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_hfyg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "so",
+   "fieldtype": "Data",
+   "label": "SO/PO No"
+  },
+  {
+   "fieldname": "section_break_csrw",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "columns": 4,
+   "fieldname": "vehicle_type",
+   "fieldtype": "Link",
+   "label": "Vehicle Type",
+   "link_filters": "[[\"Vehicle Type\",\"applies_to\",\"=\",\"Trip\"]]",
+   "options": "Vehicle Type"
+  },
+  {
+   "fieldname": "column_break_ngkx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fieldname": "origin_city",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Origin City 1",
+   "options": "City"
+  },
+  {
+   "fieldname": "column_break_kzir",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fieldname": "origin_city_2",
+   "fieldtype": "Link",
+   "label": "Origin City 2",
+   "options": "City"
+  },
+  {
+   "fieldname": "column_break_lkin",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fieldname": "destination_city_1",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Destination City 1",
+   "options": "City"
+  },
+  {
+   "fieldname": "column_break_zxew",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fieldname": "destination_city_2",
+   "fieldtype": "Link",
+   "label": "Destination City 2",
+   "options": "City"
+  },
+  {
+   "fieldname": "section_break_wnyr",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "column_break_frcc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 5,
+   "fieldname": "origin_address_1",
+   "fieldtype": "Link",
+   "label": "Origin Address 1",
+   "options": "Address"
+  },
+  {
+   "fieldname": "origin_address_1_full",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Origin Address 1",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_nfia",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 5,
+   "fieldname": "origin_address_2",
+   "fieldtype": "Link",
+   "label": "Origin Address 2",
+   "options": "Address"
+  },
+  {
+   "fieldname": "origin_address_2_full",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Origin Address 2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_rxiz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "default": "-",
+   "fieldname": "origin_state",
+   "fieldtype": "Data",
+   "label": "Origin State",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_ictb",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "column_break_klgm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 5,
+   "fieldname": "destination_address_1",
+   "fieldtype": "Link",
+   "label": "Destination Address 1",
+   "options": "Address"
+  },
+  {
+   "fieldname": "destination_address_1_full",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Destination Address 1",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_jhmq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 5,
+   "fieldname": "destination_address_2",
+   "fieldtype": "Link",
+   "label": "Destination Address 2",
+   "options": "Address"
+  },
+  {
+   "fieldname": "destination_address_2_full",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Destination Address 2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_iaiz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "default": "-",
+   "fieldname": "destination_state",
+   "fieldtype": "Data",
+   "label": "Destination State",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_enns",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "columns": 3,
+   "fieldname": "billing_start_date",
+   "fieldtype": "Date",
+   "label": "Billing Start Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_jqnv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 3,
+   "fieldname": "billing_end_date",
+   "fieldtype": "Date",
+   "label": "Billing End Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_qxsn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 6,
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_spuw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "customer_freight",
+   "fieldtype": "Currency",
+   "label": "Customer Freight"
+  },
+  {
+   "fieldname": "tab_loading_unloading",
+   "fieldtype": "Tab Break",
+   "label": "Loading and Unloading Sites"
+  },
+  {
+   "fieldname": "section_break_bnez",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "columns": 4,
+   "fieldname": "vendor",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Vendor",
+   "link_filters": "[[\"Supplier\", \"supplier_group\", \"=\", \"Vendor\"]]",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "column_break_pssf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fieldname": "vehicle_no",
+   "fieldtype": "Link",
+   "label": "Vehicle No",
+   "options": "Vehicle"
+  },
+  {
+   "fieldname": "column_break_qupa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "driver",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Driver",
+   "options": "Driver"
+  },
+  {
+   "fieldname": "column_break_cfdo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "driver_mobile",
+   "fieldtype": "Data",
+   "label": "Driver Mobile"
+  },
+  {
+   "fieldname": "section_break_vopg",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "lr_no",
+   "fieldtype": "Data",
+   "label": "LR No",
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_esdb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fieldname": "lr_date",
+   "fieldtype": "Date",
+   "label": "LR Date"
+  },
+  {
+   "fieldname": "column_break_kqjn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "packages",
+   "fieldtype": "Int",
+   "label": "Packages"
+  },
+  {
+   "fieldname": "column_break_njgp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "types_of_good",
+   "fieldtype": "Link",
+   "label": "Types Of Goods",
+   "options": "Types Of Goods"
+  },
+  {
+   "fieldname": "column_break_fzog",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "eway_bill_no",
+   "fieldtype": "Data",
+   "label": "Eway Bill No"
+  },
+  {
+   "fieldname": "column_break_jiae",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "customer_invoice_no",
+   "fieldtype": "Data",
+   "label": "Customer Invoice No"
+  },
+  {
+   "fieldname": "section_break_gajr",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "seal_no",
+   "fieldtype": "Data",
+   "label": "Seal No"
+  },
+  {
+   "fieldname": "column_break_yzok",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reach_date_time",
+   "fieldtype": "Datetime",
+   "label": "Reach Loading Point Date/Time"
+  },
+  {
+   "fieldname": "column_break_juaz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "dispatch_date_time",
+   "fieldtype": "Datetime",
+   "label": "Dispatch Loading Point Date/Time"
+  },
+  {
+   "fieldname": "column_break_bcbc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "loading_detention_days",
+   "fieldtype": "Int",
+   "label": "Loading Detention Days",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_jfrt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "loading_detention_rate_per_day",
+   "fieldtype": "Currency",
+   "label": "Loading Detention Rate/Day"
+  },
+  {
+   "fieldname": "section_break_pyra",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "loading_site_detention_amount",
+   "fieldtype": "Currency",
+   "label": "Loading Site Detention Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_hgso",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "loading_charge",
+   "fieldtype": "Currency",
+   "label": "Loading Charge"
+  },
+  {
+   "fieldname": "column_break_mvsp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "truck_return_without_loading",
+   "fieldtype": "Select",
+   "label": "Truck Returned Without Loading",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "column_break_yuzx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "arrival_date_time",
+   "fieldtype": "Datetime",
+   "label": "Arrival Unloading Point Date/Time"
+  },
+  {
+   "fieldname": "column_break_fgkc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "release_date_time",
+   "fieldtype": "Datetime",
+   "label": "Release Unloading Point Date/Time"
+  },
+  {
+   "default": "0",
+   "fieldname": "journey_time",
+   "fieldtype": "Data",
+   "label": "Journey Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_kajg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "distance_loadingunloading_site",
+   "fieldtype": "Float",
+   "label": "Distance - Loading/Unloading Sites"
+  },
+  {
+   "fieldname": "column_break_jkdk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "journey_time_400_kmsday",
+   "fieldtype": "Data",
+   "label": "Journey Time @400 Kms/Day",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "unloading_detention_days",
+   "fieldtype": "Int",
+   "label": "Unloading Detention Days",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_ywxl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "unloading_detention_rate_per_day",
+   "fieldtype": "Currency",
+   "label": "Unloading Detention Rate/Day"
+  },
+  {
+   "default": "0",
+   "fieldname": "unloading_site_detention_amount",
+   "fieldtype": "Currency",
+   "label": "Unloading Site Detention Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_xjph",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_detention_days",
+   "fieldtype": "Int",
+   "label": "Total Detention Days",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_hoce",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_detention_amount",
+   "fieldtype": "Currency",
+   "label": "Total Detention Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_ihpz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "unloading_charge",
+   "fieldtype": "Currency",
+   "label": "Unloading Charge"
+  },
+  {
+   "fieldname": "column_break_nixu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_loading_unloading_charge",
+   "fieldtype": "Currency",
+   "label": "Loading/Unloading",
+   "read_only": 1
+  },
+  {
+   "fieldname": "weighment_charges",
+   "fieldtype": "Currency",
+   "label": "Weighment Charges"
+  },
+  {
+   "fieldname": "column_break_gcnx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "extra_expenses",
+   "fieldtype": "Currency",
+   "label": "Extra Expenses"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_additional_charges",
+   "fieldtype": "Currency",
+   "label": "Total Additional Charges",
+   "read_only": 1
+  },
+  {
+   "fieldname": "employee_lr_money",
+   "fieldtype": "Int",
+   "label": "Employee Lr Money"
+  },
+  {
+   "fieldname": "column_break_wjaa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "packages_found_short",
+   "fieldtype": "Int",
+   "label": "Packages Found Short"
+  },
+  {
+   "fieldname": "packages_found_excess",
+   "fieldtype": "Int",
+   "label": "Packages Found Excess"
+  },
+  {
+   "fieldname": "packages_found_damage",
+   "fieldtype": "Int",
+   "label": "Packages Found Damaged"
+  },
+  {
+   "fieldname": "tab_km_vendor",
+   "fieldtype": "Tab Break",
+   "label": "Dedicated KM"
+  },
+  {
+   "fieldname": "section_break_afib",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "start_km",
+   "fieldtype": "Int",
+   "label": "Start Km"
+  },
+  {
+   "fieldname": "column_break_rivj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "end_km",
+   "fieldtype": "Int",
+   "label": "End Km"
+  },
+  {
+   "fieldname": "column_break_hizj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_km",
+   "fieldtype": "Int",
+   "label": "Total Km",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_acri",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "standard_km",
+   "fieldtype": "Data",
+   "label": "Standard Km"
+  },
+  {
+   "fieldname": "column_break_bmyb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "variation",
+   "fieldtype": "Float",
+   "label": "Variation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_fwyz",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "vendor_freight",
+   "fieldtype": "Currency",
+   "label": "Vendor Freight"
+  },
+  {
+   "fieldname": "column_break_uytj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vendor_freight_extra",
+   "fieldtype": "Currency",
+   "label": "Vendor Freight (Extra)"
+  },
+  {
+   "fieldname": "column_break_slkt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_vendor_freight",
+   "fieldtype": "Currency",
+   "label": "Total Vendor Freight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_awla",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "vendor_tds_to_be_deducted",
+   "fieldtype": "Currency",
+   "label": "Vendor Tds To Be Deducted",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tab_pod_approval",
+   "fieldtype": "Tab Break",
+   "label": "POD"
+  },
+  {
+   "fieldname": "section_break_qadp",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "date_pod_uploaded_on_erp",
+   "fieldtype": "Date",
+   "label": "Date Pod Uploaded On Erp"
+  },
+  {
+   "fieldname": "column_break_wrph",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "uploaded_pod_originalduplicate",
+   "fieldtype": "Select",
+   "label": "Uploaded Original/Duplicate Pod",
+   "options": "\nOriginal\nDuplicate"
+  },
+  {
+   "fieldname": "column_break_drec",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pod_status",
+   "fieldtype": "Select",
+   "label": "Pod Status",
+   "options": "POD Not Uploaded\nOriginal POD Uploaded\nDuplicate POD Uploaded",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_jjvm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_pod_sent_to_customer",
+   "fieldtype": "Date",
+   "label": "Date Pod Sent To Customer"
+  },
+  {
+   "fieldname": "column_break_vbhw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "courier_name",
+   "fieldtype": "Data",
+   "label": "Courier Name"
+  },
+  {
+   "fieldname": "section_break_rzro",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "awb_no_for_dispatch",
+   "fieldtype": "Data",
+   "label": "Awb No For Despatch"
+  },
+  {
+   "fieldname": "column_break_piwb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "indemnity_bond_serial_no",
+   "fieldtype": "Data",
+   "label": "Indemnity Bond Serial No"
+  },
+  {
+   "fieldname": "column_break_febn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "indemnity_bond_date",
+   "fieldtype": "Date",
+   "label": "Indemnity Bond Date"
+  },
+  {
+   "fieldname": "column_break_ejoi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_hjir",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "approved_origin_detention",
+   "fieldtype": "Currency",
+   "label": "Approved Origin Detention"
+  },
+  {
+   "fieldname": "column_break_vavu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "approved_destination_detention",
+   "fieldtype": "Currency",
+   "label": "Approved Destination Detention"
+  },
+  {
+   "fieldname": "column_break_dgit",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "approved_detention_charge",
+   "fieldtype": "Currency",
+   "label": "Approved Detention Charge",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_uqvn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "approved_loading_charge",
+   "fieldtype": "Currency",
+   "label": "Approved Loading Charge"
+  },
+  {
+   "fieldname": "section_break_rdjc",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "approved_unloading_charge",
+   "fieldtype": "Currency",
+   "label": "Approved Unloading Charge"
+  },
+  {
+   "fieldname": "column_break_mwyz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "approved_loadingunloading_charge",
+   "fieldtype": "Currency",
+   "label": "Approved Loading/Unloading",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_txqs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "approved_weighment_charge",
+   "fieldtype": "Currency",
+   "label": "Approved Weighment Charges"
+  },
+  {
+   "fieldname": "column_break_synu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "approved_extra_expenses",
+   "fieldtype": "Currency",
+   "label": "Approved Extra Expenses"
+  },
+  {
+   "fieldname": "brokerage_amount",
+   "fieldtype": "Currency",
+   "label": "Brokerage Amount"
+  },
+  {
+   "fieldname": "section_break_wlpt",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "lr_money",
+   "fieldtype": "Currency",
+   "label": "Broker Lr Money"
+  },
+  {
+   "fieldname": "column_break_owko",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tds_deducted_by_customer",
+   "fieldtype": "Currency",
+   "label": "Tds Deducted By Customer"
+  },
+  {
+   "fieldname": "column_break_mehi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_approved_addl_amount",
+   "fieldtype": "Currency",
+   "label": "Total Approved Addl Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_uqvs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "difference_claimedapproved",
+   "fieldtype": "Currency",
+   "label": "Difference Claimed/Approved",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_hyjn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_trip_amount",
+   "fieldtype": "Currency",
+   "label": "Trip Total Freight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tab_billing_payment",
+   "fieldtype": "Tab Break",
+   "label": "Billing"
+  },
+  {
+   "fieldname": "section_break_zlqb",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "trip_total_amount_billed",
+   "fieldtype": "Currency",
+   "label": "Trip Total Freight Billed"
+  },
+  {
+   "fieldname": "column_break_ocua",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bill_nodate",
+   "fieldtype": "Data",
+   "label": "Bill No"
+  },
+  {
+   "fieldname": "column_break_tnfl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_bill_credited",
+   "fieldtype": "Date",
+   "label": "Date Bill Credited"
+  },
+  {
+   "fieldname": "section_break_vqrx",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "payment_advice_no",
+   "fieldtype": "Data",
+   "label": "Payment Advice No"
+  },
+  {
+   "fieldname": "column_break_auly",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_advice_date",
+   "fieldtype": "Date",
+   "label": "Payment Advice Date"
+  },
+  {
+   "fieldname": "column_break_wukl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "utr_no",
+   "fieldtype": "Data",
+   "label": "Utr No"
+  },
+  {
+   "fieldname": "column_break_vwxt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "trip_status",
+   "fieldtype": "Select",
+   "label": "Trip Status",
+   "options": "\nOpen\nClose\nCancel"
+  },
+  {
+   "fieldname": "section_break_lbsa",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "amount_to_be_paid_to_vendor",
+   "fieldtype": "Currency",
+   "label": "Amount to be paid to Vendor",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_tckq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vendor_payment_date_1",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "Vendor Payment Date 1"
+  },
+  {
+   "fieldname": "column_break_njbn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vendor_payment_amount_1",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Vendor Payment Amount 1"
+  },
+  {
+   "fieldname": "column_break_mwgh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vendor_payment_reference_1",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Vendor Payment Reference 1"
+  },
+  {
+   "fieldname": "vendor_payment_details_html",
+   "fieldtype": "HTML",
+   "label": "Vendor Payment Details"
+  },
+  {
+   "fieldname": "section_break_uhqr",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "trip_no_not_yet_provided",
+   "fieldtype": "Check",
+   "label": "Trip No Not Yet Provided"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "tab_6_tab",
+   "fieldtype": "Tab Break",
+   "label": "Freight And Expenses"
+  },
+  {
+   "fieldname": "column_break_kajg2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_uphx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_qqqc",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "section_break_qhxu",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "column_break_thnx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_yuxn",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "column_break_qlgl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_iocv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ddqa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_xumv",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "column_break_rhqx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_htkc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_eayf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vendor_payment_tab",
+   "fieldtype": "Tab Break",
+   "label": "Payments"
+  },
+  {
+   "fieldname": "control_tab",
+   "fieldtype": "Tab Break",
+   "label": "Trip Status"
+  },
+  {
+   "fieldname": "column_break_oael",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Company",
+   "fieldname": "extra_expense_paid_by",
+   "fieldtype": "Select",
+   "label": "Weighment/Extra Paid By",
+   "options": "Company\nVendor\nCompany Driver"
+  },
+  {
+   "fieldname": "column_break_zbjs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_lmjt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bill_date",
+   "fieldtype": "Date",
+   "label": "Bill Date"
+  },
+  {
+   "fieldname": "bookingid",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Bookingid",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_awla2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_mvsp2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Company",
+   "fieldname": "loading_charge_payment_by",
+   "fieldtype": "Select",
+   "label": "Loading Charge Payment By",
+   "options": "Company\nVendor\nCompany Driver"
+  },
+  {
+   "default": "Company",
+   "fieldname": "unloading_charge_payment_by",
+   "fieldtype": "Select",
+   "label": "Unloading Charge Payment By",
+   "options": "Company\nVendor\nCompany Driver"
+  },
+  {
+   "default": "0",
+   "fieldname": "trip_total_freight",
+   "fieldtype": "Currency",
+   "label": "Trip Total Expense",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_zlqb2",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "column_break_zbjs2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_pwcp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ftft",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_fmok",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "column_break_wdoj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "eway_bill_date",
+   "fieldtype": "Date",
+   "label": "Eway Bill Date"
+  },
+  {
+   "fieldname": "column_break_vuzy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "eway_bill_expiry_date",
+   "fieldtype": "Date",
+   "label": "Eway Bill Expiry Date"
+  },
+  {
+   "fieldname": "column_break_rvie",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_gcbg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_pqvo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "driver_market",
+   "fieldtype": "Data",
+   "label": "Driver (Market)"
+  },
+  {
+   "fieldname": "column_break_ozgl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "driver_mobile_market",
+   "fieldtype": "Data",
+   "label": "Driver Mobile (Market)"
+  },
+  {
+   "fieldname": "company_lr_money",
+   "fieldtype": "Int",
+   "label": "Company LR Money"
+  },
+  {
+   "fieldname": "column_break_hdll",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_meup",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "column_break_lvxt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vehicle_market",
+   "fieldtype": "Data",
+   "label": "Vehicle (Market)"
+  },
+  {
+   "fieldname": "column_break_stxz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ykjl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_sykg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "extra_charges_reason",
+   "fieldtype": "Select",
+   "label": "Extra Charges Reason",
+   "options": "\nPuncture Repair\nPolice Entry\nBorder Crossing\nVehicle Washing\nGovt Penalty\nJio NW Bill\nMiscellaneous Expenses"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-06-19 09:41:01.917105",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Trip",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "default_view": "Report",
+ "sort_field": "tcntrip_date",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

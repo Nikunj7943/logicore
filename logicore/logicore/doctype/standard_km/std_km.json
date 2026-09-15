@@ -1,0 +1,86 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-01-01 14:33:50.947688",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_tyyf",
+  "name1",
+  "column_break_smym",
+  "date",
+  "section_break_pdhy",
+  "remarks",
+  "section_break_lvod",
+  "table_lnrl"
+ ],
+ "fields": [
+  {
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "section_break_tyyf",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "column_break_smym",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "section_break_lvod",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "table_lnrl",
+   "fieldtype": "Table",
+   "options": "std km"
+  },
+  {
+   "fieldname": "section_break_pdhy",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-01-01 15:56:34.176999",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "std km",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "default_view": "Report",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

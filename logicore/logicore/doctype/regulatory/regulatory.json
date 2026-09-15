@@ -1,0 +1,208 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:voucher_no",
+ "creation": "2025-12-05 10:14:08.092413",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_lrrs",
+  "voucher_date",
+  "column_break_xmxw",
+  "voucher_no",
+  "column_break_hkay",
+  "vehicle_no",
+  "section_break_gvxl",
+  "bank_cash",
+  "section_break_ximi",
+  "supplier",
+  "column_break_uhvl",
+  "gst_no",
+  "column_break_ulms",
+  "pan_card",
+  "section_break_sqiy",
+  "address",
+  "section_break_wyoh",
+  "regulatory_items",
+  "section_break_fixo",
+  "column_break_gbcw",
+  "column_break_gwfp",
+  "column_break_nnff",
+  "total_amount",
+  "section_break_qnrd",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_lrrs",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "voucher_date",
+   "fieldtype": "Date",
+   "label": "Voucher Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_xmxw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "voucher_no",
+   "fieldtype": "Data",
+   "label": "Voucher No",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_hkay",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vehicle_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Vehicle No",
+   "options": "Vehicle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_gvxl",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "bank_cash",
+   "fieldtype": "Link",
+   "label": "Bank / Cash",
+   "options": "Bank",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_ximi",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Supplier",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_uhvl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "supplier.gstin",
+   "fieldname": "gst_no",
+   "fieldtype": "Data",
+   "label": "GST No",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_ulms",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "supplier.pan",
+   "fieldname": "pan_card",
+   "fieldtype": "Data",
+   "label": "Pan Card",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_sqiy",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fetch_from": "supplier.primary_address",
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_wyoh",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "regulatory_items",
+   "fieldtype": "Table",
+   "label": "Regulatory Items",
+   "options": "Regulatory Items",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_fixo",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "column_break_gbcw",
+   "fieldtype": "Column Break",
+   "hidden": 1
+  },
+  {
+   "fieldname": "column_break_gwfp",
+   "fieldtype": "Column Break",
+   "hidden": 1
+  },
+  {
+   "fieldname": "column_break_nnff",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount"
+  },
+  {
+   "fieldname": "section_break_qnrd",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-03-30 15:29:38.619704",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Regulatory",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

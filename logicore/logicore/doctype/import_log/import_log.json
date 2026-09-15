@@ -1,0 +1,251 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "format:TIL-{YYYY}-{#####}",
+ "creation": "2026-05-27 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "details_section",
+  "overview_html",
+  "template",
+  "template_name",
+  "company",
+  "import_mode",
+  "status",
+  "uploaded_file",
+  "error_file",
+  "visual_summary_section",
+  "summary_html",
+  "preview_columns_html",
+  "row_results_html",
+  "raw_data_section",
+  "preview_json",
+  "summary_json",
+  "row_result_json",
+  "stats_section",
+  "total_rows",
+  "success_rows",
+  "failed_rows",
+  "created_count",
+  "updated_count",
+  "skipped_count",
+  "started_at",
+  "finished_at",
+  "imported_by"
+ ],
+ "fields": [
+  {
+   "fieldname": "details_section",
+   "fieldtype": "Section Break",
+   "label": "Import Details"
+  },
+  {
+   "fieldname": "overview_html",
+   "fieldtype": "HTML",
+   "label": "Overview"
+  },
+  {
+   "fieldname": "template",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Template",
+   "options": "Import Template",
+   "reqd": 1
+  },
+  {
+   "fieldname": "template_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Template Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "import_mode",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Import Mode",
+   "options": "Update Existing Only\nCreate New Only\nUpdate or Create",
+   "read_only": 1
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nValidated\nRunning\nCompleted\nCompleted With Errors\nFailed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "uploaded_file",
+   "fieldtype": "Attach",
+   "label": "Uploaded File",
+   "read_only": 1
+  },
+  {
+   "fieldname": "error_file",
+   "fieldtype": "Attach",
+   "label": "Error File",
+   "read_only": 1
+  },
+  {
+   "fieldname": "visual_summary_section",
+   "fieldtype": "Section Break",
+   "label": "Import Preview And Result"
+  },
+  {
+   "fieldname": "summary_html",
+   "fieldtype": "HTML",
+   "label": "Summary"
+  },
+  {
+   "fieldname": "preview_columns_html",
+   "fieldtype": "HTML",
+   "label": "Preview Columns"
+  },
+  {
+   "fieldname": "row_results_html",
+   "fieldtype": "HTML",
+   "label": "Row Results"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "raw_data_section",
+   "fieldtype": "Section Break",
+   "label": "Raw JSON Data"
+  },
+  {
+   "fieldname": "preview_json",
+   "fieldtype": "Long Text",
+   "hidden": 1,
+   "label": "Preview JSON",
+   "read_only": 1
+  },
+  {
+   "fieldname": "summary_json",
+   "fieldtype": "Long Text",
+   "hidden": 1,
+   "label": "Summary JSON",
+   "read_only": 1
+  },
+  {
+   "fieldname": "row_result_json",
+   "fieldtype": "Long Text",
+   "hidden": 1,
+   "label": "Row Result JSON",
+   "read_only": 1
+  },
+  {
+   "fieldname": "stats_section",
+   "fieldtype": "Section Break",
+   "label": "Counters"
+  },
+  {
+   "fieldname": "total_rows",
+   "fieldtype": "Int",
+   "label": "Total Rows",
+   "read_only": 1
+  },
+  {
+   "fieldname": "success_rows",
+   "fieldtype": "Int",
+   "label": "Success Rows",
+   "read_only": 1
+  },
+  {
+   "fieldname": "failed_rows",
+   "fieldtype": "Int",
+   "label": "Failed Rows",
+   "read_only": 1
+  },
+  {
+   "fieldname": "created_count",
+   "fieldtype": "Int",
+   "label": "Created Count",
+   "read_only": 1
+  },
+  {
+   "fieldname": "updated_count",
+   "fieldtype": "Int",
+   "label": "Updated Count",
+   "read_only": 1
+  },
+  {
+   "fieldname": "skipped_count",
+   "fieldtype": "Int",
+   "label": "Skipped Count",
+   "read_only": 1
+  },
+  {
+   "fieldname": "started_at",
+   "fieldtype": "Datetime",
+   "label": "Started At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "finished_at",
+   "fieldtype": "Datetime",
+   "label": "Finished At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "imported_by",
+   "fieldtype": "Data",
+   "label": "Imported By",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 20,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-06-18 14:57:06.738155",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Import Log",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "DIRECTOR",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "default_view": "Report",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "template_name",
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

@@ -1,0 +1,355 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-07-31 00:00:00",
+ "default_view": "Report",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "supplier",
+  "column_break_igib",
+  "payment_date",
+  "column_break_uzpr",
+  "naming_series",
+  "section_break_header",
+  "company",
+  "mode_of_payment",
+  "column_break_1",
+  "paid_from_account",
+  "column_break_2",
+  "reference_no",
+  "upi_id",
+  "section_break_accounting",
+  "column_break_kfbs",
+  "column_break_8",
+  "reference_date",
+  "column_break_mnnq",
+  "ignore_validations",
+  "amended_from",
+  "section_break_filter",
+  "from_date",
+  "column_break_3",
+  "to_date",
+  "column_break_4",
+  "fetch_invoices_btn",
+  "section_break_invoices",
+  "invoices",
+  "section_break_totals",
+  "total_payment_amount",
+  "column_break_5",
+  "total_tds_amount",
+  "column_break_6",
+  "total_transfer_amount",
+  "section_break_reconciliation",
+  "is_reconciled",
+  "column_break_reconciliation",
+  "bank_reconciliation",
+  "section_break_remarks",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "default": "SP-.YYYY.-.MM.-.#####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Payment No",
+   "no_copy": 1,
+   "options": "SP-.YYYY.-.MM.-.#####",
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "section_break_header",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Payment Details"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "payment_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Payment Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Supplier",
+   "link_filters": "[[\"Supplier\",\"supplier_group\",\"=\",\"Supplier\"]]",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_accounting",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Accounting"
+  },
+  {
+   "default": "Bank Transfer",
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Select",
+   "label": "Mode of Payment",
+   "options": "Cash\nBank Transfer\nCheque\nUPI",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "paid_from_account",
+   "fieldtype": "Link",
+   "label": "Paid From Account (Bank/Cash)",
+   "options": "Account Head",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Reference No",
+   "mandatory_depends_on": "eval:in_list(['Bank Transfer','Cheque'], doc.mode_of_payment)"
+  },
+  {
+   "depends_on": "eval:doc.mode_of_payment === 'UPI'",
+   "fieldname": "upi_id",
+   "fieldtype": "Data",
+   "label": "UPI ID",
+   "mandatory_depends_on": "eval:doc.mode_of_payment === 'UPI'"
+  },
+  {
+   "default": "Today",
+   "depends_on": "eval:in_list(['Bank Transfer','Cheque'], doc.mode_of_payment)",
+   "fieldname": "reference_date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "Reference Date"
+  },
+  {
+   "fieldname": "column_break_mnnq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "ignore_validations",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Ignore Validations (Import Only)",
+   "no_copy": 1,
+   "print_hide": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Supplier Payment",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "section_break_filter",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Search Filters"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "From Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fetch_invoices_btn",
+   "fieldtype": "Button",
+   "label": "Fetch Invoices"
+  },
+  {
+   "fieldname": "section_break_invoices",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Invoice Lines"
+  },
+  {
+   "fieldname": "invoices",
+   "fieldtype": "Table",
+   "label": "Invoices",
+   "options": "Payment Invoices"
+  },
+  {
+   "fieldname": "section_break_totals",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Totals"
+  },
+  {
+   "fieldname": "total_payment_amount",
+   "fieldtype": "Currency",
+   "label": "Payment Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_tds_amount",
+   "fieldtype": "Currency",
+   "label": "TDS Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_transfer_amount",
+   "fieldtype": "Currency",
+   "label": "Transfer Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_igib",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_kfbs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_uzpr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_reconciliation",
+   "fieldtype": "Section Break",
+   "label": "Bank Reconciliation"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_reconciled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Reconciled",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_reconciliation",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bank_reconciliation",
+   "fieldtype": "Link",
+   "label": "Bank Reconciliation",
+   "no_copy": 1,
+   "options": "TMS Bank Reconciliation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_remarks",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-08-24 15:05:00.000000",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Supplier Payment",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Administrator",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "payment_date",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

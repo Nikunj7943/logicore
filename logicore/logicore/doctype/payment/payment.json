@@ -1,0 +1,498 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "PMT-.YYYY.-.MM.-.#####",
+ "creation": "2026-04-29 17:35:40.236485",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "payment_no",
+  "date",
+  "column_break_top",
+  "type",
+  "status",
+  "section_break_accounting",
+  "company",
+  "mode_of_payment",
+  "column_break_acc1",
+  "paid_from_account",
+  "is_reconciled",
+  "bank_reconciliation",
+  "upi_id",
+  "reference_date",
+  "column_break_acc3",
+  "reference_no",
+  "payment_entry",
+  "is_reconciled_in",
+  "bank_reconciliation_in",
+  "section_break_payee",
+  "vehicle_finance",
+  "vf_vehicle",
+  "vf_financer",
+  "vf_loan_account",
+  "vendor_supplier",
+  "transfer_to_account",
+  "employee",
+  "driver",
+  "vehicle",
+  "select_account",
+  "column_break_payee",
+  "amount",
+  "outstanding_balance",
+  "payment_reference",
+  "section_break_trip",
+  "trip_no",
+  "trip_payments_html",
+  "column_break_trip",
+  "trip_tcn_no",
+  "trip_date",
+  "section_break_trip_route",
+  "trip_type",
+  "trip_origin",
+  "column_break_trip_route",
+  "trip_destination",
+  "trip_vehicle_type",
+  "section_break_remarks",
+  "remarks",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Payment Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_top",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "default": "Loading",
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Payment Type",
+   "options": "Loading\nUnloading\nExtra Expense\nBorder Crossing/Vehicle Expense/Toll Tax\nOffice/Other Expense\nPolice Entry\nEmployee Advance\nEmployee Incentive\nDriver Advance\nDriver Trip Expense\nVehicle Finance EMI\nBank Transfer\nCash Withdrawal",
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "\nDraft\nPaid\nCancelled"
+  },
+  {
+   "fieldname": "section_break_accounting",
+   "fieldtype": "Section Break",
+   "label": "Accounting"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "default": "Bank Transfer",
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Select",
+   "label": "Mode of Payment",
+   "options": "Cash\nBank Transfer\nCheque\nUPI\nATM",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.type === 'Bank Transfer'",
+   "description": "The outgoing (Debit) leg of a 'Bank Transfer' — ticked once the source account's own TMS Bank Reconciliation matches this record via Paid From Account.",
+   "fieldname": "is_reconciled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Debit Reconciled",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.type === 'Bank Transfer'",
+   "fieldname": "bank_reconciliation",
+   "fieldtype": "Link",
+   "label": "Bank Reconciliation (Debit)",
+   "no_copy": 1,
+   "options": "TMS Bank Reconciliation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_acc1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:in_list(['Bank Transfer','Cheque','Cash','UPI','ATM'], doc.mode_of_payment)",
+   "fieldname": "paid_from_account",
+   "fieldtype": "Link",
+   "label": "Paid From Account (Bank/Cash)",
+   "mandatory_depends_on": "eval:in_list(['Bank Transfer','Cheque','Cash','UPI','ATM'], doc.mode_of_payment)",
+   "options": "Account Head"
+  },
+  {
+   "fieldname": "column_break_acc3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_entry",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "ERPNext Payment Entry",
+   "no_copy": 1,
+   "options": "Payment Entry",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.type === 'Bank Transfer'",
+   "description": "The incoming (Credit) leg of a 'Bank Transfer' — ticked once the destination account's (Transfer To) own TMS Bank Reconciliation matches this record.",
+   "fieldname": "is_reconciled_in",
+   "fieldtype": "Check",
+   "label": "Credit Reconciled",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.type === 'Bank Transfer'",
+   "fieldname": "bank_reconciliation_in",
+   "fieldtype": "Link",
+   "label": "Bank Reconciliation (Credit)",
+   "no_copy": 1,
+   "options": "TMS Bank Reconciliation",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:in_list(['Bank Transfer','Cheque','UPI','Cash','ATM'], doc.mode_of_payment)",
+   "description": "Minimum 8 characters. Enter the actual bank/UPI transaction reference — not a filler value like '1', '0', or 'NA'.",
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "label": "Reference No",
+   "in_list_view": 1,
+   "mandatory_depends_on": "eval:in_list(['Bank Transfer','Cheque'], doc.mode_of_payment)"
+  },
+  {
+   "depends_on": "eval:doc.mode_of_payment === 'UPI'",
+   "fieldname": "upi_id",
+   "fieldtype": "Data",
+   "label": "UPI ID",
+   "mandatory_depends_on": "eval:doc.mode_of_payment === 'UPI'"
+  },
+  {
+   "default": "Today",
+   "depends_on": "eval:in_list(['Bank Transfer','Cheque'], doc.mode_of_payment)",
+   "fieldname": "reference_date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "Reference Date"
+  },
+  {
+   "fieldname": "section_break_payee",
+   "fieldtype": "Section Break",
+   "label": "Payee & Amount"
+  },
+  {
+   "depends_on": "eval:doc.type === 'Vehicle Finance EMI'",
+   "fieldname": "vehicle_finance",
+   "fieldtype": "Link",
+   "label": "Vehicle Finance",
+   "mandatory_depends_on": "eval:doc.type === 'Vehicle Finance EMI'",
+   "options": "Vehicle Finance"
+  },
+  {
+   "depends_on": "eval:doc.type === 'Vehicle Finance EMI' || doc.trip_no",
+   "fieldname": "vf_vehicle",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Vehicle No",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.type === 'Vehicle Finance EMI'",
+   "fieldname": "vf_financer",
+   "fieldtype": "Data",
+   "label": "Financer/Bank",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.type === 'Vehicle Finance EMI'",
+   "fieldname": "vf_loan_account",
+   "fieldtype": "Data",
+   "label": "Loan Account",
+   "read_only": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "depends_on": "eval:doc.type=='Loading' || doc.type=='Unloading' || doc.type=='Extra Expense' || doc.type=='Border Crossing/Vehicle Expense/Toll Tax' || doc.type=='Office/Other Expense' || doc.type=='Police Entry'",
+   "fieldname": "vendor_supplier",
+   "fieldtype": "Link",
+   "label": "Vendor / Supplier",
+   "mandatory_depends_on": "eval:doc.type=='Loading' || doc.type=='Unloading' || doc.type=='Extra Expense' || doc.type=='Border Crossing/Vehicle Expense/Toll Tax' || doc.type=='Office/Other Expense' || doc.type=='Police Entry'",
+   "options": "Supplier"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "depends_on": "eval:doc.type === 'Bank Transfer'",
+   "description": "The other bank account this transfer went to — the destination leg of an internal fund transfer between our own accounts.",
+   "fieldname": "transfer_to_account",
+   "fieldtype": "Link",
+   "label": "Transfer To (Bank Account)",
+   "mandatory_depends_on": "eval:doc.type === 'Bank Transfer'",
+   "options": "Account Head"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "depends_on": "eval:doc.type=='Employee Advance' || doc.type=='Employee Incentive'",
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "mandatory_depends_on": "eval:doc.type=='Employee Advance' || doc.type=='Employee Incentive'",
+   "options": "Employee"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "depends_on": "eval:doc.type=='Driver Advance' || doc.type=='Driver Trip Expense'",
+   "fieldname": "driver",
+   "fieldtype": "Link",
+   "label": "Driver",
+   "mandatory_depends_on": "eval:doc.type=='Driver Advance' || doc.type=='Driver Trip Expense'",
+   "options": "Driver"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "depends_on": "eval:doc.type === 'Driver Trip Expense' || doc.type === 'Border Crossing/Vehicle Expense/Toll Tax' || doc.type === 'Police Entry'",
+   "fieldname": "vehicle",
+   "fieldtype": "Link",
+   "label": "Vehicle",
+   "options": "Vehicle"
+  },
+  {
+   "depends_on": "eval:doc.type === 'Office/Other Expense' || doc.type === 'Employee Advance' || doc.type === 'Driver Advance' || doc.type === 'Driver Trip Expense' || doc.type === 'Cash Withdrawal'",
+   "fieldname": "select_account",
+   "fieldtype": "Link",
+   "label": "Account",
+   "mandatory_depends_on": "eval:doc.type === 'Office/Other Expense' || doc.type === 'Employee Advance' || doc.type === 'Driver Advance' || doc.type === 'Driver Trip Expense' || doc.type === 'Cash Withdrawal'",
+   "options": "Account Head"
+  },
+  {
+   "fieldname": "column_break_payee",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount (₹)",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.trip_no && !in_list(['Office/Other Expense','Employee Advance','Employee Incentive','Driver Advance','Driver Trip Expense','Border Crossing/Vehicle Expense/Toll Tax','Police Entry','Bank Transfer','Cash Withdrawal'], doc.type)",
+   "fieldname": "outstanding_balance",
+   "fieldtype": "Currency",
+   "label": "Outstanding Balance",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:in_list(['Driver Advance','Employee Advance','Employee Incentive','Driver Trip Expense','Office/Other Expense'], doc.type)",
+   "fieldname": "payment_reference",
+   "fieldtype": "Data",
+   "label": "Payment Reference",
+   "length": 100
+  },
+  {
+   "depends_on": "eval:!['Employee Advance','Employee Incentive','Driver Advance'].includes(doc.type)",
+   "fieldname": "section_break_trip",
+   "fieldtype": "Section Break",
+   "label": "Trip Reference"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "fieldname": "trip_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Trip No",
+   "mandatory_depends_on": "eval:doc.type && !['Office/Other Expense','Employee Advance','Employee Incentive','Driver Advance','Vehicle Finance EMI','Driver Trip Expense','Border Crossing/Vehicle Expense/Toll Tax','Police Entry','Bank Transfer','Cash Withdrawal'].includes(doc.type)",
+   "options": "Trip"
+  },
+  {
+   "fieldname": "trip_payments_html",
+   "fieldtype": "HTML",
+   "label": "Trip Payments"
+  },
+  {
+   "fieldname": "column_break_trip",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "fetch_from": "trip_no.tcntrip_no",
+   "fieldname": "trip_tcn_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "TCN / Trip No",
+   "read_only": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fetch_from": "trip_no.tcntrip_date",
+   "fieldname": "trip_date",
+   "fieldtype": "Date",
+   "label": "TCN / Trip Date",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_trip_route",
+   "fieldtype": "Section Break",
+   "label": "Trip Details"
+  },
+  {
+   "fetch_from": "trip_no.trip_type",
+   "fieldname": "trip_type",
+   "fieldtype": "Data",
+   "label": "Trip Type",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "trip_no.origin_city",
+   "fieldname": "trip_origin",
+   "fieldtype": "Data",
+   "label": "Origin City",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_trip_route",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "trip_no.destination_city_1",
+   "fieldname": "trip_destination",
+   "fieldtype": "Data",
+   "label": "Destination City",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "trip_no.vehicle_type",
+   "fieldname": "trip_vehicle_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Vehicle Type",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "default": "PMT-.YYYY.-.MM.-.#####",
+   "fieldname": "payment_no",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Payment No",
+   "no_copy": 1,
+   "options": "PMT-.YYYY.-.MM.-.#####",
+   "read_only": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "section_break_remarks",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Payment",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "default_print_format": "Payment TMS",
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-08-24 08:42:00.571583",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Payment",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Administrator",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "default_view": "Report",
+ "sort_field": "date",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Yellow",
+   "title": "Draft"
+  },
+  {
+   "color": "Green",
+   "title": "Paid"
+  },
+  {
+   "color": "Red",
+   "title": "Cancelled"
+  }
+ ],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

@@ -1,0 +1,387 @@
+[
+ {
+  "app": "logicore",
+  "charts": [],
+  "content": "[{\"id\": \"cb_tms_filter_bar\", \"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"TMS Filter Bar\", \"col\": 12}}, {\"id\": \"cb_tms_trip_ops\", \"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"TMS Trip Operations\", \"col\": 12}}, {\"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"TMS Financial Summary\", \"label\": \"\"}}, {\"id\": \"cb_vfa\", \"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"TMS Vehicle Finance Activity\", \"col\": 12}}, {\"id\": \"cb_vendor_pending\", \"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"TMS Vendor Pending\", \"col\": 12}}, {\"id\": \"cb_trip_other\", \"type\": \"custom_block\", \"data\": {\"custom_block_name\": \"TMS Trip Other\", \"col\": 12}}]",
+  "custom_blocks": [
+   {
+    "custom_block_name": "TMS Trip Operations",
+    "label": null
+   },
+   {
+    "custom_block_name": "TMS Financial Summary",
+    "label": null
+   },
+   {
+    "custom_block_name": "TMS Vehicle Finance Activity",
+    "label": null
+   },
+   {
+    "custom_block_name": "TMS Vendor Pending",
+    "label": null
+   },
+   {
+    "custom_block_name": "TMS Trip Other",
+    "label": null
+   },
+   {
+    "custom_block_name": "TMS Filter Bar",
+    "label": null
+   }
+  ],
+  "docstatus": 0,
+  "doctype": "Workspace",
+  "external_link": null,
+  "for_user": "",
+  "hide_custom": 0,
+  "icon": "truck",
+  "indicator_color": null,
+  "is_hidden": 0,
+  "label": "LogiCore",
+  "link_to": null,
+  "link_type": null,
+  "links": [
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 0,
+    "label": "Trip",
+    "link_count": 0,
+    "link_to": "Trip",
+    "link_type": "DocType",
+    "onboard": 1,
+    "only_for": null,
+    "report_ref_doctype": null,
+    "type": "Link"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 0,
+    "label": "Add Trip",
+    "link_count": 0,
+    "link_to": "Trip",
+    "link_type": "DocType",
+    "onboard": 1,
+    "only_for": null,
+    "report_ref_doctype": null,
+    "type": "Link"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 0,
+    "label": "Trip Type",
+    "link_count": 0,
+    "link_to": "Trip Type",
+    "link_type": "DocType",
+    "onboard": 1,
+    "only_for": null,
+    "report_ref_doctype": null,
+    "type": "Link"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 0,
+    "label": "Vehicle Type",
+    "link_count": 0,
+    "link_to": "Vehicle Type",
+    "link_type": "DocType",
+    "onboard": 1,
+    "only_for": null,
+    "report_ref_doctype": null,
+    "type": "Link"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 0,
+    "label": "City",
+    "link_count": 0,
+    "link_to": "City",
+    "link_type": "DocType",
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": null,
+    "type": "Link"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 0,
+    "label": "Business Format",
+    "link_count": 0,
+    "link_to": "Business Format",
+    "link_type": "DocType",
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": null,
+    "type": "Link"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 0,
+    "label": "Business Subformat",
+    "link_count": 0,
+    "link_to": "Business Subformat",
+    "link_type": "DocType",
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": null,
+    "type": "Link"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 0,
+    "label": "Trip Settings",
+    "link_count": 0,
+    "link_to": "Trip Settings",
+    "link_type": "DocType",
+    "onboard": 1,
+    "only_for": null,
+    "report_ref_doctype": null,
+    "type": "Link"
+   }
+  ],
+  "modified": "2026-09-04 01:42:57.322852",
+  "module": "LogiCore",
+  "name": "LogiCore",
+  "number_cards": [
+   {
+    "label": null,
+    "number_card_name": "TMS Trips This Month"
+   },
+   {
+    "label": null,
+    "number_card_name": "TMS Customer Freight MTD"
+   },
+   {
+    "label": null,
+    "number_card_name": "TMS Trip Revenue MTD"
+   },
+   {
+    "label": null,
+    "number_card_name": "TMS Open Trips"
+   },
+   {
+    "label": null,
+    "number_card_name": "TMS POD Pending"
+   },
+   {
+    "label": null,
+    "number_card_name": "TMS Total KM MTD"
+   },
+   {
+    "label": null,
+    "number_card_name": "TMS Vendor Freight MTD"
+   },
+   {
+    "label": null,
+    "number_card_name": "TMS Detention Amount MTD"
+   },
+   {
+    "label": null,
+    "number_card_name": "Fleet Fuel Cost MTD"
+   },
+   {
+    "label": null,
+    "number_card_name": "Fleet Repair Cost MTD"
+   },
+   {
+    "label": null,
+    "number_card_name": "Fleet Service Cost MTD"
+   },
+   {
+    "label": null,
+    "number_card_name": "Fleet Tyre Cost MTD"
+   },
+   {
+    "label": null,
+    "number_card_name": "Fleet Battery Count MTD"
+   },
+   {
+    "label": null,
+    "number_card_name": "Fleet Compliance Count"
+   },
+   {
+    "label": null,
+    "number_card_name": "TMS Active Vehicles"
+   },
+   {
+    "label": null,
+    "number_card_name": "Fleet EMI Total"
+   },
+   {
+    "label": null,
+    "number_card_name": "HR Leave Pending Approval"
+   },
+   {
+    "label": null,
+    "number_card_name": "HR Leave Approved MTD"
+   },
+   {
+    "label": null,
+    "number_card_name": "HR Employees on Leave Today"
+   },
+   {
+    "label": null,
+    "number_card_name": "HR Leave Rejected MTD"
+   },
+   {
+    "label": null,
+    "number_card_name": "HR Present MTD"
+   },
+   {
+    "label": null,
+    "number_card_name": "HR Absent MTD"
+   },
+   {
+    "label": null,
+    "number_card_name": "HR Late Entry MTD"
+   },
+   {
+    "label": null,
+    "number_card_name": "HR Salary Slips MTD"
+   },
+   {
+    "label": null,
+    "number_card_name": "HR Net Pay MTD"
+   },
+   {
+    "label": null,
+    "number_card_name": "HR Pending Payroll Entries"
+   }
+  ],
+  "parent_page": "",
+  "public": 1,
+  "quick_lists": [],
+  "restrict_to_domain": null,
+  "roles": [
+   {
+    "role": "All"
+   }
+  ],
+  "sequence_id": 1.0,
+  "shortcuts": [
+   {
+    "color": "Blue",
+    "doc_view": "List",
+    "format": "{} Trip",
+    "icon": null,
+    "kanban_board": null,
+    "label": "Trip",
+    "link_to": "Trip",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": "",
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Grey",
+    "doc_view": "List",
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "Business Format",
+    "link_to": "Business Format",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": "[]",
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Orange",
+    "doc_view": "List",
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "Trip Type",
+    "link_to": "Trip Type",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": null,
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Grey",
+    "doc_view": "List",
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "Vehicle",
+    "link_to": "Vehicle",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": "[]",
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Purple",
+    "doc_view": "List",
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "Vehicle Type",
+    "link_to": "Vehicle Type",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": null,
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Grey",
+    "doc_view": "List",
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "Business Sub Format",
+    "link_to": "Business Subformat",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": "[]",
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Cyan",
+    "doc_view": "List",
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "Trip Settings",
+    "link_to": "Trip Settings",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": null,
+    "type": "DocType",
+    "url": null
+   }
+  ],
+  "title": "LogiCore",
+  "type": "Workspace"
+ }
+]

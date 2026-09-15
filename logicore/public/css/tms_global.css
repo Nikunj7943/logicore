@@ -1,0 +1,1817 @@
+/* LogiCore — Global Styles */
+/* Doctype-specific styles remain in their own JS files until fully migrated */
+
+/* REVERTED per user request — back to Frappe's default list view behavior
+   for now, before a live push. This block bounded/reflowed
+   .result-container's height (page-scroll-to-reach-scrollbar fix + the
+   blank-gap-above-pagination fix). Re-enable if this is revisited.
+.list-view .frappe-list .result-container {
+    overflow-y: auto !important;
+    max-height: calc(100vh - 220px) !important;
+    height: auto !important;
+}
+.list-view .frappe-list .result-container .result {
+    height: auto !important;
+}
+*/
+
+/* DISABLED per user request — see tms_list_page_length.js for why (the
+   pinned top scrollbar this styled was not rendering usably on the user's
+   real browser, and they asked to remove it). Left commented out, not
+   deleted, in case this is revisited later.
+.tms-top-hscroll {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 17px !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #eef0f3;
+}
+.tms-top-hscroll::-webkit-scrollbar {
+    height: 17px;
+}
+.tms-top-hscroll::-webkit-scrollbar-track {
+    background: #eef0f3;
+}
+.tms-top-hscroll::-webkit-scrollbar-thumb {
+    background: #b0b5bd;
+    border-radius: 0;
+    border: none;
+}
+.tms-top-hscroll::-webkit-scrollbar-thumb:hover {
+    background: #8f95a0;
+}
+@media (prefers-color-scheme: dark) {
+    .tms-top-hscroll {
+        background: #21252e;
+    }
+    .tms-top-hscroll::-webkit-scrollbar-track {
+        background: #21252e;
+    }
+    .tms-top-hscroll::-webkit-scrollbar-thumb {
+        background: #454c5c;
+    }
+    .tms-top-hscroll::-webkit-scrollbar-thumb:hover {
+        background: #565f72;
+    }
+}
+.tms-top-hscroll-inner {
+    height: 1px;
+}
+*/
+
+/* ── Left Nav Sidebar — always expanded on desktop ──────────────────────── */
+@media (min-width: 768px) {
+    .body-sidebar {
+        width: var(--sidebar-width) !important;
+        position: relative !important;
+    }
+    /* placeholder not needed — sidebar is in normal document flow */
+    .body-sidebar-placeholder {
+        display: none !important;
+    }
+    /* notification dropdown: open to the right of the expanded sidebar */
+    .body-sidebar .dropdown-notifications .notifications-list {
+        left: 100% !important;
+    }
+    /* user-button hover style (mirrors expanded mixin) */
+    .body-sidebar .dropdown-navbar-user:hover {
+        background-color: var(--sidebar-hover-color);
+        border-radius: 8px;
+    }
+    .body-sidebar .dropdown-navbar-user .sidebar-user-button {
+        padding: var(--padding-sm);
+        border-radius: var(--border-radius-sm);
+    }
+}
+
+/* Force full-width layout — remove Frappe's 900px page max-width constraint everywhere */
+.layout-main,
+.layout-main-section,
+.std-form-layout .section-head,
+.std-form-layout .section-body,
+.form-footer,
+.treeview .layout-main-section,
+.grid-row-open .form-in-grid,
+.form-section .form-section-description,
+.form-dashboard-section .form-section-description {
+    max-width: none !important;
+}
+.navbar-home img {
+    content: url('/assets/logicore/images/logicore_icon_big.png');
+    height: 32px;
+}
+
+/* Sidebar toggle button ----------------------------------------- */
+.tms-sidebar-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: var(--text-muted);
+    background: transparent;
+    cursor: pointer;
+    margin-right: 4px;
+}
+.tms-sidebar-btn:hover { background: var(--fg-hover-color); color: var(--text-color); }
+.tms-sidebar-btn.active { color: var(--primary); border-color: var(--primary-light); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TMS OPERATIONS DASHBOARD — Filter Bar + WOW Cards
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Filter Bar ─────────────────────────────────────────────────────────── */
+.tms-ops-wrapper {
+    font-family: var(--font-stack);
+    padding: 0 0 32px 0;
+}
+
+.tms-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-end;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.tms-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1 1 160px;
+    min-width: 140px;
+}
+
+.tms-filter-group label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0;
+}
+
+.tms-filter-group select,
+.tms-filter-group input[type="date"] {
+    height: 34px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0 10px;
+    font-size: 13px;
+    color: var(--text-color);
+    background: var(--control-bg);
+    outline: none;
+    transition: border-color 0.15s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.tms-filter-group select:focus,
+.tms-filter-group input[type="date"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(var(--primary-rgb, 78,161,255), 0.15);
+}
+
+.tms-filter-actions {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+    padding-bottom: 1px;
+}
+
+.tms-btn-search {
+    height: 34px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #4e92ff 0%, #2563eb 100%);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: opacity 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+    box-shadow: 0 2px 6px rgba(37,99,235,0.35);
+    white-space: nowrap;
+}
+
+.tms-btn-search:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37,99,235,0.4);
+}
+
+.tms-btn-search:active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.tms-btn-search.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.tms-btn-reset {
+    height: 34px;
+    padding: 0 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--control-bg);
+    color: var(--text-muted);
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+}
+
+.tms-btn-reset:hover {
+    background: var(--fg-hover-color);
+    color: var(--text-color);
+}
+
+/* ── Section Header ─────────────────────────────────────────────────────── */
+.tms-ops-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.tms-ops-section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--heading-color);
+    letter-spacing: -0.2px;
+}
+
+.tms-ops-last-updated {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+/* ── Card Grid ──────────────────────────────────────────────────────────── */
+.tms-ops-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+@media (max-width: 1200px) {
+    .tms-ops-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .tms-ops-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 560px) {
+    .tms-ops-grid {
+        grid-template-columns: 1fr;
+    }
+    .tms-filter-bar {
+        flex-direction: column;
+    }
+    .tms-filter-group {
+        min-width: 100%;
+    }
+}
+
+/* ── Individual Card ────────────────────────────────────────────────────── */
+.tms-ops-card {
+    border-radius: 14px;
+    padding: 20px 22px 18px;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    text-decoration: none;
+    display: block;
+    min-height: 110px;
+}
+
+.tms-ops-card::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    pointer-events: none;
+}
+
+.tms-ops-card::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+    pointer-events: none;
+}
+
+.tms-ops-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.2);
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.tms-ops-card:active {
+    transform: translateY(-2px);
+}
+
+.tms-card-number {
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -1px;
+    margin-bottom: 6px;
+    display: block;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    transition: opacity 0.25s ease;
+}
+
+.tms-card-number.refreshing {
+    opacity: 0.4;
+}
+
+.tms-card-label {
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0.92;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    display: block;
+}
+
+.tms-card-icon {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    font-size: 28px;
+    opacity: 0.25;
+    line-height: 1;
+    pointer-events: none;
+}
+
+/* ── Card Gradient Themes ───────────────────────────────────────────────── */
+
+/* POD Download — green family */
+.tms-card--pod-download {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+/* Pending POD — green-teal */
+.tms-card--pending-pod {
+    background: linear-gradient(135deg, #0f9b58 0%, #00bf8f 100%);
+}
+
+/* Pending POD-SRM — sage green */
+.tms-card--pending-pod-srm {
+    background: linear-gradient(135deg, #1a9850 0%, #66bb6a 100%);
+}
+
+/* Pending LR No — blue family */
+.tms-card--pending-lr {
+    background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+}
+
+/* Pending Dispatch — deep blue */
+.tms-card--pending-dispatch {
+    background: linear-gradient(135deg, #1565c0 0%, #42a5f5 100%);
+}
+
+/* Pending Arrival — sky blue */
+.tms-card--pending-arrival {
+    background: linear-gradient(135deg, #0288d1 0%, #80deea 100%);
+}
+
+/* Additional Amount Email Not Sent — orange */
+.tms-card--addl-email {
+    background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+}
+
+/* Additional Amount Not Approved — red-orange */
+.tms-card--addl-not-approved {
+    background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+}
+
+/* Pending Bills — deep purple */
+.tms-card--pending-bills {
+    background: linear-gradient(135deg, #7b4397 0%, #dc2430 100%);
+}
+
+/* Pending Payment — indigo-violet */
+.tms-card--pending-payment {
+    background: linear-gradient(135deg, #4568dc 0%, #b06ab3 100%);
+}
+
+/* Pending Customer Freight — teal-green */
+.tms-card--pending-cf {
+    background: linear-gradient(135deg, #1a9850 0%, #91cf60 100%);
+}
+
+/* Pending Vendor Freight — ocean blue */
+.tms-card--pending-vf {
+    background: linear-gradient(135deg, #2980b9 0%, #6dd5ed 100%);
+}
+
+/* Trip No Pending — amber */
+.tms-card--trip-no {
+    background: linear-gradient(135deg, #f09819 0%, #edde5d 100%);
+}
+
+/* ── Skeleton Loading State ─────────────────────────────────────────────── */
+.tms-ops-card.skeleton .tms-card-number,
+.tms-ops-card.skeleton .tms-card-label {
+    background: rgba(255,255,255,0.3);
+    border-radius: 4px;
+    color: transparent;
+    animation: tms-pulse 1.4s ease-in-out infinite;
+}
+
+.tms-ops-card.skeleton .tms-card-number {
+    width: 60px;
+    height: 38px;
+    display: inline-block;
+}
+
+.tms-ops-card.skeleton .tms-card-label {
+    width: 90%;
+    height: 14px;
+    display: block;
+}
+
+@keyframes tms-pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.5; }
+}
+
+/* ================================================================
+   Amazon Trip Import — live progress panel + result panel
+   Prefix: atip-  (Amazon Trip Import Progress)
+   ================================================================ */
+
+.atip-panel {
+    border: 1px solid #dbe4ff;
+    border-radius: 12px;
+    padding: clamp(10px, 1.4vw, 16px);
+    background: #f8faff;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+.atip-panel.atip-completed { border-color: #bbf7d0; background: #f0fdf4; }
+.atip-panel.atip-failed    { border-color: #fecaca; background: #fef2f2; }
+.atip-panel.atip-cancelled { border-color: #fde68a; background: #fffbeb; }
+
+.atip-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.atip-stage {
+    font-weight: 700;
+    font-size: clamp(13px, 1.3vw, 15px);
+}
+.atip-panel .atip-cancel {
+    white-space: nowrap;
+}
+
+.atip-bar {
+    width: 100%;
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.atip-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4f46e5, #6366f1);
+    transition: width 0.3s ease;
+}
+.atip-panel.atip-completed .atip-bar-fill { background: linear-gradient(90deg, #16a34a, #22c55e); }
+.atip-panel.atip-failed .atip-bar-fill    { background: linear-gradient(90deg, #b91c1c, #ef4444); }
+.atip-panel.atip-cancelled .atip-bar-fill { background: linear-gradient(90deg, #b45309, #f59e0b); }
+
+.atip-meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: clamp(11px, 1.1vw, 13px);
+    color: #4b5563;
+}
+
+.atip-counters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+}
+.atip-counter {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+.atip-counter span { color: #6b7280; font-size: 12px; }
+.atip-counter strong { font-size: clamp(14px, 1.5vw, 17px); }
+.atip-counter.atip-ins strong { color: #16a34a; }
+.atip-counter.atip-upd strong { color: #2563eb; }
+.atip-counter.atip-skp strong { color: #6b7280; }
+.atip-counter.atip-fld strong { color: #dc2626; }
+
+/* Result panel (shown after Completed / Cancelled / Failed) */
+.atip-result {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: clamp(12px, 1.6vw, 18px);
+    margin-top: 8px;
+    background: #ffffff;
+}
+.atip-result.atip-completed { border-left: 4px solid #16a34a; }
+.atip-result.atip-cancelled { border-left: 4px solid #f59e0b; }
+.atip-result.atip-failed    { border-left: 4px solid #dc2626; }
+
+.atip-result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.atip-result-status {
+    font-size: clamp(14px, 1.6vw, 18px);
+    font-weight: 700;
+}
+.atip-result-time {
+    color: #6b7280;
+    font-size: 12px;
+}
+.atip-result-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.atip-download { white-space: nowrap; }
+
+.atip-result-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+}
+.atip-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.atip-card span { color: #6b7280; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+.atip-card strong { font-size: clamp(16px, 1.8vw, 20px); }
+.atip-card-total strong { color: #111827; }
+.atip-card-ins strong   { color: #16a34a; }
+.atip-card-upd strong   { color: #2563eb; }
+.atip-card-skp strong   { color: #6b7280; }
+.atip-card-fld strong   { color: #dc2626; }
+
+.atip-no-failures {
+    color: #16a34a;
+    font-weight: 600;
+    padding: 12px;
+    background: #f0fdf4;
+    border-radius: 8px;
+}
+
+.atip-failures {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 12px;
+}
+.atip-failures-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+.atip-failures-title {
+    font-weight: 700;
+    color: #dc2626;
+}
+.atip-failures-search {
+    width: min(320px, 100%);
+}
+.atip-failures-scroll {
+    max-height: 360px;
+    overflow: auto;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+.atip-failures-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+.atip-failures-table thead {
+    position: sticky;
+    top: 0;
+    background: #f3f4f6;
+    z-index: 1;
+}
+.atip-failures-table th,
+.atip-failures-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #f1f5f9;
+    text-align: left;
+    vertical-align: top;
+}
+.atip-failures-table td.atip-msg {
+    color: #4b5563;
+    word-break: break-word;
+    max-width: 520px;
+}
+.atip-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+}
+.atip-badge-error   { background: #fef2f2; color: #b91c1c; }
+.atip-badge-warning { background: #fffbeb; color: #b45309; }
+.atip-more-note {
+    margin-top: 8px;
+    color: #6b7280;
+    font-size: 12px;
+}
+
+/* Mobile tweaks */
+@media (max-width: 640px) {
+    .atip-meta { gap: 8px; }
+    .atip-failures-head { flex-direction: column; align-items: stretch; }
+    .atip-failures-search { width: 100%; }
+}
+
+/* ================================================================
+   Amazon Trip Import — Form Page Styling
+   Page: #page-Amazon-trip---Import
+   ================================================================ */
+
+/* ── Page Container ── */
+#page-Amazon-trip---Import .layout-main-section-wrapper,
+#page-Amazon-trip---Import .page-content {
+    border: 2px solid var(--tms-section-border, #C7D7FF) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 0 0 1px rgba(59,79,228,0.12), 0 8px 32px rgba(0,0,0,0.08) !important;
+    background: #f0f4ff !important;
+    overflow: visible !important;
+}
+
+/* ── Page Header ── */
+#page-Amazon-trip---Import .page-head,
+#page-Amazon-trip---Import .page-header-actions-block {
+    background: #fff !important;
+    border-bottom: 1.5px solid var(--tms-section-border, #C7D7FF) !important;
+}
+
+#page-Amazon-trip---Import .title-text,
+#page-Amazon-trip---Import .page-title .title-text {
+    color: var(--tms-heading-color, #1E1B4B) !important;
+    font-weight: 800 !important;
+}
+
+/* ── Banner ── */
+.atip-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 22px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #3B4FE4 0%, #6366f1 50%, #818cf8 100%);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(59,79,228,0.25), 0 1px 0 rgba(255,255,255,0.12) inset;
+    gap: 16px;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+}
+.atip-banner::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    pointer-events: none;
+}
+.atip-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    pointer-events: none;
+}
+
+.atip-banner-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    z-index: 1;
+}
+
+.atip-banner-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    backdrop-filter: blur(4px);
+}
+.atip-banner-icon svg {
+    color: #fff;
+}
+
+.atip-banner-title {
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.atip-banner-sub {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.78);
+    margin-top: 2px;
+}
+
+.atip-banner-right {
+    z-index: 1;
+}
+
+.atip-banner-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: 1.5px solid;
+    backdrop-filter: blur(4px);
+    white-space: nowrap;
+}
+
+/* ── Section Headers ── */
+#page-Amazon-trip---Import .section-head,
+#page-Amazon-trip---Import .form-section-heading {
+    color: var(--tms-heading-color, #1E1B4B) !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.10em !important;
+    border-left: 3px solid var(--tms-primary, #3B4FE4) !important;
+    padding-left: 9px !important;
+    margin-bottom: 10px !important;
+}
+
+/* ── Labels ── */
+#page-Amazon-trip---Import .control-label,
+#page-Amazon-trip---Import .frappe-control label.control-label {
+    color: var(--tms-label-color, #3730A3) !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.07em !important;
+    text-transform: uppercase !important;
+    margin-bottom: 4px !important;
+}
+
+/* ── Input Fields ── */
+#page-Amazon-trip---Import .frappe-control .form-control,
+#page-Amazon-trip---Import .frappe-control input:not([type="checkbox"]):not([type="radio"]),
+#page-Amazon-trip---Import .frappe-control textarea,
+#page-Amazon-trip---Import .frappe-control select {
+    background: #f0f4ff !important;
+    border: 1.5px solid #a5b4fc !important;
+    border-radius: 8px !important;
+    color: var(--tms-heading-color, #1E1B4B) !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    padding: 8px 12px !important;
+    height: 38px !important;
+    line-height: 1.4 !important;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.03) !important;
+    transition: border-color 0.18s, box-shadow 0.18s, background 0.18s !important;
+    outline: none !important;
+}
+
+#page-Amazon-trip---Import .frappe-control .form-control:hover:not([readonly]):not([disabled]),
+#page-Amazon-trip---Import .frappe-control input:hover:not([readonly]):not([disabled]),
+#page-Amazon-trip---Import .frappe-control select:hover:not([disabled]) {
+    border-color: var(--tms-primary, #3B4FE4) !important;
+    background: #fff !important;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.03), 0 0 0 3px rgba(59,79,228,0.10) !important;
+}
+
+#page-Amazon-trip---Import .frappe-control .form-control:focus,
+#page-Amazon-trip---Import .frappe-control input:focus,
+#page-Amazon-trip---Import .frappe-control select:focus {
+    border-color: var(--tms-primary, #3B4FE4) !important;
+    background: #fff !important;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.03), 0 0 0 3.5px rgba(59,79,228,0.12) !important;
+    outline: none !important;
+}
+
+/* Read-only fields */
+#page-Amazon-trip---Import .frappe-control .like-disabled-input {
+    display: block !important;
+    min-height: 38px !important;
+    background: rgba(99,102,241,0.05) !important;
+    border: 1.5px solid rgba(99,102,241,0.18) !important;
+    border-radius: 8px !important;
+    color: var(--tms-heading-color, #1E1B4B) !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    padding: 8px 12px !important;
+    cursor: default !important;
+}
+
+/* ── Import Button ── */
+.atip-import-btn {
+    background: linear-gradient(135deg, #3B4FE4 0%, #6366f1 100%) !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    padding: 10px 32px !important;
+    height: auto !important;
+    min-height: 44px !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 14px rgba(59,79,228,0.30) !important;
+    transition: transform 0.15s, box-shadow 0.15s, filter 0.15s !important;
+    letter-spacing: 0.02em !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.atip-import-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(59,79,228,0.40) !important;
+    filter: brightness(1.08) !important;
+}
+
+.atip-import-btn:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 8px rgba(59,79,228,0.25) !important;
+}
+
+.atip-import-btn:disabled,
+.atip-import-btn[disabled] {
+    background: linear-gradient(135deg, #94a3b8 0%, #cbd5e1 100%) !important;
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    filter: none !important;
+}
+
+/* ── Buttons in page header ── */
+#page-Amazon-trip---Import .page-actions .btn-primary {
+    background: var(--tms-primary, #3B4FE4) !important;
+    border-color: var(--tms-primary, #3B4FE4) !important;
+    color: #fff !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+    transition: filter 0.15s, transform 0.12s !important;
+}
+
+#page-Amazon-trip---Import .page-actions .btn-primary:hover {
+    filter: brightness(1.1) !important;
+    transform: translateY(-1px) !important;
+}
+
+#page-Amazon-trip---Import .page-actions .btn-default,
+#page-Amazon-trip---Import .page-actions .btn-secondary {
+    border: 1.5px solid #a5b4fc !important;
+    border-radius: 8px !important;
+    color: var(--tms-label-color, #3730A3) !important;
+    font-weight: 600 !important;
+}
+
+#page-Amazon-trip---Import .page-actions .btn-default:hover {
+    border-color: var(--tms-primary, #3B4FE4) !important;
+    color: var(--tms-primary, #3B4FE4) !important;
+}
+
+/* ── Required asterisk ── */
+#page-Amazon-trip---Import .control-label .reqd,
+#page-Amazon-trip---Import .frappe-control .reqd {
+    color: var(--tms-primary, #3B4FE4) !important;
+    font-weight: 900 !important;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .atip-banner {
+        padding: 14px 16px;
+        gap: 12px;
+    }
+    .atip-banner-title {
+        font-size: 15px;
+    }
+    .atip-banner-icon {
+        width: 38px;
+        height: 38px;
+    }
+    .atip-import-btn {
+        width: 100% !important;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TRIP POD IMPORT — Advanced UI
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Action Button Row (side-by-side) ───────────────────────────────────── */
+.pod-btn-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    order: 999;
+    margin-top: 8px;
+}
+.pod-btn-group .frappe-control {
+    margin-bottom: 0 !important;
+}
+
+/* ── Action Buttons ─────────────────────────────────────────────────────── */
+.pod-import-btn {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 7px;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    padding: 9px 20px !important;
+    border-radius: 8px !important;
+    border: none !important;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    line-height: 1.3 !important;
+    height: auto !important;
+    min-height: 38px;
+}
+.pod-import-btn .pod-btn-icon {
+    font-size: 15px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+.pod-import-btn-select {
+    background: linear-gradient(135deg, #4361ee, #3a56d4) !important;
+    color: #fff !important;
+    box-shadow: 0 2px 8px rgba(67,97,238,0.30);
+}
+.pod-import-btn-select:hover:not(:disabled) {
+    background: linear-gradient(135deg, #3a56d4, #2f48c0) !important;
+    box-shadow: 0 4px 14px rgba(67,97,238,0.40);
+    transform: translateY(-1px);
+}
+.pod-import-btn-import {
+    background: linear-gradient(135deg, #2d9e5e, #25854f) !important;
+    color: #fff !important;
+    box-shadow: 0 2px 8px rgba(45,158,94,0.30);
+}
+.pod-import-btn-import:hover:not(:disabled) {
+    background: linear-gradient(135deg, #25854f, #1e6e40) !important;
+    box-shadow: 0 4px 14px rgba(45,158,94,0.40);
+    transform: translateY(-1px);
+}
+.pod-import-btn:disabled,
+.pod-import-btn.disabled {
+    opacity: 0.45 !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+.pod-import-btn:active:not(:disabled) { transform: translateY(0) !important; }
+
+/* ── Help Button ────────────────────────────────────────────────────────── */
+.pod-help-btn {
+    background: linear-gradient(135deg, #7b61ff, #6366f1) !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(99,102,241,0.30);
+}
+.pod-help-btn:hover,
+.pod-help-btn.active {
+    background: linear-gradient(135deg, #6d54ff, #4f46e5) !important;
+    box-shadow: 0 4px 14px rgba(99,102,241,0.40);
+    transform: translateY(-1px);
+}
+[data-theme="dark"] .pod-help-btn {
+    background: linear-gradient(135deg, #7b61ff, #6366f1) !important;
+    color: #fff !important;
+}
+[data-theme="dark"] .pod-help-btn:hover,
+[data-theme="dark"] .pod-help-btn.active {
+    background: linear-gradient(135deg, #6d54ff, #4f46e5) !important;
+}
+
+/* ── FAQ Panel ──────────────────────────────────────────────────────────── */
+.pod-faq-panel {
+    margin: 4px 0 16px;
+    border: 1px solid #e0e7ff;
+    border-radius: 11px;
+    background: #fff;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.25s ease, opacity 0.2s ease;
+}
+.pod-faq-panel.open {
+    max-height: 3000px;
+    opacity: 1;
+}
+.pod-faq-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #f5f3ff, #eef2ff);
+    border-bottom: 1px solid #e0e7ff;
+}
+.pod-faq-head-icon { font-size: 20px; flex-shrink: 0; }
+.pod-faq-head-title { font-size: 13.5px; font-weight: 700; color: #1e1b4b; }
+.pod-faq-head-sub { font-size: 11px; color: #6b7280; }
+.pod-faq-body { padding: 6px 16px 14px; }
+.pod-faq-item { border-bottom: 1px solid #f1f5f9; }
+.pod-faq-item:last-child { border-bottom: none; }
+.pod-faq-q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 11px 4px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #1e1b4b;
+    cursor: pointer;
+}
+.pod-faq-q:hover { color: #4f46e5; }
+.pod-faq-q .pod-faq-q-chev {
+    transition: transform 0.2s ease;
+    color: #9ca3af;
+    flex-shrink: 0;
+    font-size: 11px;
+}
+.pod-faq-item.open .pod-faq-q .pod-faq-q-chev {
+    transform: rotate(180deg);
+    color: #6366f1;
+}
+.pod-faq-a {
+    display: none;
+    padding: 0 4px 13px;
+    font-size: 12px;
+    line-height: 1.65;
+    color: #374151;
+}
+.pod-faq-item.open .pod-faq-a { display: block; }
+.pod-faq-a table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 11.5px; }
+.pod-faq-a th, .pod-faq-a td { border: 1px solid #e5e7eb; padding: 5px 8px; text-align: left; vertical-align: top; }
+.pod-faq-a th { background: #f8faff; font-weight: 700; color: #4f46e5; }
+.pod-faq-a code { background: #f3f4f6; border-radius: 4px; padding: 1px 5px; font-size: 11px; color: #be123c; }
+.pod-faq-a strong { color: #1e1b4b; }
+.pod-faq-a .ok  { color: #16a34a; font-weight: 700; }
+.pod-faq-a .bad { color: #dc2626; font-weight: 700; }
+.pod-faq-a ol, .pod-faq-a ul { margin: 6px 0; padding-left: 20px; }
+.pod-faq-a li { margin-bottom: 3px; }
+
+[data-theme="dark"] .pod-faq-panel {
+    background: var(--card-bg, #1a1a2e);
+    border-color: var(--border-color, #2a2a3e);
+}
+[data-theme="dark"] .pod-faq-head {
+    background: var(--subtle-accent, #16213e);
+    border-color: var(--border-color, #2a2a3e);
+}
+[data-theme="dark"] .pod-faq-head-title { color: var(--text-color, #e0e0e0); }
+[data-theme="dark"] .pod-faq-head-sub { color: var(--text-muted, #9e9e9e); }
+[data-theme="dark"] .pod-faq-item { border-color: var(--border-color, #2a2a3e); }
+[data-theme="dark"] .pod-faq-q { color: var(--text-color, #e0e0e0); }
+[data-theme="dark"] .pod-faq-q:hover { color: #8b9bff; }
+[data-theme="dark"] .pod-faq-a { color: var(--text-muted, #c2c8d0); }
+[data-theme="dark"] .pod-faq-a th, [data-theme="dark"] .pod-faq-a td { border-color: var(--border-color, #2a2a3e); }
+[data-theme="dark"] .pod-faq-a th { background: var(--subtle-accent, #16213e); color: #8b9bff; }
+[data-theme="dark"] .pod-faq-a code { background: var(--subtle-accent, #16213e); color: #ff8fa3; }
+
+@media (max-width: 600px) {
+    .pod-faq-a { overflow-x: auto; }
+    .pod-faq-a table { font-size: 10.5px; }
+    .pod-faq-head-title { font-size: 12.5px; }
+    .pod-faq-head-sub { font-size: 10px; }
+}
+
+/* ── Status Badge Pills ─────────────────────────────────────────────────── */
+.pod-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    border-width: 1px;
+    border-style: solid;
+}
+.pod-status-badge.s-ready       { background:#edfbf0; color:#1e7a46; border-color:#27ae6040; }
+.pod-status-badge.s-imported    { background:#e8f4fd; color:#1a5f9c; border-color:#2980b940; }
+.pod-status-badge.s-failed      { background:#fdecea; color:#9b2317; border-color:#e74c3c40; }
+.pod-status-badge.s-no-match    { background:#fef5e4; color:#8a5a00; border-color:#f39c1240; }
+.pod-status-badge.s-multi       { background:#f5eef8; color:#6b2d8b; border-color:#9b59b640; }
+.pod-status-badge.s-duplicate   { background:#f2f3f4; color:#555e65; border-color:#95a5a640; }
+.pod-status-badge.s-invalid     { background:#fdedec; color:#922b21; border-color:#c0392b40; }
+.pod-status-badge.s-unknown     { background:#f8f9fa; color:#495057; border-color:#adb5bd40; }
+
+/* ── Stat Cards ─────────────────────────────────────────────────────────── */
+.pod-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+}
+.pod-stat-card {
+    padding: 14px 16px;
+    border-radius: 10px;
+    border-width: 1px;
+    border-style: solid;
+}
+.pod-stat-card .pod-stat-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 4px;
+}
+.pod-stat-card .pod-stat-value {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+/* ── File Preview Table ─────────────────────────────────────────────────── */
+.pod-file-table-wrap {
+    margin-top: 14px;
+    border-radius: 10px;
+    border: 1px solid #e2e6ea;
+    overflow: hidden;
+    background: #fff;
+}
+.pod-file-table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e2e6ea;
+}
+.pod-file-table-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #343a40;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.pod-file-table-count {
+    font-size: 11px;
+    color: #6c757d;
+    background: #e9ecef;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+.pod-file-table-scroll {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 380px;
+}
+.pod-file-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+}
+.pod-file-table thead th {
+    padding: 9px 12px;
+    text-align: left;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: #f8f9fa;
+    border-bottom: 2px solid #e2e6ea;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    white-space: nowrap;
+}
+.pod-file-table tbody tr {
+    border-bottom: 1px solid #f1f3f5;
+    transition: background 0.1s;
+}
+.pod-file-table tbody tr:last-child { border-bottom: none; }
+.pod-file-table tbody tr:hover { background: #f8f9fa; }
+.pod-file-table tbody td {
+    padding: 8px 12px;
+    vertical-align: middle;
+    color: #343a40;
+}
+.pod-file-table .col-num {
+    width: 40px;
+    text-align: center;
+    color: #adb5bd;
+    font-weight: 600;
+    font-size: 11px;
+}
+.pod-file-table .col-file {
+    max-width: 240px;
+    word-break: break-all;
+    font-family: monospace;
+    font-size: 11.5px;
+}
+.pod-file-table .col-ref {
+    white-space: nowrap;
+    font-family: monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: #495057;
+}
+.pod-file-table .col-trip {
+    white-space: nowrap;
+    font-size: 12px;
+    color: #4361ee;
+    font-weight: 600;
+}
+.pod-file-table .col-msg {
+    font-size: 11px;
+    color: #6c757d;
+    max-width: 180px;
+}
+
+/* ── Progress Strip ─────────────────────────────────────────────────────── */
+.pod-progress-strip {
+    height: 4px;
+    background: #e9ecef;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+.pod-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4361ee, #2d9e5e);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+/* ── Result Dialog ──────────────────────────────────────────────────────── */
+.pod-result-wrap { font-family: var(--font-stack); }
+.pod-result-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+.pod-result-banner.success { background: #edfbf0; border: 1px solid #27ae6040; }
+.pod-result-banner.partial { background: #fef5e4; border: 1px solid #f39c1240; }
+.pod-result-banner.fail    { background: #fdecea; border: 1px solid #e74c3c40; }
+.pod-result-banner-icon { font-size: 26px; }
+.pod-result-banner-text strong { display: block; font-size: 14px; font-weight: 700; }
+.pod-result-banner-text span   { font-size: 12px; color: #6c757d; }
+.pod-result-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+}
+.pod-result-stat {
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid transparent;
+}
+.pod-result-stat .pod-rs-num {
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+.pod-result-stat .pod-rs-lbl { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+.pod-result-stat.imported { background: #e8f4fd; color: #1a5f9c; border-color: #2980b940; }
+.pod-result-stat.failed   { background: #fdecea; color: #9b2317; border-color: #e74c3c40; }
+.pod-result-stat.remaining{ background: #f8f9fa; color: #495057; border-color: #adb5bd40; }
+.pod-result-errors { margin-top: 12px; }
+.pod-result-errors-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #6c757d;
+    margin-bottom: 8px;
+}
+.pod-result-error-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: 6px;
+    background: #fdecea;
+    margin-bottom: 6px;
+    font-size: 12px;
+}
+.pod-result-error-row .err-icon { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+.pod-result-error-row .err-file { font-weight: 600; font-family: monospace; color: #9b2317; }
+.pod-result-error-row .err-msg  { color: #c0392b; }
+
+/* ── Alert Strips ───────────────────────────────────────────────────────── */
+.pod-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
+    border-left: 3px solid;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+.pod-alert.info    { background:#e8f4fd; border-color:#1a7abf; color:#0d4d7a; }
+.pod-alert.success { background:#edfbf0; border-color:#2d9e5e; color:#1a5c38; }
+.pod-alert.warning { background:#fef5e4; border-color:#e67e22; color:#7d5c1a; }
+.pod-alert.danger  { background:#fdecea; border-color:#c0392b; color:#7b1b15; }
+.pod-alert-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+/* ── Help Card ──────────────────────────────────────────────────────────── */
+.pod-help-card {
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9ff, #f0f4ff);
+    border-radius: 12px;
+    border: 1px solid #dde3f5;
+    text-align: center;
+}
+.pod-help-icon { font-size: 32px; margin-bottom: 10px; }
+.pod-help-title { font-size: 14px; font-weight: 700; color: #343a40; margin-bottom: 6px; }
+.pod-help-text  { font-size: 12px; color: #6c757d; line-height: 1.6; }
+
+/* Dark mode overrides for help card */
+[data-theme="dark"] .pod-help-card {
+    background: linear-gradient(135deg, var(--card-bg, #1a1a2e), var(--subtle-accent, #16213e));
+    border-color: var(--border-color, #2a2a3e);
+}
+[data-theme="dark"] .pod-help-title {
+    color: var(--text-color, #e0e0e0);
+}
+[data-theme="dark"] .pod-help-text {
+    color: var(--text-muted, #9e9e9e);
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+    .pod-stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .pod-result-stats { grid-template-columns: repeat(3, 1fr); }
+    .pod-stat-card .pod-stat-value { font-size: 22px; }
+    .pod-file-table .col-msg { display: none; }
+    .pod-file-table .col-trip { max-width: 100px; overflow: hidden; text-overflow: ellipsis; }
+    .pod-import-btn { padding: 8px 13px !important; font-size: 12px !important; }
+}
+@media (max-width: 480px) {
+    .pod-result-stats { grid-template-columns: repeat(3, 1fr); }
+    .pod-result-stat .pod-rs-num { font-size: 20px; }
+    .pod-result-stat .pod-rs-lbl { font-size: 10px; }
+    .pod-file-table .col-ref { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   File Uploader — Public-only mode
+   Marker class .tms-private-disabled is added to the upload dialog wrapper by
+   default_public_upload.js. Scope keeps these rules from leaking to other
+   dialogs/checkboxes. Visually present but unclickable so users see the
+   intent without being able to bypass it.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.tms-private-disabled #uploader-private-checkbox,
+.tms-private-disabled .modal-footer .btn-modal-secondary {
+    pointer-events: none !important;
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+}
+.tms-private-disabled #uploader-private-checkbox input {
+    pointer-events: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TMS User Group — Permission Matrix Table
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Permission Matrix ─────────────────────────────────────────────────── */
+/* Hover only — all other styles are inline in tms_user_group.js */
+[data-doctype]:hover td { background: #EEF2FF !important; }
+
+.tms-perm-wrap {
+    overflow-x: auto;
+    border: 1px solid #C7D2FE;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(79,70,229,0.10);
+    margin: 16px 0;
+    background: #fff;
+}
+
+.tms-perm-tbl {
+    border-collapse: collapse;
+    width: max-content;
+    min-width: 100%;
+    font-size: 13px;
+}
+
+/* ── Sticky first two columns ───────────────────────────────────────────── */
+.tms-sticky-1 {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+    background: inherit;
+}
+.tms-sticky-2 {
+    position: sticky;
+    left: 115px;
+    z-index: 3;
+    background: inherit;
+    box-shadow: 3px 0 6px -2px rgba(79,70,229,0.12);
+}
+thead .tms-sticky-1,
+thead .tms-sticky-2 { z-index: 5; }
+
+/* ── Group header row (Core Access | Workflow | Data & Extras) ─────────── */
+.tms-ph-group-row { border-bottom: none; }
+
+.tms-ph-corner {
+    background: #312E81;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 10px 12px;
+    white-space: nowrap;
+    width: 115px;
+    vertical-align: middle;
+    text-align: left;
+}
+.tms-sticky-2.tms-ph-corner { width: 155px; min-width: 155px; }
+
+.tms-ph-group {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    text-align: center;
+    padding: 8px 6px;
+    border-left: 2px solid rgba(255,255,255,0.25);
+    color: #fff;
+}
+.tms-ph-core     { background: #4F46E5; }
+.tms-ph-workflow { background: #D97706; }
+.tms-ph-extras   { background: #0D9488; }
+
+/* ── Column label row ───────────────────────────────────────────────────── */
+.tms-ph-col-row { background: #F8FAFF; border-bottom: 2px solid #C7D2FE; }
+
+.tms-ph-col {
+    padding: 7px 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #374151;
+    text-align: center;
+    white-space: nowrap;
+    width: 52px;
+    min-width: 52px;
+}
+.tms-ph-sep { border-left: 2px solid #C7D2FE; }
+
+/* ── Body cells ─────────────────────────────────────────────────────────── */
+.tms-pr-even { background: #FAFAFF; }
+.tms-pr-odd  { background: #FFFFFF; }
+.tms-perm-tbl tbody tr:hover { background: #EEF2FF; }
+
+.tms-pc-module {
+    vertical-align: top;
+    padding: 10px 8px;
+    border-bottom: 1px solid #EEF2FF;
+    width: 115px;
+    background: inherit;
+}
+.tms-pc-name {
+    padding: 8px 12px;
+    border-bottom: 1px solid #EEF2FF;
+    white-space: nowrap;
+    font-size: 13px;
+    color: #1E293B;
+    width: 155px;
+    min-width: 155px;
+    background: inherit;
+}
+.tms-pc-check {
+    text-align: center;
+    padding: 6px 2px;
+    border-bottom: 1px solid #EEF2FF;
+}
+.tms-pc-sep { border-left: 2px solid #E0E7FF; }
+
+/* ── Module badges ──────────────────────────────────────────────────────── */
+.tms-mod-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    line-height: 1.4;
+}
+
+/* Default + named variants */
+.tms-mod-badge                       { background: #EEF2FF; color: #4338CA; }
+.tms-mod-operations                  { background: #DCFCE7; color: #166534; }
+.tms-mod-master                      { background: #FEF9C3; color: #854D0E; }
+.tms-mod-finance                     { background: #D1FAE5; color: #065F46; }
+.tms-mod-fleet                       { background: #DBEAFE; color: #1E40AF; }
+.tms-mod-hrms                        { background: #FAE8FF; color: #7E22CE; }
+.tms-mod-settings                    { background: #F1F5F9; color: #334155; }
+.tms-mod-logicore             { background: #EEF2FF; color: #4338CA; }
+
+/* ── Checkboxes ─────────────────────────────────────────────────────────── */
+.tms-perm-cb {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: #4F46E5;
+    display: block;
+    margin: 0 auto;
+}
+.tms-perm-cb:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   POD Manager Modal — Dark Mode
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] #tms-pod-upload-zone {
+    background: var(--card-bg, #2d2d4d) !important;
+    border-color: var(--border-color, #444) !important;
+}
+[data-theme="dark"] #tms-pod-upload-zone > div:nth-child(2) {
+    color: var(--text-color, #e0e0e0) !important;
+}
+[data-theme="dark"] #tms-pod-upload-zone > div:nth-child(3) {
+    color: var(--text-muted, #9e9e9e) !important;
+}
+[data-theme="dark"] #tms-pod-file-name {
+    background: var(--subtle-accent, #1a1a2e) !important;
+    border-color: var(--border-color, #444) !important;
+    color: var(--text-color, #e0e0e0) !important;
+}
+[data-theme="dark"] #tms-pod-delete-btn {
+    background: transparent !important;
+    color: #f87171 !important;
+    border-color: #ef4444 !important;
+}
+[data-theme="dark"] #tms-pod-delete-btn:hover {
+    background: rgba(239, 68, 68, .1) !important;
+}
+[data-theme="dark"] #tms-pod-delete-progress {
+    color: var(--text-muted, #9e9e9e) !important;
+}
+[data-theme="dark"] #tms-pod-upload-progress {
+    background: transparent !important;
+}
+[data-theme="dark"] #tms-pod-progress-bar {
+    background: var(--primary, #6366f1) !important;
+}
+[data-theme="dark"] #tms-pod-progress-text {
+    color: var(--text-muted, #9e9e9e) !important;
+}
+[data-theme="dark"] #tms-pod-type,
+[data-theme="dark"] #tms-pod-date {
+    background: var(--control-bg, #2d2d4d) !important;
+    color: var(--text-color, #e0e0e0) !important;
+    border-color: var(--border-color, #444) !important;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+    .tms-pc-module  { display: none; }
+    .tms-ph-corner:first-child { display: none; }
+    .tms-sticky-2   { left: 0; box-shadow: none; }
+    .tms-pc-name    { width: 120px; min-width: 120px; }
+    .tms-ph-col     { width: 44px; min-width: 44px; }
+}
+
+/* ── Fuel Urea Expenses list view ──────────────────────────────────────────
+   list_view.js:apply_column_widths() measures each column's text length after
+   render and injects an inline `width`/`flex` style on .list-subject based on
+   that alone — it doesn't account for the Draft/Submitted status column that
+   appears now that the doctype is submittable, so the ID still gets squeezed
+   and ellipsis-truncated. Inline styles beat plain CSS, so !important is
+   required here to guarantee a minimum width without removing any column. */
+body[data-route^="List/Fuel Urea Expenses"] .list-subject {
+    width: 200px !important;
+    flex: 2 0 200px !important;
+}
+
+/* ── Hide "Select Report" dropdown in Report View (all doctypes) ──────────
+   frappe/list/list_view_select.js groups this under
+   .inner-group-button[data-label="Select Report"] regardless of doctype. */
+.inner-group-button[data-label="Select%20Report"] {
+    display: none !important;
+}
+
+/* ── Purchase Invoice "Purchase Invoice Payment Details" section ─────────
+   Frappe gives every .form-column a fixed width (not flex-grow), so with
+   only 4 visible columns the row bunches left with empty space on the
+   right. Stretch the visible columns to fill the row instead. */
+.form-section[data-fieldname="tms_payment_section"] > .section-body > .form-column {
+    flex: 1 1 0 !important;
+    width: auto !important;
+}
+
+/* ── Fuel Urea Expenses: Fuel History panel ───────────────────────────────
+   Rendered client-side into the read-only "fuel_history_html" field.
+   Filter row wraps on narrow screens; table scrolls horizontally within
+   its own container instead of widening the page (fluid, no fixed px). */
+.tms-fuel-history {
+    font-size: clamp(12px, 1.4vw, 14px);
+}
+.tms-fuel-history-empty {
+    padding: var(--padding-sm, 8px) 0;
+    color: var(--text-muted);
+}
+.tms-fuel-history-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.tms-fuel-history-filters .tms-fh-field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 130px;
+    flex: 1 1 130px;
+}
+.tms-fuel-history-filters label {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin: 0;
+}
+.tms-fuel-history-filters .btn {
+    flex: 0 0 auto;
+}
+.tms-fuel-history-scroll {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 420px;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+.tms-fuel-history-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+}
+.tms-fuel-history-table th,
+.tms-fuel-history-table td {
+    padding: 6px 8px;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+}
+.tms-fuel-history-table th {
+    color: var(--text-muted);
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    background: var(--fg-color);
+}
+.tms-fuel-history-table td.tms-fh-num,
+.tms-fuel-history-table th.tms-fh-num {
+    text-align: right;
+}
+@media (max-width: 767px) {
+    .tms-fuel-history-filters .tms-fh-field {
+        flex: 1 1 100%;
+    }
+}
+
+/* Driver Documents grid: restyle the plain grey "Attach" button to match the
+   app's primary color instead of the default Bootstrap grey button, and
+   center it within the "Document Attached" column. */
+.grid-static-col[data-fieldname="document_attached"] {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+.grid-static-col[data-fieldname="document_attached"] .btn-attach {
+    background: transparent !important;
+    border: 1.5px solid var(--tms-primary, #3B4FE4) !important;
+    color: var(--tms-primary, #3B4FE4) !important;
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 2px 12px;
+    box-shadow: none !important;
+    margin: 0 auto;
+}
+.grid-static-col[data-fieldname="document_attached"] .btn-attach:hover {
+    background: var(--tms-primary, #3B4FE4) !important;
+    color: #fff !important;
+}
+.grid-static-col[data-fieldname="document_attached"] .missing-image {
+    color: var(--tms-primary, #3B4FE4) !important;
+}
+
+/* Driver Documents / Employee Documents grids: the table field's label is
+   blank (so it doesn't repeat the section heading above it), but the empty
+   label row still reserved its usual height/margin, leaving a gap before the
+   grid. Collapse it. The label sits as .frappe-control > .grid-field >
+   label.control-label, so it must be targeted as a descendant, not a direct
+   child. */
+.frappe-control[data-fieldname="driving_license_category"] .grid-field > .control-label,
+.frappe-control[data-fieldname="employee_documents"] .grid-field > .control-label {
+    display: none !important;
+}
+.frappe-control[data-fieldname="driving_license_category"] .grid-field,
+.frappe-control[data-fieldname="employee_documents"] .grid-field {
+    margin-top: -8px !important;
+}
+
+/* Left nav sidebar "Search" (Ctrl+K) standard item — hidden per user
+   request; users trigger search via keyboard shortcut instead. */
+#navbar-modal-search {
+    display: none !important;
+}

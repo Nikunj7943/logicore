@@ -1,0 +1,440 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-05-01 17:24:30.482566",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_oyyw",
+  "column_break_amid",
+  "naming_series",
+  "section_break_header",
+  "company",
+  "column_break_1",
+  "payment_date",
+  "column_break_2",
+  "customer",
+  "column_break_rt",
+  "receipt_type",
+  "section_break_accounting",
+  "mode_of_payment",
+  "column_break_mop_r",
+  "paid_from_account",
+  "reference_date",
+  "column_break_mnnq",
+  "reference_no",
+  "upi_id",
+  "payment_entry",
+  "is_reconciled",
+  "bank_reconciliation",
+  "amended_from",
+  "section_break_filter",
+  "from_date",
+  "column_break_3",
+  "to_date",
+  "column_break_4",
+  "trip_type",
+  "column_break_filter_btn",
+  "fetch_trips_btn",
+  "section_break_trips",
+  "trips",
+  "section_break_totals",
+  "total_invoice_amount",
+  "column_break_rr1",
+  "receive_reference",
+  "column_break_5",
+  "total_brokerage_amount",
+  "column_break_6",
+  "total_lr_money",
+  "column_break_7",
+  "total_tds_amount",
+  "column_break_8",
+  "total_received_amount",
+  "total_outstanding_amount",
+  "section_break_remarks",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "default": "RCT-.YYYY.-.MM.-.#####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Receipt No",
+   "no_copy": 1,
+   "options": "RCT-.YYYY.-.MM.-.#####",
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "section_break_header",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Receipt Details"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "payment_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Payment Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_rt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Trip Wise",
+   "fieldname": "receipt_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Receipt Type",
+   "options": "Trip Wise\nOther Receipt",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.receipt_type=='Trip Wise'",
+   "fieldname": "section_break_filter",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Search Filters"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "From Date",
+   "mandatory_depends_on": "eval:doc.receipt_type=='Trip Wise'"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "mandatory_depends_on": "eval:doc.receipt_type=='Trip Wise'"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "trip_type",
+   "fieldtype": "Link",
+   "label": "Trip Type",
+   "options": "Trip Type",
+   "mandatory_depends_on": "eval:doc.receipt_type=='Trip Wise'"
+  },
+  {
+   "fieldname": "column_break_filter_btn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fetch_trips_btn",
+   "fieldtype": "Button",
+   "label": "Fetch Trips"
+  },
+  {
+   "depends_on": "eval:doc.receipt_type=='Trip Wise'",
+   "fieldname": "section_break_trips",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Trip Lines"
+  },
+  {
+   "fieldname": "trips",
+   "fieldtype": "Table",
+   "label": "Trips",
+   "options": "Customer Receipt Trip"
+  },
+  {
+   "fieldname": "section_break_totals",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Totals"
+  },
+  {
+   "fieldname": "total_invoice_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount",
+   "read_only_depends_on": "eval:doc.receipt_type=='Trip Wise'"
+  },
+  {
+   "depends_on": "eval:doc.receipt_type=='Other Receipt'",
+   "fieldname": "column_break_rr1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.receipt_type=='Other Receipt'",
+   "fieldname": "receive_reference",
+   "fieldtype": "Data",
+   "label": "Receive Reference",
+   "mandatory_depends_on": "eval:doc.receipt_type=='Other Receipt'"
+  },
+  {
+   "depends_on": "eval:doc.receipt_type=='Trip Wise'",
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.receipt_type=='Trip Wise'",
+   "fieldname": "total_brokerage_amount",
+   "fieldtype": "Currency",
+   "label": "Total Brokerage Amount",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.receipt_type=='Trip Wise'",
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.receipt_type=='Trip Wise'",
+   "fieldname": "total_lr_money",
+   "fieldtype": "Currency",
+   "label": "Total Broker LR Money",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.receipt_type=='Trip Wise'",
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.receipt_type=='Trip Wise'",
+   "fieldname": "total_tds_amount",
+   "fieldtype": "Currency",
+   "label": "Total TDS Deducted",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.receipt_type=='Trip Wise'",
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.receipt_type=='Trip Wise'",
+   "fieldname": "total_received_amount",
+   "fieldtype": "Currency",
+   "label": "Total Receive Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_outstanding_amount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Total Outstanding Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_accounting",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Accounting"
+  },
+  {
+   "default": "Bank Transfer",
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Select",
+   "label": "Mode of Payment",
+   "options": "Cash\nBank Transfer\nCheque\nUPI",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:in_list(['Bank Transfer','Cheque','Cash','UPI'], doc.mode_of_payment)",
+   "fieldname": "paid_from_account",
+   "fieldtype": "Link",
+   "label": "Deposit To Account (Bank/Cash)",
+   "mandatory_depends_on": "eval:in_list(['Bank Transfer','Cheque','Cash','UPI'], doc.mode_of_payment)",
+   "options": "Account Head"
+  },
+  {
+   "fieldname": "column_break_mop_r",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.mode_of_payment === 'UPI'",
+   "fieldname": "upi_id",
+   "fieldtype": "Data",
+   "label": "UPI ID",
+   "mandatory_depends_on": "eval:doc.mode_of_payment === 'UPI'"
+  },
+  {
+   "depends_on": "eval:in_list(['Bank Transfer','Cheque','UPI','Cash'], doc.mode_of_payment)",
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "label": "Reference No",
+   "in_list_view": 1,
+   "mandatory_depends_on": "eval:in_list(['Bank Transfer','Cheque'], doc.mode_of_payment)"
+  },
+  {
+   "default": "Today",
+   "depends_on": "eval:in_list(['Bank Transfer','Cheque'], doc.mode_of_payment)",
+   "fieldname": "reference_date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "Reference Date"
+  },
+  {
+   "fieldname": "column_break_mnnq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_entry",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "ERPNext Payment Entry",
+   "no_copy": 1,
+   "options": "Payment Entry",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_reconciled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Reconciled",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "bank_reconciliation",
+   "fieldtype": "Link",
+   "label": "Bank Reconciliation",
+   "no_copy": 1,
+   "options": "TMS Bank Reconciliation",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "ignore_validations",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Ignore Validations (Import Only)",
+   "no_copy": 1,
+   "print_hide": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Receipt",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "column_break_amid",
+   "fieldtype": "Column Break",
+   "hidden": 1
+  },
+  {
+   "fieldname": "section_break_oyyw",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "hide_border": 1
+  },
+  {
+   "fieldname": "section_break_remarks",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "default_print_format": "Receipt TMS",
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-08-24 08:42:00.571583",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Receipt",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Administrator",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "default_view": "Report",
+ "sort_field": "payment_date",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

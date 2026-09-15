@@ -1,0 +1,480 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "creation": "2026-03-26 17:25:40.594074",
+ "default_view": "Report",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_basic_info",
+  "date",
+  "column_break_yfxq",
+  "vehicle",
+  "column_break_gcby",
+  "fuelurea",
+  "column_break_izxr",
+  "driver_id",
+  "section_break_nkxi",
+  "supplier",
+  "column_break_qjye",
+  "entry_type",
+  "section_break_stock",
+  "urea_item",
+  "column_break_stock",
+  "warehouse",
+  "section_break_urea_stock_entry",
+  "stock_entry",
+  "section_break_xiph",
+  "payment_date",
+  "column_break_paydt",
+  "payment_mode",
+  "is_reconciled",
+  "column_break_gvod",
+  "bank_name",
+  "bank_reconciliation",
+  "column_break_mutr",
+  "reference_no",
+  "upi_id",
+  "section_break_inew",
+  "fill_type",
+  "last_odoometer",
+  "current_odometer",
+  "distance",
+  "liters",
+  "uom",
+  "partial_liters_carried",
+  "effective_liters",
+  "fuelurea_amount",
+  "kpl",
+  "column_break_lzqj",
+  "fixed_kpl",
+  "excessshort_fuel",
+  "excessshort_fuel_rate",
+  "fuel_incentive",
+  "expense_amount",
+  "remarks",
+  "section_break_driver_payment",
+  "driver_payment_date",
+  "driver_payment_mode",
+  "column_break_driver_payment",
+  "driver_bank_name",
+  "driver_upi_id",
+  "driver_payment_reference",
+  "is_reconciled_driver",
+  "bank_reconciliation_driver",
+  "amended_from",
+  "section_break_fuel_history",
+  "fuel_history_html"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_basic_info",
+   "fieldtype": "Section Break",
+   "label": "Basic Information"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "driver_id",
+   "fieldtype": "Link",
+   "label": "Driver",
+   "options": "Driver",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_yfxq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Link",
+   "label": "Vehicle",
+   "options": "Vehicle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_inew",
+   "fieldtype": "Section Break",
+   "label": "Odometer & Fuel Details"
+  },
+  {
+   "default": "Top Up (Full Tank)",
+   "fieldname": "fill_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Fill Type",
+   "options": "Top Up (Full Tank)\nPartial Refill",
+   "reqd": 1
+  },
+  {
+   "fieldname": "current_odometer",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Current Odometer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "last_odoometer",
+   "fieldtype": "Int",
+   "label": "Last Odometer"
+  },
+  {
+   "fieldname": "distance",
+   "fieldtype": "Float",
+   "label": "Distance"
+  },
+  {
+   "default": "Petrol",
+   "fieldname": "fuelurea",
+   "fieldtype": "Select",
+   "label": "Fuel/Urea",
+   "options": "Diesel\nUrea\nPetrol"
+  },
+  {
+   "fieldname": "liters",
+   "fieldtype": "Float",
+   "label": "Fuel / Urea Liters",
+   "reqd": 1
+  },
+  {
+   "default": "Litres",
+   "fieldname": "uom",
+   "fieldtype": "Data",
+   "label": "UOM"
+  },
+  {
+   "depends_on": "eval:doc.fill_type === 'Top Up (Full Tank)' && doc.fuelurea !== 'Urea'",
+   "description": "Auto-fetched: sum of Partial Refill liters since last Top Up for this vehicle",
+   "fieldname": "partial_liters_carried",
+   "fieldtype": "Float",
+   "label": "Partial Liters Carried Forward",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.fill_type === 'Top Up (Full Tank)' && doc.fuelurea !== 'Urea'",
+   "description": "Current liters + Partial Liters Carried \u2014 used for KPL calculation",
+   "fieldname": "effective_liters",
+   "fieldtype": "Float",
+   "label": "Effective Liters (For KPL)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "kpl",
+   "fieldtype": "Float",
+   "label": "KPL",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_lzqj",
+   "fieldtype": "Column Break",
+   "read_only": 1
+  },
+  {
+   "fieldname": "fixed_kpl",
+   "fieldtype": "Float",
+   "label": "Fixed KPL",
+   "precision": "2"
+  },
+  {
+   "fieldname": "excessshort_fuel",
+   "fieldtype": "Float",
+   "label": "Excess/Short Fuel"
+  },
+  {
+   "fieldname": "excessshort_fuel_rate",
+   "fieldtype": "Float",
+   "label": "Excess/Short Fuel Rate"
+  },
+  {
+   "fieldname": "fuel_incentive",
+   "fieldtype": "Float",
+   "label": "Fuel Incentive"
+  },
+  {
+   "fieldname": "expense_amount",
+   "fieldtype": "Float",
+   "label": "Amount Paid to Driver"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "depends_on": "eval:!(doc.fuelurea=='Urea' && doc.entry_type=='In Stock Use')",
+   "fieldname": "section_break_xiph",
+   "fieldtype": "Section Break",
+   "label": "Payment Details"
+  },
+  {
+   "depends_on": "eval:!(doc.fuelurea=='Urea' && doc.entry_type=='In Stock Use')",
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "mandatory_depends_on": "eval:!(doc.fuelurea=='Urea' && doc.entry_type=='In Stock Use')",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "column_break_paydt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Bank Transfer",
+   "fieldname": "payment_mode",
+   "fieldtype": "Select",
+   "label": "Payment Mode",
+   "mandatory_depends_on": "eval:!(doc.fuelurea=='Urea' && doc.entry_type=='In Stock Use')",
+   "options": "Cash\nBank Transfer\nCheque\nUPI"
+  },
+  {
+   "fieldname": "column_break_mutr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:!(doc.fuelurea=='Urea' && doc.entry_type=='In Stock Use') && in_list(['Bank Transfer','Cheque','Cash','UPI'], doc.payment_mode)",
+   "fieldname": "bank_name",
+   "fieldtype": "Link",
+   "label": "Bank Account No",
+   "mandatory_depends_on": "eval:!(doc.fuelurea=='Urea' && doc.entry_type=='In Stock Use') && in_list(['Bank Transfer','Cheque','Cash','UPI'], doc.payment_mode)",
+   "options": "Account Head"
+  },
+  {
+   "depends_on": "eval:!(doc.fuelurea=='Urea' && doc.entry_type=='In Stock Use') && in_list(['Bank Transfer','Cheque','Cash','UPI'], doc.payment_mode)",
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Reference No."
+  },
+  {
+   "depends_on": "eval:!(doc.fuelurea=='Urea' && doc.entry_type=='In Stock Use') && doc.payment_mode === 'UPI'",
+   "fieldname": "upi_id",
+   "fieldtype": "Data",
+   "label": "UPI ID",
+   "mandatory_depends_on": "eval:!(doc.fuelurea=='Urea' && doc.entry_type=='In Stock Use') && doc.payment_mode === 'UPI'"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_reconciled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Reconciled (Supplier)",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "bank_reconciliation",
+   "fieldtype": "Link",
+   "label": "Bank Reconciliation (Supplier)",
+   "no_copy": 1,
+   "options": "TMS Bank Reconciliation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_gcby",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_izxr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:!(doc.fuelurea=='Urea' && doc.entry_type=='In Stock Use')",
+   "fieldname": "fuelurea_amount",
+   "fieldtype": "Float",
+   "label": "Fuel/Urea  Amount ",
+   "mandatory_depends_on": "eval:!(doc.fuelurea=='Urea' && doc.entry_type=='In Stock Use')",
+   "precision": "2"
+  },
+  {
+   "depends_on": "eval:doc.fuelurea !== 'Urea' && flt(doc.expense_amount) > 0",
+   "fieldname": "section_break_driver_payment",
+   "fieldtype": "Section Break",
+   "label": "Driver Payment Details"
+  },
+  {
+   "depends_on": "eval:doc.fuelurea !== 'Urea' && flt(doc.expense_amount) > 0",
+   "fieldname": "driver_payment_date",
+   "fieldtype": "Date",
+   "label": "Driver Payment Date"
+  },
+  {
+   "default": "Cash",
+   "depends_on": "eval:doc.fuelurea !== 'Urea' && flt(doc.expense_amount) > 0",
+   "fieldname": "driver_payment_mode",
+   "fieldtype": "Select",
+   "label": "Payment Mode",
+   "options": "Cash\nBank Transfer\nCheque\nUPI"
+  },
+  {
+   "fieldname": "column_break_driver_payment",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.fuelurea !== 'Urea' && flt(doc.expense_amount) > 0 && in_list(['Bank Transfer','Cheque','Cash','UPI'], doc.driver_payment_mode)",
+   "fieldname": "driver_bank_name",
+   "fieldtype": "Link",
+   "label": "Bank Account No",
+   "options": "Account Head"
+  },
+  {
+   "depends_on": "eval:doc.fuelurea !== 'Urea' && flt(doc.expense_amount) > 0 && doc.driver_payment_mode === 'UPI'",
+   "fieldname": "driver_upi_id",
+   "fieldtype": "Data",
+   "label": "UPI ID",
+   "mandatory_depends_on": "eval:doc.fuelurea !== 'Urea' && flt(doc.expense_amount) > 0 && doc.driver_payment_mode === 'UPI'"
+  },
+  {
+   "depends_on": "eval:doc.fuelurea !== 'Urea' && flt(doc.expense_amount) > 0 && in_list(['Bank Transfer','Cheque','Cash','UPI'], doc.driver_payment_mode)",
+   "fieldname": "driver_payment_reference",
+   "fieldtype": "Data",
+   "label": "Payment Reference",
+   "length": 100
+  },
+  {
+   "default": "0",
+   "fieldname": "is_reconciled_driver",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Reconciled (Driver Incentive)",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "bank_reconciliation_driver",
+   "fieldtype": "Link",
+   "label": "Bank Reconciliation (Driver Incentive)",
+   "no_copy": 1,
+   "options": "TMS Bank Reconciliation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Fuel Urea Expenses",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "section_break_fuel_history",
+   "fieldtype": "Section Break",
+   "label": "Fuel History"
+  },
+  {
+   "fieldname": "fuel_history_html",
+   "fieldtype": "HTML",
+   "print_hide": 1,
+   "report_hide": 1
+  },
+  {
+   "fieldname": "column_break_gvod",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:!(doc.fuelurea=='Urea' && doc.entry_type=='In Stock Use')",
+   "fieldname": "payment_date",
+   "fieldtype": "Date",
+   "label": "Payment Date",
+   "mandatory_depends_on": "eval:!(doc.fuelurea=='Urea' && doc.entry_type=='In Stock Use')"
+  },
+  {
+   "fieldname": "section_break_nkxi",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "New Purchase",
+   "depends_on": "eval:doc.fuelurea=='Urea'",
+   "fieldname": "entry_type",
+   "fieldtype": "Select",
+   "label": "Entry Type",
+   "options": "New Purchase\nIn Stock Use"
+  },
+  {
+   "fieldname": "column_break_qjye",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.fuelurea=='Urea' && doc.entry_type=='In Stock Use'",
+   "description": "Select the urea item and warehouse to issue from existing stock.",
+   "fieldname": "section_break_stock",
+   "fieldtype": "Section Break",
+   "label": "Stock Issue Details"
+  },
+  {
+   "fieldname": "urea_item",
+   "fieldtype": "Link",
+   "label": "Urea Item",
+   "mandatory_depends_on": "eval:doc.fuelurea=='Urea' && doc.entry_type=='In Stock Use'",
+   "options": "Item"
+  },
+  {
+   "fieldname": "column_break_stock",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "label": "Issue From Warehouse",
+   "mandatory_depends_on": "eval:doc.fuelurea=='Urea' && doc.entry_type=='In Stock Use'",
+   "options": "Warehouse"
+  },
+  {
+   "depends_on": "eval:doc.fuelurea=='Urea' && doc.entry_type=='In Stock Use'",
+   "fieldname": "section_break_urea_stock_entry",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "depends_on": "eval:doc.fuelurea=='Urea' && doc.entry_type=='In Stock Use'",
+   "fieldname": "stock_entry",
+   "fieldtype": "Link",
+   "label": "Linked Stock Entry",
+   "no_copy": 1,
+   "options": "Stock Entry",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-08-24 09:24:44.715973",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Fuel Urea Expenses",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "date",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

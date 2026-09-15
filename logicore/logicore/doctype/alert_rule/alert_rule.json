@@ -1,0 +1,179 @@
+{
+ "actions": [],
+ "creation": "2026-05-29 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "editable_grid": 1,
+ "field_order": [
+  "enabled",
+  "rule_name",
+  "source_doctype",
+  "date_field",
+  "alert_before_days",
+  "upcoming_repeat_frequency",
+  "desk_enabled",
+  "email_enabled",
+  "email_recipients",
+  "advanced_settings",
+  "send_time",
+  "upcoming_repeat_every_days",
+  "overdue_repeat_frequency",
+  "overdue_repeat_every_days",
+  "overdue_window_days",
+  "detail_fields",
+  "show_in_list",
+  "max_rows",
+  "last_alert_sent_on"
+ ],
+ "fields": [
+  {
+   "default": "1",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Enabled"
+  },
+  {
+   "fieldname": "rule_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Rule Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source_doctype",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Source DocType",
+   "options": "DocType",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date_field",
+   "fieldtype": "Autocomplete",
+   "in_list_view": 1,
+   "label": "Date Field",
+   "description": "Pick the Source DocType first — the date fields available on it will be listed here.",
+   "reqd": 1
+  },
+  {
+   "default": "7",
+   "fieldname": "alert_before_days",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Alert Before (Days)",
+   "reqd": 1
+  },
+  {
+   "default": "Once",
+   "fieldname": "upcoming_repeat_frequency",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Repeat",
+   "options": "Once\nDaily\nAlternate Days\nWeekly\nCustom"
+  },
+  {
+   "default": "1",
+   "fieldname": "desk_enabled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Desk"
+  },
+  {
+   "default": "1",
+   "fieldname": "email_enabled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Email"
+  },
+  {
+   "fieldname": "email_recipients",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Email Recipients",
+   "description": "Comma-separated emails or usernames. Leave blank to use global Notify Users."
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "advanced_settings",
+   "fieldtype": "Section Break",
+   "label": "Advanced Settings"
+  },
+  {
+   "fieldname": "send_time",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "Send Time",
+   "description": "Override global send time for this rule. Leave blank to use global setting."
+  },
+  {
+   "fieldname": "upcoming_repeat_every_days",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Upcoming Custom Repeat Days"
+  },
+  {
+   "default": "Daily",
+   "fieldname": "overdue_repeat_frequency",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Overdue Repeat Frequency",
+   "options": "Once\nDaily\nAlternate Days\nWeekly\nCustom"
+  },
+  {
+   "fieldname": "overdue_repeat_every_days",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Overdue Custom Repeat Days"
+  },
+  {
+   "default": "30",
+   "fieldname": "overdue_window_days",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Overdue Window (Days)"
+  },
+  {
+   "fieldname": "detail_fields",
+   "fieldtype": "Small Text",
+   "label": "Card Fields",
+   "description": "Pick the Source DocType first — its fields will be listed here. Shown in the alert card and email. Open this row (edit icon) to pick — the dropdown does not display correctly in the inline grid cell."
+  },
+  {
+   "default": "1",
+   "fieldname": "show_in_list",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Highlight In List"
+  },
+  {
+   "default": "50",
+   "fieldname": "max_rows",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Max Rows"
+  },
+  {
+   "fieldname": "last_alert_sent_on",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "Last Alert Sent On",
+   "read_only": 1,
+   "description": "Set atomically by the scheduler to guarantee at most one alert email per rule per day, regardless of how many scheduler ticks fall inside the send-time window."
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-07-17 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Alert Rule",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 0
+}

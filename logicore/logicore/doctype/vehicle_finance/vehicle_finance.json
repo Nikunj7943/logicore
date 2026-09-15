@@ -1,0 +1,235 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "FIN-.YYYY.-.#####",
+ "creation": "2026-03-27 10:32:57.056608",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_basic",
+  "finance",
+  "column_break_godz",
+  "vehicle",
+  "section_loan_details",
+  "loan_account",
+  "loan_amount",
+  "interest_rate",
+  "emi_amount",
+  "column_break_muyz",
+  "start_date",
+  "end_date",
+  "date_of_emi",
+  "total_emis",
+  "section_emi_summary",
+  "emis_paid",
+  "column_break_emi",
+  "outstanding_loan",
+  "section_payment",
+  "payment_mode",
+  "column_break_payment",
+  "bank_name",
+  "reference_no",
+  "upi_id",
+  "section_break_remarks",
+  "remarks",
+  "section_emi_payments",
+  "emi_payments_html"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_basic",
+   "fieldtype": "Section Break",
+   "label": "Finance Details"
+  },
+  {
+   "fieldname": "finance",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Financer/Bank",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_godz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Vehicle",
+   "options": "Vehicle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_loan_details",
+   "fieldtype": "Section Break",
+   "label": "Loan Details"
+  },
+  {
+   "fieldname": "loan_account",
+   "fieldtype": "Data",
+   "label": "Loan Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "loan_amount",
+   "fieldtype": "Currency",
+   "label": "Loan Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "interest_rate",
+   "fieldtype": "Float",
+   "label": "Rate of Interest (%)",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "emi_amount",
+   "fieldtype": "Currency",
+   "label": "EMI Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_muyz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Loan Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Loan End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date_of_emi",
+   "fieldtype": "Date",
+   "label": "Date of EMI",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_emi_summary",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_emis",
+   "fieldtype": "Int",
+   "label": "Total EMIs",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_emi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "emis_paid",
+   "fieldtype": "Int",
+   "label": "EMIs Paid",
+   "read_only": 1
+  },
+  {
+   "fieldname": "outstanding_loan",
+   "fieldtype": "Currency",
+   "label": "Outstanding Loan",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_emi_payments",
+   "fieldtype": "Section Break",
+   "label": "EMI Payment History"
+  },
+  {
+   "fieldname": "emi_payments_html",
+   "fieldtype": "HTML",
+   "label": "EMI Payments"
+  },
+  {
+   "fieldname": "section_payment",
+   "fieldtype": "Section Break",
+   "label": "Payment Details"
+  },
+  {
+   "default": "Bank Transfer",
+   "fieldname": "payment_mode",
+   "fieldtype": "Select",
+   "label": "Payment Mode",
+   "options": "Cash\nBank Transfer\nCheque\nUPI"
+  },
+  {
+   "fieldname": "column_break_payment",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bank_name",
+   "fieldtype": "Link",
+   "label": "Bank Account No",
+   "options": "Account Head",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:in_list(['Bank Transfer','Cheque','Cash','UPI'], doc.payment_mode)",
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Reference No."
+  },
+  {
+   "depends_on": "eval:doc.payment_mode === 'UPI'",
+   "fieldname": "upi_id",
+   "fieldtype": "Data",
+   "label": "UPI ID",
+   "mandatory_depends_on": "eval:doc.payment_mode === 'UPI'"
+  },
+  {
+   "fieldname": "section_break_remarks",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-24 08:42:00.571583",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Vehicle Finance",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "default_view": "Report",
+ "sort_field": "date_of_emi",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

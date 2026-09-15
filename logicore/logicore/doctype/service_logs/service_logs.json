@@ -1,0 +1,327 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "SER-.YYYY.-.#####",
+ "creation": "2026-04-13 10:31:50.204223",
+ "default_view": "Report",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_ajyz",
+  "voucher_date",
+  "column_break_iite",
+  "voucher_no",
+  "column_break_kjqr",
+  "service_type",
+  "section_break_mjod",
+  "vehicle_no",
+  "column_break_ooxd",
+  "km",
+  "column_break_swoe",
+  "driver",
+  "section_break_last_svc",
+  "last_service_date",
+  "column_break_lsk",
+  "last_service_km",
+  "section_break_wfsa",
+  "supplier",
+  "column_break_stpf",
+  "payment_date",
+  "section_break_eoyg",
+  "payment_mode",
+  "column_break_cdvi",
+  "bank_name",
+  "column_break_bgwy",
+  "reference_no",
+  "upi_id",
+  "is_reconciled",
+  "bank_reconciliation",
+  "section_break_qczp",
+  "service_replacement_item",
+  "section_break_epsg",
+  "total_qty",
+  "column_break_hskb",
+  "total_amount",
+  "column_break_yfnn",
+  "insurance_cover",
+  "column_break_qwpu",
+  "next_service_date",
+  "section_break_remarks",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_ajyz",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "voucher_date",
+   "fieldtype": "Date",
+   "label": "Voucher Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_iite",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "voucher_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Voucher No",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_kjqr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "service_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Service Type",
+   "options": "\nACCIDENTAL\nREGULAR\nREPARING\nREPLANCEMENT\nWARRANTY",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_mjod",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "vehicle_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Vehicle No",
+   "options": "Vehicle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ooxd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "km",
+   "fieldtype": "Int",
+   "label": "KM",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_swoe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "driver",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Driver",
+   "options": "Driver",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_last_svc",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "last_service_date",
+   "fieldtype": "Date",
+   "label": "Last Service Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_lsk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "last_service_km",
+   "fieldtype": "Int",
+   "label": "Last KM",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_eoyg",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_cdvi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Bank Transfer",
+   "fieldname": "payment_mode",
+   "fieldtype": "Select",
+   "label": "Payment Mode",
+   "options": "Cash\nBank Transfer\nCheque\nUPI",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:in_list(['Bank Transfer','Cheque','Cash','UPI'], doc.payment_mode)",
+   "fieldname": "bank_name",
+   "fieldtype": "Link",
+   "label": "Bank Account No",
+   "options": "Account Head"
+  },
+  {
+   "depends_on": "eval:in_list(['Bank Transfer','Cheque','Cash','UPI'], doc.payment_mode)",
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Reference No"
+  },
+  {
+   "depends_on": "eval:doc.payment_mode === 'UPI'",
+   "fieldname": "upi_id",
+   "fieldtype": "Data",
+   "label": "UPI ID",
+   "mandatory_depends_on": "eval:doc.payment_mode === 'UPI'"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_reconciled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Reconciled",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "bank_reconciliation",
+   "fieldtype": "Link",
+   "label": "Bank Reconciliation",
+   "no_copy": 1,
+   "options": "TMS Bank Reconciliation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_qczp",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "service_replacement_item",
+   "fieldtype": "Table",
+   "label": "Service  Replacement Item",
+   "options": "Service  Replacement Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_epsg",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "total_qty",
+   "fieldtype": "Float",
+   "label": "Total Qty",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_hskb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_yfnn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "insurance_cover",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Insurance Cover"
+  },
+  {
+   "fieldname": "column_break_qwpu",
+   "fieldtype": "Column Break",
+   "hidden": 1
+  },
+  {
+   "description": "Earliest upcoming Next/Expiry Date across all Service Replacement Item rows. Auto-computed on save \u2014 drives the list-view alert indicator.",
+   "fieldname": "next_service_date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "Next Service Due Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_wfsa",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_stpf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_date",
+   "fieldtype": "Date",
+   "label": "Payment Date"
+  },
+  {
+   "fieldname": "column_break_bgwy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_remarks",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-24 08:42:00.571583",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Service Logs",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "voucher_date",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

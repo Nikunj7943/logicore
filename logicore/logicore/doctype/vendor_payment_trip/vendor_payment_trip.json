@@ -1,0 +1,188 @@
+{
+ "actions": [],
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "trip",
+  "trip_date",
+  "tcntrip_no",
+  "lr_no",
+  "vehicle_no",
+  "hire_amount",
+  "balance",
+  "payment_amount",
+  "employee_lr_money",
+  "employee_lr_locked",
+  "company_lr_money",
+  "company_lr_locked",
+  "prev_employee_lr_money",
+  "prev_company_lr_money",
+  "lr_money",
+  "tds_amount",
+  "transfer_amount",
+  "advance_or_balance",
+  "payment_type",
+  "row_remarks"
+ ],
+ "fields": [
+  {
+   "bold": 1,
+   "fieldname": "trip",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Trip",
+   "options": "Trip",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "trip.tcntrip_date",
+   "fetch_if_empty": 0,
+   "fieldname": "trip_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Trip Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "trip.tcntrip_no",
+   "fetch_if_empty": 0,
+   "fieldname": "tcntrip_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "TCN/Trip No",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "trip.lr_no",
+   "fetch_if_empty": 0,
+   "fieldname": "lr_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "LR No",
+   "read_only": 1
+  },
+  {
+   "fieldname": "vehicle_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Vehicle No",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "trip.total_vendor_freight",
+   "fetch_if_empty": 0,
+   "fieldname": "hire_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Hire Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "balance",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Balance",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Payment Amount"
+  },
+  {
+   "fetch_if_empty": 0,
+   "fieldname": "employee_lr_money",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Employee LR Money",
+   "read_only_depends_on": "eval:doc.employee_lr_locked"
+  },
+  {
+   "fieldname": "employee_lr_locked",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Employee LR Locked",
+   "read_only": 1
+  },
+  {
+   "fetch_if_empty": 0,
+   "fieldname": "company_lr_money",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Company LR Money",
+   "read_only_depends_on": "eval:doc.company_lr_locked"
+  },
+  {
+   "fieldname": "company_lr_locked",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Company LR Locked",
+   "read_only": 1
+  },
+  {
+   "fieldname": "prev_employee_lr_money",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Previous Employee LR Money",
+   "read_only": 1
+  },
+  {
+   "fieldname": "prev_company_lr_money",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Previous Company LR Money",
+   "read_only": 1
+  },
+  {
+   "fieldname": "lr_money",
+   "fieldtype": "Currency",
+   "label": "LR Money"
+  },
+  {
+   "fieldname": "tds_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "TDS",
+   "read_only": 1
+  },
+  {
+   "fieldname": "transfer_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Transfer Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "advance_or_balance",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Advance/Balance",
+   "options": "\nAdvance\nBalance\nFull Amount"
+  },
+  {
+   "fieldname": "payment_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "\nCash\nFuel\nInter Bank Transfer\nMisc"
+  },
+  {
+   "fieldname": "row_remarks",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Remarks"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "module": "LogiCore",
+ "name": "Vendor Payment Trip",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

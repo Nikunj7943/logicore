@@ -1,0 +1,178 @@
+{
+ "actions": [],
+ "creation": "2026-06-09 12:11:43.276014",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "trip",
+  "trip_date",
+  "tcntrip_no",
+  "vehicle_no",
+  "lr_no",
+  "origin_city",
+  "destination_city",
+  "customer_freight",
+  "approved_addl_amount",
+  "brokerage_amount",
+  "lr_money",
+  "tds_amount",
+  "invoice_amount",
+  "balance",
+  "received_amount",
+  "net_received",
+  "payment_advice_no",
+  "utr_no",
+  "row_remarks"
+ ],
+ "fields": [
+  {
+   "bold": 1,
+   "fieldname": "trip",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Trip",
+   "options": "Trip",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "trip.tcntrip_date",
+   "fieldname": "trip_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Trip Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "trip.tcntrip_no",
+   "fieldname": "tcntrip_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "TCN/Trip No",
+   "read_only": 1
+  },
+  {
+   "fieldname": "vehicle_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Vehicle No",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "trip.lr_no",
+   "fieldname": "lr_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "LR No",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "trip.origin_city",
+   "fieldname": "origin_city",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Origin",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "trip.destination_city_1",
+   "fieldname": "destination_city",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Destination",
+   "read_only": 1
+  },
+  {
+   "fieldname": "customer_freight",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Customer Freight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "approved_addl_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Approved Addl Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "invoice_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "balance",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Outstanding Balance",
+   "read_only": 1
+  },
+  {
+   "fieldname": "received_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Received Amount"
+  },
+  {
+   "fieldname": "brokerage_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Brokerage Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "lr_money",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Broker LR Money",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tds_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "TDS Deducted",
+   "read_only": 1
+  },
+  {
+   "fieldname": "net_received",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Net Received",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_advice_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Payment Advice No"
+  },
+  {
+   "fieldname": "utr_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "UTR No"
+  },
+  {
+   "fieldname": "row_remarks",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Remarks"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2026-06-09 17:01:31.023041",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Customer Receipt Trip",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

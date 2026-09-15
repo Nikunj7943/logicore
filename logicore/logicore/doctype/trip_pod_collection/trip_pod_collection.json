@@ -1,0 +1,112 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2026-06-08 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "trip",
+  "status",
+  "collected_count",
+  "chat_id",
+  "images_section",
+  "images",
+  "result_section",
+  "pod_file_url",
+  "completed_at"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "TPOC-.YYYY.-.####\n"
+  },
+  {
+   "bold": 1,
+   "fieldname": "trip",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Trip",
+   "options": "Trip",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Collecting\nProcessing\nCompleted\nFailed",
+   "default": "Collecting"
+  },
+  {
+   "fieldname": "collected_count",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Collected",
+   "read_only": 1
+  },
+  {
+   "fieldname": "chat_id",
+   "fieldtype": "Data",
+   "label": "Telegram Chat ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "images_section",
+   "fieldtype": "Section Break",
+   "label": "Images"
+  },
+  {
+   "fieldname": "images",
+   "fieldtype": "Table",
+   "label": "Images",
+   "options": "Trip POD Collection Image"
+  },
+  {
+   "fieldname": "result_section",
+   "fieldtype": "Section Break",
+   "label": "Result"
+  },
+  {
+   "fieldname": "pod_file_url",
+   "fieldtype": "Data",
+   "label": "POD File URL",
+   "read_only": 1
+  },
+  {
+   "fieldname": "completed_at",
+   "fieldtype": "Datetime",
+   "label": "Completed At",
+   "read_only": 1
+  }
+ ],
+ "istable": 0,
+ "links": [],
+ "module": "LogiCore",
+ "name": "Trip POD Collection",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "Administrator",
+   "write": 1
+  }
+ ],
+ "default_view": "Report",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

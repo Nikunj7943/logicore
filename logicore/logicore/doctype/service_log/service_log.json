@@ -1,0 +1,170 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "Service-.#####",
+ "creation": "2026-03-27 10:25:46.309657",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_ouvx",
+  "date",
+  "vehicle",
+  "column_break_avyy",
+  "service",
+  "service_type",
+  "section_break_kcoc",
+  "column_break_tlyw",
+  "supplier",
+  "quantity",
+  "amount",
+  "column_break_gzqx",
+  "payment_mode",
+  "bank_account_no",
+  "bank",
+  "column_break_ymda",
+  "odometer_on_date_of_service",
+  "kms_before_next_service",
+  "next_service_km",
+  "days_before_next_service",
+  "next_service_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_ouvx",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Link",
+   "label": "Vehicle",
+   "options": "Vehicle"
+  },
+  {
+   "fieldname": "column_break_avyy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "service",
+   "fieldtype": "Data",
+   "label": "Service Reference"
+  },
+  {
+   "fieldname": "service_type",
+   "fieldtype": "Select",
+   "label": "Service Type",
+   "options": "Replace Air Filter\nReplace Baby Filter\nReplace Fuel Filter\nReplace Engine Oil\nReplace Oil Filter\nReplace Gear Oil\nReplace Differential Oil\nWheel Service"
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Int",
+   "label": "Quantity"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount"
+  },
+  {
+   "fieldname": "column_break_gzqx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_mode",
+   "fieldtype": "Data",
+   "label": "Payment Mode"
+  },
+  {
+   "fieldname": "bank_account_no",
+   "fieldtype": "Data",
+   "label": "Bank Account No"
+  },
+  {
+   "fieldname": "bank",
+   "fieldtype": "Link",
+   "label": "Bank",
+   "options": "Bank"
+  },
+  {
+   "fieldname": "odometer_on_date_of_service",
+   "fieldtype": "Int",
+   "label": "Odometer on Date of Service"
+  },
+  {
+   "fieldname": "kms_before_next_service",
+   "fieldtype": "Int",
+   "label": "KMs Before Next Service"
+  },
+  {
+   "fieldname": "next_service_km",
+   "fieldtype": "Int",
+   "label": "Next Service KM"
+  },
+  {
+   "fieldname": "days_before_next_service",
+   "fieldtype": "Int",
+   "label": "Days Before Next Service"
+  },
+  {
+   "fieldname": "next_service_date",
+   "fieldtype": "Date",
+   "label": "Next Service Date"
+  },
+  {
+   "fieldname": "column_break_tlyw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ymda",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_kcoc",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "grid_page_length": 50,
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-01 11:00:24.526929",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Service Log",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

@@ -1,0 +1,17 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2026-06-16 00:00:00.000000",
+ "disable_prepared_report": 1,
+ "doctype": "Report",
+ "filters": [],
+ "is_standard": "Yes",
+ "modified": "2026-06-16 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "TMS Payment Report",
+ "owner": "Administrator",
+ "ref_doctype": "Payment",
+ "report_name": "TMS Payment Report",
+ "report_type": "Script Report"
+}

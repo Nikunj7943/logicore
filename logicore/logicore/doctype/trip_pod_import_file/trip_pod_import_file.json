@@ -1,0 +1,120 @@
+{
+ "actions": [],
+ "creation": "2026-04-03 17:20:46.152118",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "client_row_key",
+  "pod_file",
+  "file_name",
+  "source_path",
+  "reference_no",
+  "matched_trip",
+  "preview_status",
+  "status_message",
+  "can_import",
+  "match_count",
+  "imported_on",
+  "error_trace"
+ ],
+ "fields": [
+  {
+   "fieldname": "client_row_key",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Client Row Key",
+   "read_only": 1
+  },
+  {
+   "fieldname": "pod_file",
+   "fieldtype": "Attach",
+   "hidden": 1,
+   "label": "POD File",
+   "read_only": 1
+  },
+  {
+   "fieldname": "file_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "File Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "source_path",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Source Path",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Reference No",
+   "read_only": 1
+  },
+  {
+   "fieldname": "matched_trip",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Matched Trip",
+   "options": "Trip",
+   "read_only": 1
+  },
+  {
+   "fieldname": "preview_status",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status_message",
+   "fieldtype": "Small Text",
+   "label": "Message",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "can_import",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Can Import",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "match_count",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Match Count",
+   "read_only": 1
+  },
+  {
+   "fieldname": "imported_on",
+   "fieldtype": "Datetime",
+   "label": "Imported On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "error_trace",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Error Trace",
+   "read_only": 1
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2026-04-03 17:20:46.152118",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Trip POD Import File",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

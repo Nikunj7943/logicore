@@ -1,0 +1,32 @@
+{
+ "columns": [],
+ "creation": "2026-05-14 00:00:00.000000",
+ "disable_prepared_report": 1,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "employee_type",
+   "fieldtype": "Select",
+   "label": "Employee Type",
+   "options": "Employee\nDriver",
+   "default": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "employee_link",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 0
+  }
+ ],
+ "is_standard": "Yes",
+ "modified": "2026-05-14 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Salary Advance Report",
+ "owner": "Administrator",
+ "ref_doctype": "Payment",
+ "report_name": "Salary Advance Report",
+ "report_type": "Script Report"
+}

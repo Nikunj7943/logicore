@@ -1,0 +1,56 @@
+[
+ {
+  "cards": [
+   {
+    "card": "TMS Open Trips"
+   },
+   {
+    "card": "TMS Trips This Month"
+   },
+   {
+    "card": "TMS Customer Freight MTD"
+   },
+   {
+    "card": "TMS POD Pending"
+   },
+   {
+    "card": "TMS Total KM MTD"
+   }
+  ],
+  "chart_options": null,
+  "charts": [
+   {
+    "chart": "TMS Trip Volume Monthly",
+    "width": "Full"
+   },
+   {
+    "chart": "TMS Customer Freight Monthly",
+    "width": "Full"
+   },
+   {
+    "chart": "TMS POD Status Distribution",
+    "width": "Half"
+   },
+   {
+    "chart": "TMS Trips by Branch",
+    "width": "Full"
+   },
+   {
+    "chart": "TMS Trips by Status",
+    "width": "Half"
+   },
+   {
+    "chart": "TMS Trips by Trip Type",
+    "width": "Half"
+   }
+  ],
+  "dashboard_name": "Trip Dashboard",
+  "docstatus": 0,
+  "doctype": "Dashboard",
+  "is_default": 0,
+  "is_standard": 0,
+  "modified": "2026-03-16 14:30:06.727916",
+  "module": "LogiCore",
+  "name": "Trip Dashboard"
+ }
+]

@@ -1,0 +1,131 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "ACC-HEAD-.####",
+ "creation": "2026-05-12 10:07:25.778980",
+ "default_view": "Report",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "name1",
+  "disabled",
+  "column_break_vndp",
+  "group",
+  "bank_ac_last_digits",
+  "section_break_balance",
+  "opening_balance_date",
+  "column_break_ob_date",
+  "opening_balance",
+  "column_break_balance",
+  "current_balance"
+ ],
+ "fields": [
+  {
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Account Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "group",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Group",
+   "options": "\nEXPENSE\nINCOME\nBRANCH\nBANK\nCASH\nTAX\nEXPENSE-SERVICE\nEXPENSE-REGULATORY\nSALES\nPURCHASE\nEmployee Advance\nDriver Advance",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.group==\"BANK\"",
+   "description": "Last 4-5 digits of the real bank account number (e.g. \"2881\") \u2014 enough to tell accounts at the same bank apart. Not the full account number; banks share the same leading digits across branches/accounts, so only the distinguishing tail is needed.",
+   "fieldname": "bank_ac_last_digits",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Bank A/C No. (Last 4-5 Digits)",
+   "length": 5
+  },
+  {
+   "fieldname": "column_break_vndp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "description": "Disabled records stay on existing documents but stop appearing in dropdowns when creating new ones.",
+   "fieldname": "disabled",
+   "fieldtype": "Check",
+   "in_standard_filter": 1,
+   "label": "Disabled"
+  },
+  {
+   "depends_on": "eval:in_list([\"CASH\",\"BANK\"], doc.group)",
+   "fieldname": "section_break_balance",
+   "fieldtype": "Section Break",
+   "hide_border": 1,
+   "label": "Balance"
+  },
+  {
+   "default": "Today",
+   "depends_on": "eval:in_list([\"CASH\",\"BANK\"], doc.group)",
+   "description": "The date this Opening Balance is effective from.",
+   "fieldname": "opening_balance_date",
+   "fieldtype": "Date",
+   "label": "Opening Balance Date"
+  },
+  {
+   "fieldname": "column_break_ob_date",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:in_list([\"CASH\",\"BANK\"], doc.group)",
+   "description": "The account's balance before this app started tracking it. Set this once; Current Balance is this plus every Account Ledger booked since.",
+   "fieldname": "opening_balance",
+   "fieldtype": "Currency",
+   "label": "Opening Balance"
+  },
+  {
+   "fieldname": "column_break_balance",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:in_list([\"CASH\",\"BANK\"], doc.group)",
+   "description": "Auto-calculated \u2014 Opening Balance plus every Account Ledger for this account. Not manually editable; recomputed whenever a payment/receipt is submitted or cancelled.",
+   "fieldname": "current_balance",
+   "fieldtype": "Currency",
+   "label": "Current Balance",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-07 14:07:21.689709",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Account Head",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "name1",
+ "show_title_field_in_link": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "name1",
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

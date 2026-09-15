@@ -1,0 +1,105 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-06-11 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "is_enabled",
+  "telegram_bot_token",
+  "column_break_main",
+  "bot_username",
+  "telegram_webhook_secret",
+  "webhook_url",
+  "last_synced_on",
+  "webhook_status",
+  "advanced_section",
+  "base_url_override"
+ ],
+ "fields": [
+  {
+   "fieldname": "is_enabled",
+   "fieldtype": "Check",
+   "label": "Enable Telegram Bot",
+   "default": "1",
+   "description": "Uncheck to disable the bot (e.g. on local/dev). Messages will be silently dropped and the webhook will be removed from Telegram."
+  },
+  {
+   "fieldname": "telegram_bot_token",
+   "fieldtype": "Password",
+   "label": "Telegram Bot Token",
+   "reqd": 0,
+   "description": "Get this from @BotFather on Telegram. Just paste it and save — the webhook registers automatically."
+  },
+  {
+   "fieldname": "column_break_main",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bot_username",
+   "fieldtype": "Data",
+   "label": "Bot Username",
+   "read_only": 1
+  },
+  {
+   "fieldname": "telegram_webhook_secret",
+   "fieldtype": "Data",
+   "label": "Webhook Secret",
+   "read_only": 1,
+   "description": "Auto-generated on first save"
+  },
+  {
+   "fieldname": "webhook_url",
+   "fieldtype": "Data",
+   "label": "Registered Webhook URL",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_synced_on",
+   "fieldtype": "Datetime",
+   "label": "Last Synced On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "webhook_status",
+   "fieldtype": "Small Text",
+   "label": "Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "advanced_section",
+   "fieldtype": "Section Break",
+   "label": "Advanced",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "base_url_override",
+   "fieldtype": "Data",
+   "label": "Webhook Base URL Override",
+   "description": "Leave blank — the URL is auto-detected (ngrok tunnel locally, or this site's URL on a server). Only set this if auto-detection picks the wrong URL, e.g. https://yoursite.frappecloud.com"
+  }
+ ],
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-06-11 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Telegram Bot Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 0,
+   "print": 0,
+   "read": 1,
+   "report": 0,
+   "role": "System Manager",
+   "share": 0,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 0
+}

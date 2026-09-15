@@ -1,0 +1,14 @@
+{
+ "doctype": "Page",
+ "icon": "fa fa-truck",
+ "module": "LogiCore",
+ "name": "fleet-dashboard",
+ "page_name": "fleet-dashboard",
+ "roles": [
+  {
+   "role": "All"
+  }
+ ],
+ "standard": "Yes",
+ "title": "Fleet Dashboard"
+}

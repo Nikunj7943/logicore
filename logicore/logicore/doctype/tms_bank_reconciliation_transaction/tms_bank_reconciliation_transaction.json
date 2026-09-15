@@ -1,0 +1,123 @@
+{
+ "actions": [],
+ "creation": "2026-07-28 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "grid_page_length": 200000,
+ "field_order": [
+  "row_number",
+  "transaction_date",
+  "amount",
+  "direction",
+  "column_break_txn",
+  "narration",
+  "reference_no",
+  "status",
+  "matched_source",
+  "matched_doctype",
+  "matched_docname",
+  "pick_matched_record"
+ ],
+ "fields": [
+  {
+   "description": "Row number as counted in the raw statement file — kept for error messages (e.g. \"Row(s) 5, 12: ...\") and cross-checking against the original file; not shown as a grid column since it's redundant with the grid's own row position (No.) most of the time.",
+   "fieldname": "row_number",
+   "fieldtype": "Int",
+   "label": "Row #",
+   "read_only": 1
+  },
+  {
+   "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Transaction Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "direction",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Direction",
+   "options": "Debit\nCredit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_txn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "narration",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Narration",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "label": "Reference No",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Matched\nUnmatched",
+   "read_only": 1
+  },
+  {
+   "description": "Which reconcilable leg (Vendor Payment, Fuel Urea Expenses - Driver Incentive, etc.) matched_docname belongs to. Set automatically on auto-match; pick manually to resolve an Unmatched row.",
+   "fieldname": "matched_source",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Matched Source",
+   "options": "TMS Reconciliation Source",
+   "read_only_depends_on": "eval:doc.status == 'Matched'"
+  },
+  {
+   "fetch_from": "matched_source.target_doctype",
+   "fieldname": "matched_doctype",
+   "fieldtype": "Link",
+   "label": "Matched Doctype",
+   "options": "DocType",
+   "read_only": 1
+  },
+  {
+   "description": "Set only via the \"Browse\" button below — typing directly here is disabled so every pick goes through the table picker (with date/amount/vehicle/etc. context) instead of a bare-ID dropdown.",
+   "fieldname": "matched_docname",
+   "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "label": "Matched Record",
+   "options": "matched_doctype",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.status != 'Matched' && doc.matched_source",
+   "fieldname": "pick_matched_record",
+   "fieldtype": "Button",
+   "in_list_view": 1,
+   "label": "Browse"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-07-30 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "TMS Bank Reconciliation Transaction",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,15 @@
+{
+ "doctype": "Page",
+ "icon": "fa fa-bell",
+ "module": "LogiCore",
+ "name": "alert-center",
+ "page_name": "alert-center",
+ "roles": [
+  {
+   "role": "All"
+  }
+ ],
+ "standard": "Yes",
+ "title": "Alert Center"
+}
+

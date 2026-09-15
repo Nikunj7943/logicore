@@ -1,0 +1,334 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "BAT-.YYYY.-.#####",
+ "creation": "2026-03-27 09:20:15.688786",
+ "default_view": "Report",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_identification",
+  "entry_type",
+  "vehicle_id",
+  "brand",
+  "column_break_id",
+  "battery_regn_no",
+  "vehicle_reg_no",
+  "section_dates",
+  "purchase_date",
+  "installation_date",
+  "column_break_dates",
+  "warranty_months",
+  "warranty_expiry_date",
+  "section_stock",
+  "battery_item",
+  "column_break_stock",
+  "warehouse",
+  "section_cost",
+  "cost",
+  "vendor",
+  "column_break_cost",
+  "replacement_date",
+  "actual_life_achieved",
+  "section_payment",
+  "payment_date",
+  "column_break_vvhh",
+  "payment_mode",
+  "column_break_payment",
+  "bank_name",
+  "reference_no",
+  "upi_id",
+  "is_reconciled",
+  "bank_reconciliation",
+  "section_status",
+  "warranty_status",
+  "battery_condition",
+  "stock_entry",
+  "column_break_remarks",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_identification",
+   "fieldtype": "Section Break",
+   "label": "Battery Identification"
+  },
+  {
+   "default": "New Purchase",
+   "fieldname": "entry_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Entry Type",
+   "options": "New Purchase\nIn Stock Use",
+   "reqd": 1
+  },
+  {
+   "fieldname": "vehicle_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Vehicle",
+   "options": "Vehicle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "brand",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Brand",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_id",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "battery_regn_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Battery Registration No.",
+   "reqd": 1
+  },
+  {
+   "description": "Auto-filled from Vehicle",
+   "fieldname": "vehicle_reg_no",
+   "fieldtype": "Data",
+   "label": "Vehicle Reg No",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_dates",
+   "fieldtype": "Section Break",
+   "label": "Dates & Warranty"
+  },
+  {
+   "fieldname": "purchase_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Purchase Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "installation_date",
+   "fieldtype": "Date",
+   "label": "Installation Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_dates",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "warranty_months",
+   "fieldtype": "Int",
+   "label": "Warranty (Months)"
+  },
+  {
+   "description": "Auto-calculated from Purchase Date + Warranty Months",
+   "fieldname": "warranty_expiry_date",
+   "fieldtype": "Date",
+   "label": "Warranty Expiry Date",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.entry_type=='In Stock Use'",
+   "description": "Select the battery item and warehouse to issue from existing stock.",
+   "fieldname": "section_stock",
+   "fieldtype": "Section Break",
+   "label": "Stock Issue Details"
+  },
+  {
+   "fieldname": "battery_item",
+   "fieldtype": "Link",
+   "label": "Battery Item",
+   "mandatory_depends_on": "eval:doc.entry_type=='In Stock Use'",
+   "options": "Item"
+  },
+  {
+   "fieldname": "column_break_stock",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "label": "Issue From Warehouse",
+   "mandatory_depends_on": "eval:doc.entry_type=='In Stock Use'",
+   "options": "Warehouse"
+  },
+  {
+   "depends_on": "eval:doc.entry_type=='New Purchase'",
+   "fieldname": "section_cost",
+   "fieldtype": "Section Break",
+   "label": "Cost, Vendor & Replacement"
+  },
+  {
+   "fieldname": "cost",
+   "fieldtype": "Currency",
+   "label": "Cost (\u20b9)",
+   "options": "INR"
+  },
+  {
+   "fieldname": "vendor",
+   "fieldtype": "Link",
+   "label": "Vendor",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "column_break_cost",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "replacement_date",
+   "fieldtype": "Date",
+   "label": "Replacement Date"
+  },
+  {
+   "description": "Auto-calculated: Installation \u2192 Replacement date",
+   "fieldname": "actual_life_achieved",
+   "fieldtype": "Data",
+   "label": "Actual Life Achieved",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.entry_type=='New Purchase'",
+   "fieldname": "section_payment",
+   "fieldtype": "Section Break",
+   "label": "Payment Details"
+  },
+  {
+   "default": "Bank Transfer",
+   "fieldname": "payment_mode",
+   "fieldtype": "Select",
+   "label": "Payment Mode",
+   "mandatory_depends_on": "eval:doc.entry_type=='New Purchase'",
+   "options": "Cash\nBank Transfer\nCheque\nUPI"
+  },
+  {
+   "fieldname": "column_break_payment",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.entry_type=='New Purchase' && in_list(['Bank Transfer','Cheque','Cash','UPI'], doc.payment_mode)",
+   "fieldname": "bank_name",
+   "fieldtype": "Link",
+   "label": "Bank Account No",
+   "options": "Account Head"
+  },
+  {
+   "depends_on": "eval:doc.entry_type=='New Purchase' && in_list(['Bank Transfer','Cheque','Cash','UPI'], doc.payment_mode)",
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Reference No."
+  },
+  {
+   "depends_on": "eval:doc.entry_type=='New Purchase' && doc.payment_mode === 'UPI'",
+   "fieldname": "upi_id",
+   "fieldtype": "Data",
+   "label": "UPI ID",
+   "mandatory_depends_on": "eval:doc.entry_type=='New Purchase' && doc.payment_mode === 'UPI'"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_reconciled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Reconciled",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "bank_reconciliation",
+   "fieldtype": "Link",
+   "label": "Bank Reconciliation",
+   "no_copy": 1,
+   "options": "TMS Bank Reconciliation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_status",
+   "fieldtype": "Section Break",
+   "label": "Status"
+  },
+  {
+   "fieldname": "warranty_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Warranty Status",
+   "options": "\nUnder Warranty\nExpired\nNo Warranty",
+   "read_only": 1
+  },
+  {
+   "default": "Active",
+   "fieldname": "battery_condition",
+   "fieldtype": "Select",
+   "label": "Battery Condition",
+   "options": "\nActive\nReplaced\nFailed"
+  },
+  {
+   "depends_on": "eval:doc.entry_type=='New Purchase'",
+   "fieldname": "payment_date",
+   "fieldtype": "Date",
+   "label": "Payment Date "
+  },
+  {
+   "fieldname": "column_break_vvhh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.entry_type=='In Stock Use'",
+   "fieldname": "stock_entry",
+   "fieldtype": "Link",
+   "label": "Linked Stock Entry",
+   "no_copy": 1,
+   "options": "Stock Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_remarks",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-08-24 09:24:44.715973",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Battery Expenses",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "purchase_date",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

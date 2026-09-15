@@ -1,0 +1,150 @@
+{
+ "actions": [],
+ "autoname": "format:EWB-{company}",
+ "creation": "2026-07-14 00:00:00",
+ "default_view": "Report",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "column_break_xxzd",
+  "enabled",
+  "credentials_section",
+  "email",
+  "username",
+  "column_break_creds",
+  "password",
+  "client_id",
+  "client_secret",
+  "gstin_section",
+  "gstin",
+  "ip_address",
+  "environment_section",
+  "use_sandbox",
+  "column_break_env",
+  "sandbox_url",
+  "production_url"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "default": "1",
+   "description": "Untick to stop the automatic E-Way Bill lookup on Trip. Users then enter Eway Bill Date, Expiry Date and Vehicle No manually.",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Enable E-Way Bill Lookup"
+  },
+  {
+   "fieldname": "credentials_section",
+   "fieldtype": "Section Break",
+   "label": "Login Credentials"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "username",
+   "fieldtype": "Data",
+   "label": "Username"
+  },
+  {
+   "fieldname": "column_break_creds",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "password",
+   "fieldtype": "Password",
+   "label": "Password"
+  },
+  {
+   "fieldname": "client_id",
+   "fieldtype": "Password",
+   "label": "Client ID"
+  },
+  {
+   "fieldname": "client_secret",
+   "fieldtype": "Password",
+   "label": "Client Secret"
+  },
+  {
+   "fieldname": "gstin_section",
+   "fieldtype": "Section Break",
+   "label": "GSTIN & Access"
+  },
+  {
+   "fieldname": "gstin",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "GSTIN"
+  },
+  {
+   "description": "The public IP address registered/whitelisted with Whitebooks for this client_id.",
+   "fieldname": "ip_address",
+   "fieldtype": "Data",
+   "label": "Whitelisted IP Address"
+  },
+  {
+   "fieldname": "environment_section",
+   "fieldtype": "Section Break",
+   "label": "Environment"
+  },
+  {
+   "default": "1",
+   "fieldname": "use_sandbox",
+   "fieldtype": "Check",
+   "label": "Use Sandbox"
+  },
+  {
+   "fieldname": "column_break_env",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "https://apisandbox.whitebooks.in/ewaybillapi/v1.03",
+   "fieldname": "sandbox_url",
+   "fieldtype": "Data",
+   "label": "Sandbox Base URL"
+  },
+  {
+   "fieldname": "production_url",
+   "fieldtype": "Data",
+   "label": "Production Base URL"
+  },
+  {
+   "fieldname": "column_break_xxzd",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "links": [],
+ "modified": "2026-08-07 14:07:45.348503",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Eway Bill Settings",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "company"
+}

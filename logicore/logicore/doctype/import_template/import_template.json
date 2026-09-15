@@ -1,0 +1,217 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:template_name",
+ "creation": "2026-05-27 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "details_section",
+  "template_name",
+  "is_active",
+  "disabled",
+  "target_doctype",
+  "company",
+  "match_field",
+  "default_import_mode",
+  "column_break_nvow",
+  "overview_html",
+  "allow_blank_update",
+  "import_action",
+  "builder_section",
+  "builder_html",
+  "columns_json",
+  "section_break_zrov",
+  "description",
+  "files_section",
+  "last_used_on",
+  "sample_file",
+  "column_break_fsnx",
+  "last_used_by"
+ ],
+ "fields": [
+  {
+   "fieldname": "details_section",
+   "fieldtype": "Section Break",
+   "label": "Template Details"
+  },
+  {
+   "fieldname": "overview_html",
+   "fieldtype": "HTML",
+   "label": "Overview"
+  },
+  {
+   "fieldname": "template_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Template Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Active"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "target_doctype",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Select Doc Name",
+   "options": "DocType",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "match_field",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Match Field",
+   "read_only": 1
+  },
+  {
+   "default": "Update Existing Only",
+   "fieldname": "default_import_mode",
+   "fieldtype": "Select",
+   "label": "Default Import Mode",
+   "options": "Update Existing Only\nCreate New Only\nUpdate or Create",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "allow_blank_update",
+   "fieldtype": "Check",
+   "label": "Allow Blank Update"
+  },
+  {
+   "default": "None",
+   "fieldname": "import_action",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Import Action",
+   "options": "None\nSubmit After Update\nCancel Document"
+  },
+  {
+   "fieldname": "builder_section",
+   "fieldtype": "Section Break",
+   "label": "Column Builder"
+  },
+  {
+   "fieldname": "builder_html",
+   "fieldtype": "HTML",
+   "label": "Builder"
+  },
+  {
+   "fieldname": "columns_json",
+   "fieldtype": "Code",
+   "hidden": 1,
+   "label": "Columns JSON",
+   "options": "JSON"
+  },
+  {
+   "fieldname": "files_section",
+   "fieldtype": "Section Break",
+   "label": "Usage"
+  },
+  {
+   "fieldname": "sample_file",
+   "fieldtype": "Attach",
+   "label": "Sample File",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_used_on",
+   "fieldtype": "Datetime",
+   "hidden": 1,
+   "label": "Last Used On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_used_by",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Last Used By",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_nvow",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_fsnx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_zrov",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:false",
+   "description": "Derived from Is Active. Not edited directly.",
+   "fieldname": "disabled",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Disabled",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 20,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-10 15:07:03.421178",
+ "modified_by": "Administrator",
+ "module": "LogiCore",
+ "name": "Import Template",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "DIRECTOR",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "default_view": "Report",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "template_name",
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}
